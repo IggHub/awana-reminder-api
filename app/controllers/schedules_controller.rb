@@ -20,7 +20,7 @@ class SchedulesController < ApplicationController
 
   def update
     @schedule = Schedule.find(params[:id])
-    if @schedule.update_attributes
+    if @schedule.update_attributes(schedule_params)
       render json: @schedule
     else
       render json: @schedule, status: :unprocessable_entity
