@@ -33,6 +33,7 @@ class SchedulesController < ApplicationController
   end
 
   private
+  
   def schedule_params
     params.permit(:date, :user_id)
   end
