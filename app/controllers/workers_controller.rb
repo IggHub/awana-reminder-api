@@ -1,12 +1,18 @@
 class WorkersController < ApplicationController
   def index
-    @workers = Worker.all
+    @workers = Worker.where(nil)
+    @workers = Worker.where(schedule_id: params[:schedule_id]) if params[:schedule_id].present?
     render json: @workers
   end
 
   def show
     @worker = Worker.find(params[:id])
     render json: @worker
+  end
+
+  def show_workers_by_schedule
+    @workers = Worker.where(schedule_id: params[:schedule_id])
+    render json:@worker
   end
 
   def create
