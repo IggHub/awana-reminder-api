@@ -10,11 +10,6 @@ class WorkersController < ApplicationController
     render json: @worker
   end
 
-  def show_workers_by_schedule
-    @workers = Worker.where(schedule_id: params[:schedule_id])
-    render json:@worker
-  end
-
   def create
     @worker = Worker.new(worker_params)
     if @worker.save

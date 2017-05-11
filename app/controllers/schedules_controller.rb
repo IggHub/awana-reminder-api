@@ -12,6 +12,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
     if @schedule.save
+      #TwillioSender... #=> if using the same controller for message
       render json: @schedule
     else
       render json: @schedule, status: :unprocessable_entity
@@ -33,16 +34,7 @@ class SchedulesController < ApplicationController
   end
 
   def send_text
-    acc_sid = Rails.application.secrets.acc_sid
-    auth_token = Rails.application.secrets.auth_token
-    twillio_num = '+18189753697'
-    @client = Twilio::REST::Client.new acc_sid, auth_token
-
-    message = @client.account.messages.create(
-      :body => params[:message],
-      :to   => '+18189439150',
-      :from => twillio_num
-    )
+    TwilioSender.new.send_it(params[:message])
     puts "Message sent"
   end
 

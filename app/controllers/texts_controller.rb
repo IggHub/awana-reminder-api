@@ -1,26 +1,28 @@
 class TextsController < ApplicationController
   def index
-    @phones = Hash.new
-    Worker.all.map do |n|
-        @phones[n.name] = n.phone
+    @texts = Text.where(nil)
+    @texts = Text.where(schedule_id: params[:schedule_id]) if params[:schedule_id].present?
+    render json: @texts
+  end
+
+  def create
+    @text = Text.new(text_params)
+    if @text.save
+      render json: @text
+    else
+      render json: @text, status: :unprocessable_entity
     end
-    render json: @phones
   end
 
-  def send_text
-    acc_sid = Rails.application.secrets.acc_sid
-    auth_token = Rails.application.secrets.auth_token
-    twillio_num = '+18189753697'
-    @client = Twilio::REST::Client.new acc_sid, auth_token
-
-    message = @client.account.messages.create(
-      :body => 'Hey from Iggy Rails, Iggy!',
-      :to   => '+18189439150',
-      :from => twillio_num
-    )
-    puts "Message sent"
+  def destroy
+    @text = Text.find(params[:id]).destroy
   end
 
+  private
+
+  def text_params
+    params.permit(:message, :schedule_id)
+  end
 
 =begin
   def send_text
