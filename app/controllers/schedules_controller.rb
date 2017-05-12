@@ -33,10 +33,7 @@ class SchedulesController < ApplicationController
     head :no_content
   end
 
-  def send_text
-    TwilioSender.new.send_it(params[:message])
-    puts "Message sent"
-  end
+
 
   private
 

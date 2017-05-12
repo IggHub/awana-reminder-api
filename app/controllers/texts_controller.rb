@@ -18,6 +18,17 @@ class TextsController < ApplicationController
     @text = Text.find(params[:id]).destroy
   end
 
+  def send_text
+=begin
+    @workers = Worker.where(schedule_id: params[:schedule_id])
+    @workers.each do |worker|
+      TwilioSender.new.send_it(params[:message], worker.phone)
+    end
+=end
+    TwilioSender.new.send_it(params[:message], params[:phone])
+    puts "Message sent!"
+  end
+
   private
 
   def text_params
