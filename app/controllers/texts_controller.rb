@@ -25,8 +25,11 @@ class TextsController < ApplicationController
       TwilioSender.new.send_it(params[:message], worker.phone)
     end
 =end
-    TwilioSender.new.send_it(params[:message], params[:phone])
-    puts "Message sent!"
+    #TwilioSender.new.send_it(params[:message], params[:phone])
+    #puts "Message sent!"
+
+    HardWorker.perform_in(5.seconds, params[:message], params[:phone])
+#    puts "Sent!"
   end
 
   private
