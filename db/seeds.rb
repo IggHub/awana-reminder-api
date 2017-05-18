@@ -10,7 +10,7 @@
 user = User.create(name: 'iggy', phone: '(777)-777-7777', password: 'password', username: 'iirianto', email: 'igor.irianto@gmail.com')
 
 3.times do
-  schedule = Schedule.create(date: Time.now.to_date + (1..10).to_a.sample, user_id: user.id)
+  schedule = Schedule.create(date: Time.now + (1..10).to_a.sample, user_id: user.id)
 end
 ### end create schedule ###
 
