@@ -19,17 +19,12 @@ class TextsController < ApplicationController
   end
 
   def send_text
-=begin
-    @workers = Worker.where(schedule_id: params[:schedule_id])
-    @workers.each do |worker|
-      TwilioSender.new.send_it(params[:message], worker.phone)
-    end
-=end
+
     #TwilioSender.new.send_it(params[:message], params[:phone])
     #puts "Message sent!"
 
     HardWorker.perform_in(5.seconds, params[:message], params[:phone])
-#    puts "Sent!"
+
   end
 
   private
@@ -38,16 +33,4 @@ class TextsController < ApplicationController
     params.permit(:message, :schedule_id)
   end
 
-=begin
-  def send_text
-    @phone = Phone.new(phone_params)
-    @phone.send_sms(@phone.clean_number)
-    redirect_to :back
-  end
-
-  private
-  def phone_params
-    params.require(:phone).permit(:number)
-  end
-=end
 end

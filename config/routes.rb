@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     resources :schedules, only: [:index, :show, :create, :update, :destroy]
     resources :texts, only: [:index, :create]
+    resources :rosters, only: [:index, :create]
     post '/texts/send_text' => 'texts#send_text'
     #resources :sms, only: :create
   end

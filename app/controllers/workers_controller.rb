@@ -35,6 +35,6 @@ class WorkersController < ApplicationController
   private
 
   def worker_params
-    params.permit(:name, :phone, :schedule_id)
+    params.permit(:name, :phone)
   end
 end
