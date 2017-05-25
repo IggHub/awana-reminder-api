@@ -11,14 +11,15 @@ class SchedulesController < ApplicationController
 
   def create
     @schedule = Schedule.new(schedule_params)
-    @worker = Worker.new(worker_params)
+    @worker = @schedule.workers.new(worker_params)
+    @worker.save
     #@worker = @schedule.workers.new(worker_params)
     #@worker.save
     #roster = @schedule.rosters.build unless @schedule.rosters.present?
     #roster.build_worker unless roster.worker.present?
     # binding.pry
     if @schedule.save
-      @worker.save
+
       render json: @schedule
     else
       render json: @schedule, status: :unprocessable_entity
@@ -42,7 +43,7 @@ class SchedulesController < ApplicationController
   private
 
   def schedule_params
-    params.require(:schedule).permit(:date, :user_id)
+    params.require(:schedule).permit(:date, :message, :user_id)
   end
 
   def worker_params

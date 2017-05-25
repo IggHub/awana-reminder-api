@@ -1,8 +1,8 @@
 class Schedule < ApplicationRecord
   belongs_to :user
   has_many :texts, dependent: :destroy
-  has_many :workers, through: :rosters, dependent: :destroy
-  has_many :rosters, inverse_of: :schedule
+  has_many :workers
+  #has_many :rosters, inverse_of: :schedule
   validates_length_of :workers, maximum: 3
 
 end
