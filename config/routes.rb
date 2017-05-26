@@ -5,9 +5,8 @@ Rails.application.routes.draw do
     resources :schedules, only: [:index, :show, :create, :update, :destroy]
     resources :texts, only: [:index, :create]
     resources :rosters, only: [:index, :create]
-    post '/texts/send_text' => 'texts#send_text'
     #resources :sms, only: :create
   end
-
+  post '/text_it' => 'schedules#text_dat_message'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

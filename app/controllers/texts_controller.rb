@@ -19,11 +19,11 @@ class TextsController < ApplicationController
   end
 
   def send_text
-
+    TwilioSender.new.send_it(params[:message], params[:phone])
     #TwilioSender.new.send_it(params[:message], params[:phone])
     #puts "Message sent!"
 
-    HardWorker.perform_in(5.seconds, params[:message], params[:phone])
+#    HardWorker.perform_in(5.seconds, params[:message], params[:phone])
 
   end
 
