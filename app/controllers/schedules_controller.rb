@@ -2,7 +2,11 @@ class SchedulesController < ApplicationController
   def text_dat_message
     #TwilioSender.new.send_it(params[:message], params[:phone])
     #testing worker
-    HardWorker.perform_in(10.seconds, params[:message], params[:phone])
+    phones = params[:phones]
+    phones.each_with_index do |num, index|
+      HardWorker.perform_in(index * 3, params[:message], num)
+    end
+
   end
 
   def index
