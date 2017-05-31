@@ -3,8 +3,13 @@ class SchedulesController < ApplicationController
     #TwilioSender.new.send_it(params[:message], params[:phone])
     #testing worker
     phones = params[:phones]
+    message_datetime = Time.at(params[:message_datetime] / 1000)
     phones.each_with_index do |num, index|
-      HardWorker.perform_in(index * 3, params[:message], num)
+      #HardWorker.perform_in(index * 3, params[:message], num)
+      #HardWorker.perform_at(Time.now + (5 * index).seconds, params[:message], num)
+      HardWorker.perform_at(message_datetime + (5 * index).seconds, params[:message], num)
+      #puts "Date time message: "
+      #puts Time.at(params[:message_datetime] / 1000)
     end
 
   end
