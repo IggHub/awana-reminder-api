@@ -4,10 +4,12 @@ RSpec.describe SchedulesController do
   num_schedule = 3
   num_worker = 10
   let(:schedule) {FactoryGirl.create(:schedule)}
+  let(:user) {FactoryGirl.create(:user)}
   worker_info = [{name: "Test1", phone: "(123-456-7890)"}]
 
   before (:each) do
     FactoryGirl.create_list(:schedule, num_schedule)
+    FactoryGirl.create_list(:worker, num_worker)
   end
 
   describe "GET index" do
@@ -34,16 +36,16 @@ RSpec.describe SchedulesController do
     end
   end
 
-=begin
+
   describe "POST create" do
     it "adds new schedule by 1" do
-      FactoryGirl.create(:worker)
+
       expect {
-        post "/api/schedules", schedule: {date: schedule.date, user_id: schedule.user_id, message: schedule.message}
+        post "/api/schedules", schedule: {date: Time.now + 1.hour, user_id: user.id, message: "Hello message"}
       }.to change(Schedule, :count).by(1)
     end
   end
-=end
+
 
   describe "DELETE destroy" do
     it "destroys a select schedule" do
