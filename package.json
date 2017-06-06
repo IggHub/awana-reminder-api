@@ -1,0 +1,8 @@
+{
+  "name": "awana_reminder_api",
+  "private": true,
+  "dependencies": {},
+  "scripts": {
+    "postinstall": "cd client && yarn install"
+  }
+}
