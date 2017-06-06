@@ -17,6 +17,7 @@ gem 'puma', '~> 3.0'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
 gem 'sidekiq'
+gem 'react_on_rails', '8.0.0'  
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
