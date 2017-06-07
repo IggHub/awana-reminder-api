@@ -82,4 +82,5 @@ ReactOnRails.configure do |config|
   # see https://github.com/shakacode/react_on_rails/blob/master/docs/additional-reading/rails-assets.md
   # And you will use a setting like this.
   # config.symlink_non_digested_assets_regex = /\.(png|jpg|jpeg|gif|tiff|woff|ttf|eot|svg|map)/
+  config.npm_build_production_command = "yarn run build:production"
 end
