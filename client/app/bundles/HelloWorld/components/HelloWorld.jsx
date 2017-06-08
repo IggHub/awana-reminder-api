@@ -1,20 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import Message from './Message';
 
 export default class HelloWorld extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired, // this is passed from the Rails view
+    name: PropTypes.string.isRequired
   };
 
-  /**
-   * @param props - Comes from your rails view.
-   * @param _railsContext - Comes from React on Rails
-   */
   constructor(props, _railsContext) {
     super(props);
-
-    // How to set initial state in ES6 class syntax
-    // https://facebook.github.io/react/docs/reusable-components.html#es6-classes
     this.state = { name: this.props.name };
   }
 
@@ -25,6 +19,7 @@ export default class HelloWorld extends React.Component {
   render() {
     return (
       <div>
+
         <h3>
           Hello, {this.state.name}!
         </h3>
@@ -39,6 +34,7 @@ export default class HelloWorld extends React.Component {
             value={this.state.name}
             onChange={(e) => this.updateName(e.target.value)}
           />
+        <Message name={this.state.name} />
         </form>
       </div>
     );
