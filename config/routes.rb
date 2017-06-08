@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root "hello_world#index"
-  get 'hello_world', to: 'hello_world#index'
+  root "app#index"
+  get 'app', to: 'app#index'
   scope :api do
     resources :workers, only: [:index, :show, :create, :update, :destroy]
     resources :users, only: [:index, :show]

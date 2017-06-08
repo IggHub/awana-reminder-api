@@ -1,9 +1,9 @@
 import ReactOnRails from 'react-on-rails';
 
-import HelloWorld from '../components/HelloWorld';
+import App from '../components/App';
 import Message from '../components/Message';
 
 ReactOnRails.register({
-  HelloWorld,
+  App,
   Message
 });
