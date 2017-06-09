@@ -10,8 +10,11 @@ class Schedule extends React.Component {
       schedules: [],
       schedule: '',
       workers: [],
-      worker: ''
-    }
+      worker: '',
+      date: ''
+    };
+    this.postSchedule = this.postSchedule.bind(this);
+    this.handleMessage = this.handleMessage.bind(this);
   };
   getSchedules(){
     Client.getSchedules((schedules) => {
@@ -22,7 +25,15 @@ class Schedule extends React.Component {
     Client.getWorkersInfo((workers) => {
       this.setState({workers})
     })
-  }
+  };
+  postSchedule(date, message, workers){
+    let tempNewWorkers = this.state.workers.slice();
+
+  };
+
+  handleMessage(e){
+    this.setState({message: e.target.value})
+  };
   componentDidMount(){
     this.getSchedules();
     this.getWorkersInfo();
@@ -35,9 +46,10 @@ class Schedule extends React.Component {
         <DisplaySchedules
           workers={this.state.workers}
           schedules={this.state.schedules} />
-        <CreateSchedules />
-        <button onClick={() => console.log(this.state.schedules)}>Schedules</button>
-        <button onClick={() => console.log(this.state.workers)}>Workers</button>
+        <CreateSchedules
+          handleMessage={this.handleMessage} />
+
+        <button onClick={() => console.log(this.state.message)}>Message</button>
       </div>
     )
   }

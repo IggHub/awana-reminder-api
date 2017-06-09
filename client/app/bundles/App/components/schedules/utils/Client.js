@@ -20,8 +20,25 @@ function getWorkersInfo(cb){
     .then(cb)
 };
 
+function postSchedule(date, message, workersArray, cb) {
+  return fetch(`api/schedules`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      date: date,
+      message: message,
+      user_id: 1,
+      worker_info: workersArray
+    })
+  }).then((response) => response.json())
+    .then(cb);
+};
+
 const Client = {
   getSchedules,
-  getWorkersInfo
+  getWorkersInfo,
+  postSchedule
 }
 export default Client;
