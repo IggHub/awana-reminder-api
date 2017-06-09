@@ -32,7 +32,9 @@ class Schedule extends React.Component {
     return (
       <div>
         <h2>Hello from Schedule!</h2>
-        <DisplaySchedules />
+        <DisplaySchedules
+          workers={this.state.workers}
+          schedules={this.state.schedules} />
         <CreateSchedules />
         <button onClick={() => console.log(this.state.schedules)}>Schedules</button>
         <button onClick={() => console.log(this.state.workers)}>Workers</button>
