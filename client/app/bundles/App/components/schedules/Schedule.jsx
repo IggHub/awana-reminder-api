@@ -50,8 +50,10 @@ class Schedule extends React.Component {
       this.setState({
         schedules: this.state.schedules.concat([schedule]),
         workers: this.state.workers.concat(noBlankTempNewWorkers)
-      })
-    })
+      });
+      this.getWorkersInfo();
+    });
+
   };
 
   handleMessage(e){
