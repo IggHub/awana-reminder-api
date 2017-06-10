@@ -1,7 +1,7 @@
 import React from 'react';
 import {FormGroup, ControlLabel} from 'react-bootstrap';
 import DateTime from 'react-datetime';
-//import '../../schedules/stylesheets/DateTime.css';
+import dateTimeStyle from '../../schedules/stylesheets/DateTime.css';
 
 export default class AddDate extends React.Component {
   render(){
