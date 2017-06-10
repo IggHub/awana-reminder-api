@@ -19,6 +19,8 @@ export default class DisplaySchedules extends React.Component{
                   <h6 key={index}>{worker.name}</h6>
                 )
               }
+
+              <button onClick={() => this.props.deleteSchedule(schedule.id)}>Delete</button>
             </Thumbnail>
           </Col>
         )}

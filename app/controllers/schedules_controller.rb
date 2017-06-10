@@ -43,7 +43,13 @@ class SchedulesController < ApplicationController
   end
 
   def destroy
+    @workers = Schedule.find(params[:id]).workers
+    @workers.each do |worker|
+      worker.destroy
+    end
     @schedule = Schedule.find(params[:id]).destroy
+    #find all workers with that schedule id and destroy it
+
     head :no_content
   end
 

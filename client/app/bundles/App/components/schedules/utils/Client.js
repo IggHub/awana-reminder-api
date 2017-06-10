@@ -36,9 +36,16 @@ function postSchedule(date, message, workersArray, cb) {
     .then(cb);
 };
 
+function deleteSchedule(scheduleId, cb){
+  return fetch(`api/schedules/${scheduleId}`, {
+    method: 'DELETE'
+  }).then(cb);
+};
+
 const Client = {
   getSchedules,
   getWorkersInfo,
-  postSchedule
+  postSchedule,
+  deleteSchedule
 }
 export default Client;

@@ -23,6 +23,7 @@ class Schedule extends React.Component {
       date: ''
     };
     this.postSchedule = this.postSchedule.bind(this);
+    this.deleteSchedule = this.deleteSchedule.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
     this.handleDate = this.handleDate.bind(this);
     this.handleNewWorkers = this.handleNewWorkers.bind(this);
@@ -39,12 +40,18 @@ class Schedule extends React.Component {
     })
   };
   postSchedule(){
+    console.log("starting postSchedule...");
     let tempNewWorkers = this.state.newWorkers.slice();
     let noBlankTempNewWorkers = tempNewWorkers.filter((el) => {
       return el.name.length > 0
     });
     this.setState({finalNewWorkers: noBlankTempNewWorkers}, () => console.log(this.state.finalNewWorkers));
-
+    Client.postSchedule(this.state.date, this.state.message, noBlankTempNewWorkers, (schedule) => {
+      this.setState({
+        schedules: this.state.schedules.concat([schedule]),
+        workers: this.state.workers.concat(noBlankTempNewWorkers)
+      })
+    })
   };
 
   handleMessage(e){
@@ -83,7 +90,12 @@ class Schedule extends React.Component {
       this.setState({phoneTemp3: e.target.value});
     };
     this.setState({newWorkers: phonesArray});
+  };
 
+  deleteSchedule(scheduleId){
+    Client.deleteSchedule(scheduleId, () => {
+      this.getSchedules();
+    })
   }
   componentDidMount(){
     this.getSchedules();
@@ -96,7 +108,8 @@ class Schedule extends React.Component {
         <h2>Hello from Schedule!</h2>
         <DisplaySchedules
           workers={this.state.workers}
-          schedules={this.state.schedules} />
+          schedules={this.state.schedules}
+          deleteSchedule={this.deleteSchedule} />
         <CreateSchedules
           handleMessage={this.handleMessage}
           handleDate={this.handleDate}
@@ -106,6 +119,7 @@ class Schedule extends React.Component {
         <button onClick={() => console.log(this.state.workers)}>Workers</button>
         <button onClick={() => console.log(this.state.newWorkers)}>New Workers</button>
         <button onClick={() => console.log(this.state.message)}>Message</button>
+        <button onClick={() => console.log(this.state.schedules)}>Schedules</button>
         <button onClick={this.postSchedule}>Post Schedule</button>
       </div>
     )
