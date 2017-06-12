@@ -17,7 +17,9 @@ export default class CreateSchedules extends React.Component {
         <h2>Hello create schedules!</h2>
         <AddDate handleDate={this.props.handleDate} />
         {workerHolder}
-        <AddMessage handleMessage={this.props.handleMessage} />
+        <AddMessage handleMessage={this.props.handleMessage} message={this.props.message}/>
+        <button onClick={this.props.postSchedule}>Post Schedule</button>
+        <hr />
       </div>
     )
   }

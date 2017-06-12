@@ -2,6 +2,7 @@ import React from 'react';
 import Client from '../schedules/utils/Client';
 import DisplaySchedules from '../schedules/components/DisplaySchedules';
 import CreateSchedules from '../schedules/components/CreateSchedules';
+import EditSchedules from '../schedules/components/EditSchedules';
 
 class Schedule extends React.Component {
   constructor(props, _railsContext) {
@@ -20,7 +21,9 @@ class Schedule extends React.Component {
       phoneTemp1: '',
       phoneTemp2: '',
       phoneTemp3: '',
-      date: ''
+      date: '',
+      editable: false,
+      creatable: true
     };
     this.postSchedule = this.postSchedule.bind(this);
     this.deleteSchedule = this.deleteSchedule.bind(this);
@@ -28,6 +31,7 @@ class Schedule extends React.Component {
     this.handleDate = this.handleDate.bind(this);
     this.handleNewWorkers = this.handleNewWorkers.bind(this);
     this.handlePhones = this.handlePhones.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   };
   getSchedules(){
     Client.getSchedules((schedules) => {
@@ -94,6 +98,10 @@ class Schedule extends React.Component {
     this.setState({newWorkers: phonesArray});
   };
 
+  handleEdit(){
+    this.setState({editable: !this.state.editable, creatable: !this.state.creatable})
+  };
+
   deleteSchedule(scheduleId){
     Client.deleteSchedule(scheduleId, () => {
       this.getSchedules();
@@ -105,24 +113,25 @@ class Schedule extends React.Component {
   }
 
   render(){
+    const editSchedule = this.state.editable ? <EditSchedules handleMessage={this.handleMessage} handleDate={this.handleDate} handleNewWorkers={this.handleNewWorkers} handlePhones={this.handlePhones} handleEdit = {this.handleEdit} date={this.state.date} newWorkers={this.state.newWorkers} message={this.state.message}/> : <div></div>
+    const createSchedule = this.state.creatable ? <CreateSchedules handleMessage={this.handleMessage} handleDate={this.handleDate} handleNewWorkers={this.handleNewWorkers} handlePhones={this.handlePhones} postSchedule={this.postSchedule} /> : <div></div>
     return (
       <div>
         <h2>Hello from Schedule!</h2>
         <DisplaySchedules
           workers={this.state.workers}
           schedules={this.state.schedules}
-          deleteSchedule={this.deleteSchedule} />
-        <CreateSchedules
-          handleMessage={this.handleMessage}
-          handleDate={this.handleDate}
-          handleNewWorkers={this.handleNewWorkers}
-          handlePhones={this.handlePhones} />
-        <button onClick={() => console.log(this.state.date)}>Date</button>
-        <button onClick={() => console.log(this.state.workers)}>Workers</button>
-        <button onClick={() => console.log(this.state.newWorkers)}>New Workers</button>
-        <button onClick={() => console.log(this.state.message)}>Message</button>
-        <button onClick={() => console.log(this.state.schedules)}>Schedules</button>
-        <button onClick={this.postSchedule}>Post Schedule</button>
+          deleteSchedule={this.deleteSchedule}
+          handleEdit={this.handleEdit} />
+
+        {editSchedule}
+        {createSchedule}
+
+        <button onClick={() => console.log(this.state.date)}>View Date</button>
+        <button onClick={() => console.log(this.state.workers)}>View Workers</button>
+        <button onClick={() => console.log(this.state.newWorkers)}>View New Workers</button>
+        <button onClick={() => console.log(this.state.message)}>View Message</button>
+        <button onClick={() => console.log(this.state.schedules)}>View Schedules</button>
       </div>
     )
   }

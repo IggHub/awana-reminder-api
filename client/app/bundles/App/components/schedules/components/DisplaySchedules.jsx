@@ -20,6 +20,7 @@ export default class DisplaySchedules extends React.Component{
                 )
               }
 
+              <button onClick={this.props.handleEdit}>Edit</button>
               <button onClick={() => this.props.deleteSchedule(schedule.id)}>Delete</button>
             </Thumbnail>
           </Col>

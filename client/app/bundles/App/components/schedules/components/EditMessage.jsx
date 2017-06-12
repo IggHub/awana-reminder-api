@@ -1,12 +1,12 @@
 import React from 'react';
 import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
-export default class AddMessage extends React.Component {
+export default class EditMessage extends React.Component {
   render(){
     return (
       <FormGroup>
         <ControlLabel>Message:</ControlLabel>
-        <FormControl maxLength="140" placeholder="Enter Message" componentClass="textarea" onChange={this.props.handleMessage} />
+        <FormControl onChange={this.props.handleMessage} maxLength="140" componentClass="textarea" value={this.props.message} />
       </FormGroup>
     )
   }
