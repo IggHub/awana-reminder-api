@@ -7,17 +7,17 @@ import EditMessage from './EditMessage';
 export default class EditSchedules extends React.Component {
   render(){
     let workerHolder = [];
-    for(var i = 1; i <= this.props.newWorkers.length; i++){
+    for(var i = 1; i <= this.props.editWorkers.length; i++){
       workerHolder.push(
-        <EditWorkers worker={this.props.newWorkers[i-1].name} phone={this.props.newWorkers[i-1].phone} newWorkers={this.props.newWorkers} handleNewWorkers={this.props.handleNewWorkers} handlePhones={this.props.handlePhones} key={i} id={i} />
+        <EditWorkers handleEditWorkers={this.props.handleEditWorkers} handlePhones={this.props.handlePhones} worker={this.props.editWorkers[i-1].name} phone={this.props.editWorkers[i-1].phone} workers={this.props.editWorkers} handleNewWorkers={this.props.handleNewWorkers} handlePhones={this.props.handlePhones} key={i} id={i} />
       )
     }
     return (
       <div>
         <h2>Hello Edit Schedules!</h2>
-        <EditDate handleDate={this.props.handleDate} date={this.props.date}/>
+        <EditDate handleDate={this.props.handleDate} editDate={this.props.editDate}/>
         {workerHolder}
-        <EditMessage handleMessage={this.props.handleMessage} message={this.props.message} />
+        <EditMessage handleMessage={this.props.handleMessage} editMessage={this.props.editMessage} />
         <button>Update Schedule</button>
         <hr />
       </div>

@@ -23,13 +23,17 @@ class Schedule extends React.Component {
       phoneTemp3: '',
       date: '',
       editable: false,
-      creatable: true
+      creatable: true,
+      editWorkers: [],
+      editDate: '',
+      editMessage: ''
     };
     this.postSchedule = this.postSchedule.bind(this);
     this.deleteSchedule = this.deleteSchedule.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
     this.handleDate = this.handleDate.bind(this);
     this.handleNewWorkers = this.handleNewWorkers.bind(this);
+    this.handleEditWorkers = this.handleEditWorkers.bind(this);
     this.handlePhones = this.handlePhones.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   };
@@ -61,11 +65,11 @@ class Schedule extends React.Component {
   };
 
   handleMessage(e){
-    this.setState({message: e.target.value})
+    this.setState({message: e.target.value, editMessage: e.target.value})
   };
 
   handleDate(date){
-    this.setState({date: date._d})
+    this.setState({date: date._d, editDate: date._d})
   };
 
   handleNewWorkers(e, id){
@@ -80,7 +84,22 @@ class Schedule extends React.Component {
       workersArray = [{name: this.state.workerTemp1, phone: this.state.phoneTemp1}, {name: this.state.workerTemp2, phone: this.state.phoneTemp2}, {name: e.target.value, phone: this.state.phoneTemp3}];
       this.setState({workerTemp3: e.target.value});
     };
-    this.setState({newWorkers: workersArray});
+    this.setState({newWorkers: workersArray, editWorkers: workersArray});
+  };
+
+  handleEditWorkers(e, id){
+    let workersArray = this.state.editWorkers.slice();
+    if(id === 1){
+      workersArray = [{name: e.target.value, phone: this.state.phoneTemp1}, {name: this.state.workerTemp2, phone: this.state.phoneTemp2}, {name: this.state.workerTemp3, phone: this.state.phoneTemp3}];
+      this.setState({workerTemp1: e.target.value});
+    } else if (id === 2) {
+      workersArray = [{name: this.state.workerTemp1, phone: this.state.phoneTemp1}, {name: e.target.value, phone: this.state.phoneTemp2}, {name: this.state.workerTemp3, phone: this.state.phoneTemp3}];
+      this.setState({workerTemp2: e.target.value});
+    } else if (id === 3) {
+      workersArray = [{name: this.state.workerTemp1, phone: this.state.phoneTemp1}, {name: this.state.workerTemp2, phone: this.state.phoneTemp2}, {name: e.target.value, phone: this.state.phoneTemp3}];
+      this.setState({workerTemp3: e.target.value});
+    };
+    this.setState({newWorkers: workersArray, editWorkers: workersArray});
   }
 
   handlePhones(e, id){
@@ -98,8 +117,20 @@ class Schedule extends React.Component {
     this.setState({newWorkers: phonesArray});
   };
 
-  handleEdit(){
-    this.setState({editable: !this.state.editable, creatable: !this.state.creatable})
+  handleEdit(scheduleId){
+    let editWorkersArray = this.state.workers.filter(function(worker){
+      return worker.schedule_id === scheduleId
+    });
+    let editMessage = this.state.schedules.find((el) => el.id === scheduleId).message;
+    let editDate = this.state.schedules.find((el) => el.id === scheduleId).date;
+    this.setState({
+      editable: !this.state.editable,
+      creatable: !this.state.creatable,
+      editWorkers: editWorkersArray,
+      editMessage: editMessage,
+      editDate: editDate
+    });
+
   };
 
   deleteSchedule(scheduleId){
@@ -113,7 +144,7 @@ class Schedule extends React.Component {
   }
 
   render(){
-    const editSchedule = this.state.editable ? <EditSchedules handleMessage={this.handleMessage} handleDate={this.handleDate} handleNewWorkers={this.handleNewWorkers} handlePhones={this.handlePhones} handleEdit = {this.handleEdit} date={this.state.date} newWorkers={this.state.newWorkers} message={this.state.message}/> : <div></div>
+    const editSchedule = this.state.editable ? <EditSchedules handleMessage={this.handleMessage} handleDate={this.handleDate} handleEditWorkers={this.handleEditWorkers} handlePhones={this.handlePhones} handleEdit = {this.handleEdit} editDate={this.state.editDate} editWorkers={this.state.editWorkers} editMessage={this.state.editMessage}/> : <div></div>
     const createSchedule = this.state.creatable ? <CreateSchedules handleMessage={this.handleMessage} handleDate={this.handleDate} handleNewWorkers={this.handleNewWorkers} handlePhones={this.handlePhones} postSchedule={this.postSchedule} /> : <div></div>
     return (
       <div>
@@ -130,6 +161,7 @@ class Schedule extends React.Component {
         <button onClick={() => console.log(this.state.date)}>View Date</button>
         <button onClick={() => console.log(this.state.workers)}>View Workers</button>
         <button onClick={() => console.log(this.state.newWorkers)}>View New Workers</button>
+        <button onClick={() => console.log(this.state.editWorkers)}>View Edit Workers</button>
         <button onClick={() => console.log(this.state.message)}>View Message</button>
         <button onClick={() => console.log(this.state.schedules)}>View Schedules</button>
       </div>
