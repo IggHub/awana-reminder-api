@@ -9,7 +9,15 @@ export default class EditSchedules extends React.Component {
     let workerHolder = [];
     for(var i = 1; i <= this.props.editWorkers.length; i++){
       workerHolder.push(
-        <EditWorkers handleEditWorkers={this.props.handleEditWorkers} handlePhones={this.props.handlePhones} worker={this.props.editWorkers[i-1].name} phone={this.props.editWorkers[i-1].phone} workers={this.props.editWorkers} handleNewWorkers={this.props.handleNewWorkers} handlePhones={this.props.handlePhones} key={i} id={i} />
+        <EditWorkers
+            handleEditWorkers={this.props.handleEditWorkers}
+            handlePhones={this.props.handlePhones}
+            worker={this.props.editWorkers[i-1].name}
+            phone={this.props.editWorkers[i-1].phone}
+            workers={this.props.editWorkers}
+            handleNewWorkers={this.props.handleNewWorkers}
+            key={i}
+            id={i} />
       )
     }
     return (

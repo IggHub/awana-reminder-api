@@ -14,13 +14,7 @@ class Schedule extends React.Component {
       workers: [],
       newWorkers: [{name: '', phone: ''},{name: '', phone: ''},{name: '', phone: ''}],
       finalNewWorkers: [],
-      workerTemp1: '',
-      workerTemp2: '',
-      workerTemp3: '',
       phone: '',
-      phoneTemp1: '',
-      phoneTemp2: '',
-      phoneTemp3: '',
       date: '',
       editable: false,
       creatable: true,
@@ -36,7 +30,7 @@ class Schedule extends React.Component {
     this.handleEditWorkers = this.handleEditWorkers.bind(this);
     this.handlePhones = this.handlePhones.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
-    this.clearField = this.clearField.bind(this);
+
   };
   getSchedules(){
     Client.getSchedules((schedules) => {
@@ -67,12 +61,6 @@ class Schedule extends React.Component {
     });
   };
 
-  clearField(){
-
-    console.log(document.getElementById("addDate"));
-    document.getElementById("addMessage").value="";
-  };
-
   handleMessage(e){
     this.setState({message: e.target.value, editMessage: e.target.value})
   };
@@ -83,46 +71,19 @@ class Schedule extends React.Component {
 
   handleNewWorkers(e, id){
     let workersArray = this.state.newWorkers.slice();
-    if(id === 1){
-      workersArray = [{name: e.target.value, phone: this.state.phoneTemp1}, {name: this.state.workerTemp2, phone: this.state.phoneTemp2}, {name: this.state.workerTemp3, phone: this.state.phoneTemp3}];
-      this.setState({workerTemp1: e.target.value});
-    } else if (id === 2) {
-      workersArray = [{name: this.state.workerTemp1, phone: this.state.phoneTemp1}, {name: e.target.value, phone: this.state.phoneTemp2}, {name: this.state.workerTemp3, phone: this.state.phoneTemp3}];
-      this.setState({workerTemp2: e.target.value});
-    } else if (id === 3) {
-      workersArray = [{name: this.state.workerTemp1, phone: this.state.phoneTemp1}, {name: this.state.workerTemp2, phone: this.state.phoneTemp2}, {name: e.target.value, phone: this.state.phoneTemp3}];
-      this.setState({workerTemp3: e.target.value});
-    };
+    workersArray[id-1] = {name: e.target.value, phone: workersArray[id-1].phone};
     this.setState({newWorkers: workersArray, editWorkers: workersArray});
   };
 
   handleEditWorkers(e, id){
     let workersArray = this.state.editWorkers.slice();
-    if(id === 1){
-      workersArray = [{name: e.target.value, phone: this.state.phoneTemp1}, {name: this.state.workerTemp2, phone: this.state.phoneTemp2}, {name: this.state.workerTemp3, phone: this.state.phoneTemp3}];
-      this.setState({workerTemp1: e.target.value});
-    } else if (id === 2) {
-      workersArray = [{name: this.state.workerTemp1, phone: this.state.phoneTemp1}, {name: e.target.value, phone: this.state.phoneTemp2}, {name: this.state.workerTemp3, phone: this.state.phoneTemp3}];
-      this.setState({workerTemp2: e.target.value});
-    } else if (id === 3) {
-      workersArray = [{name: this.state.workerTemp1, phone: this.state.phoneTemp1}, {name: this.state.workerTemp2, phone: this.state.phoneTemp2}, {name: e.target.value, phone: this.state.phoneTemp3}];
-      this.setState({workerTemp3: e.target.value});
-    };
+    workersArray[id-1] = {name: e.target.value, phone: workersArray[id-1].phone};
     this.setState({newWorkers: workersArray, editWorkers: workersArray});
   }
 
   handlePhones(e, id){
     let phonesArray = this.state.newWorkers.slice();
-    if(id === 1){
-      phonesArray = [{name: this.state.workerTemp1, phone: e.target.value}, {name: this.state.workerTemp2, phone: this.state.phoneTemp2}, {name: this.state.workerTemp3, phone: this.state.phoneTemp3}];
-      this.setState({phoneTemp1: e.target.value});
-    } else if (id === 2) {
-      phonesArray = [{name: this.state.workerTemp1, phone: this.state.phoneTemp1}, {name: this.state.workerTemp2, phone: e.target.value}, {name: this.state.workerTemp3, phone: this.state.phoneTemp3}];
-      this.setState({phoneTemp2: e.target.value});
-    } else if (id === 3) {
-      phonesArray = [{name: this.state.workerTemp1, phone: this.state.phoneTemp1}, {name: this.state.workerTemp2, phone: this.state.phoneTemp2}, {name: this.state.workerTemp3, phone: e.target.value}];
-      this.setState({phoneTemp3: e.target.value});
-    };
+    phonesArray[id-1] = {name: phonesArray[id-1].name, phone: e.target.value};
     this.setState({newWorkers: phonesArray});
   };
 
@@ -139,7 +100,6 @@ class Schedule extends React.Component {
       editMessage: editMessage,
       editDate: editDate
     });
-
   };
 
   deleteSchedule(scheduleId){
@@ -162,7 +122,7 @@ class Schedule extends React.Component {
                                                       editDate={this.state.editDate}
                                                       editWorkers={this.state.editWorkers}
                                                       editMessage={this.state.editMessage}/> : <div></div>
-                                                    
+
     const createSchedule = this.state.creatable ? <CreateSchedules
                                                       handleMessage={this.handleMessage}
                                                       handleDate={this.handleDate}
