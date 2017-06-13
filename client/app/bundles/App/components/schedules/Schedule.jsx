@@ -12,7 +12,7 @@ class Schedule extends React.Component {
       schedules: [],
       worker: '',
       workers: [],
-      newWorkers: [],
+      newWorkers: [{name: '', phone: ''},{name: '', phone: ''},{name: '', phone: ''}],
       finalNewWorkers: [],
       workerTemp1: '',
       workerTemp2: '',
@@ -36,6 +36,7 @@ class Schedule extends React.Component {
     this.handleEditWorkers = this.handleEditWorkers.bind(this);
     this.handlePhones = this.handlePhones.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.clearField = this.clearField.bind(this);
   };
   getSchedules(){
     Client.getSchedules((schedules) => {
@@ -57,11 +58,19 @@ class Schedule extends React.Component {
     Client.postSchedule(this.state.date, this.state.message, noBlankTempNewWorkers, (schedule) => {
       this.setState({
         schedules: this.state.schedules.concat([schedule]),
-        workers: this.state.workers.concat(noBlankTempNewWorkers)
+        workers: this.state.workers.concat(noBlankTempNewWorkers),
+        date: '',
+        message: '',
+        newWorkers: [{name: '', phone: ''},{name: '', phone: ''},{name: '', phone: ''}]
       });
       this.getWorkersInfo();
     });
+  };
 
+  clearField(){
+
+    console.log(document.getElementById("addDate"));
+    document.getElementById("addMessage").value="";
   };
 
   handleMessage(e){
@@ -144,8 +153,25 @@ class Schedule extends React.Component {
   }
 
   render(){
-    const editSchedule = this.state.editable ? <EditSchedules handleMessage={this.handleMessage} handleDate={this.handleDate} handleEditWorkers={this.handleEditWorkers} handlePhones={this.handlePhones} handleEdit = {this.handleEdit} editDate={this.state.editDate} editWorkers={this.state.editWorkers} editMessage={this.state.editMessage}/> : <div></div>
-    const createSchedule = this.state.creatable ? <CreateSchedules handleMessage={this.handleMessage} handleDate={this.handleDate} handleNewWorkers={this.handleNewWorkers} handlePhones={this.handlePhones} postSchedule={this.postSchedule} /> : <div></div>
+    const editSchedule = this.state.editable ? <EditSchedules
+                                                      handleMessage={this.handleMessage}
+                                                      handleDate={this.handleDate}
+                                                      handleEditWorkers={this.handleEditWorkers}
+                                                      handlePhones={this.handlePhones}
+                                                      handleEdit={this.handleEdit}
+                                                      editDate={this.state.editDate}
+                                                      editWorkers={this.state.editWorkers}
+                                                      editMessage={this.state.editMessage}/> : <div></div>
+                                                    
+    const createSchedule = this.state.creatable ? <CreateSchedules
+                                                      handleMessage={this.handleMessage}
+                                                      handleDate={this.handleDate}
+                                                      handleNewWorkers={this.handleNewWorkers}
+                                                      handlePhones={this.handlePhones}
+                                                      postSchedule={this.postSchedule}
+                                                      date={this.state.date}
+                                                      message={this.state.message}
+                                                      newWorkers={this.state.newWorkers}/> : <div></div>
     return (
       <div>
         <h2>Hello from Schedule!</h2>

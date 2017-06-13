@@ -9,16 +9,16 @@ export default class CreateSchedules extends React.Component {
     let workerHolder = [];
     for(var i = 1; i <= 3; i++){
       workerHolder.push(
-        <AddWorkers handleNewWorkers={this.props.handleNewWorkers} handlePhones={this.props.handlePhones} key={i} id={i}/>
+        <AddWorkers newWorkers={this.props.newWorkers} handleNewWorkers={this.props.handleNewWorkers} handlePhones={this.props.handlePhones} key={i} id={i}/>
       )
     }
     return (
       <div>
         <h2>Hello create schedules!</h2>
-        <AddDate handleDate={this.props.handleDate} />
-        {workerHolder}
-        <AddMessage handleMessage={this.props.handleMessage} message={this.props.message}/>
-        <button onClick={this.props.postSchedule}>Post Schedule</button>
+          <AddDate date={this.props.date} handleDate={this.props.handleDate} />
+          {workerHolder}
+          <AddMessage handleMessage={this.props.handleMessage} message={this.props.message}/>
+          <button onClick={this.props.postSchedule}>Post Schedule</button>
         <hr />
       </div>
     )

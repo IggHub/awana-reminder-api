@@ -8,7 +8,7 @@ export default class AddDate extends React.Component {
     return (
       <FormGroup>
         <ControlLabel>Date:</ControlLabel>
-        <DateTime onChange={this.props.handleDate} />
+        <DateTime value={this.props.date} ref="addDate" onChange={this.props.handleDate} />
       </FormGroup>
     )
   }
