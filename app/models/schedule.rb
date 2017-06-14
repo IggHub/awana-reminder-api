@@ -4,7 +4,7 @@ class Schedule < ApplicationRecord
   has_many :workers
   #has_many :rosters, inverse_of: :schedule
   validates_length_of :workers, maximum: 3
-
+  #accepts_nested_attributes_for :workers, allow_destroy: true
 end
 
 =begin

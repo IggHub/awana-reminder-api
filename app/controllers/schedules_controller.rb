@@ -36,6 +36,10 @@ class SchedulesController < ApplicationController
   def update
     @schedule = Schedule.find(params[:id])
     if @schedule.update_attributes(schedule_params)
+      worker_params["worker_info"].each do |worker|
+        @worker = @schedule.workers.find(worker["id"])
+        @worker.update_attributes(name: worker["name"], phone: worker["phone"])
+      end
       render json: @schedule
     else
       render json: @schedule, status: :unprocessable_entity
@@ -54,12 +58,11 @@ class SchedulesController < ApplicationController
   private
 
   def schedule_params
-    params.require(:schedule).permit(:date, :message, :user_id)
+    params.require(:schedule).permit(:date, :message, :user_id, worker_info: [:name, :phone, :id])
   end
 
-
   def worker_params
-    params.permit(worker_info: [:name, :phone])
+    params.permit(worker_info: [:name, :phone, :id])
   end
 
 end

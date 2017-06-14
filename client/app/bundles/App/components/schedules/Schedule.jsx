@@ -70,7 +70,8 @@ class Schedule extends React.Component {
     console.log("current Date: " + currentSchedule.date);
     console.log(this.state.editWorkers);
     Client.updateSchedule(this.state.currentScheduleId, this.state.editDate, this.state.editMessage, this.state.editWorkers, () => {
-      this.getWorkersInfo;
+      this.getSchedules();
+      this.getWorkersInfo();
     });
   };
 
@@ -85,27 +86,27 @@ class Schedule extends React.Component {
 
   handleNewWorkers(e, id){
     let workersArray = this.state.newWorkers.slice();
-    workersArray[id-1] = {name: e.target.value, phone: workersArray[id-1].phone};
+    workersArray[id-1]["name"] = e.target.value;
     this.setState({newWorkers: workersArray, editWorkers: workersArray});
   };
 
   handleEditWorkers(e, id){
     let workersArray = this.state.editWorkers.slice();
-    workersArray[id-1] = {name: e.target.value, phone: workersArray[id-1].phone};
+    workersArray[id-1]["name"] = e.target.value;
     this.setState({newWorkers: workersArray, editWorkers: workersArray});
   };
 
   handlePhones(e, id){
     let phonesArray = this.state.newWorkers.slice();
-    phonesArray[id-1] = {name: phonesArray[id-1].name, phone: e.target.value};
-    this.setState({newWorkers: phonesArray});
+    phonesArray[id-1]["phone"] = e.target.value;
+    this.setState({newWorkers: phonesArray, editWorkers: phonesArray});
   };
 
   handleEditPhones(e, id){
     let phonesArray = this.state.editWorkers.slice();
-    phonesArray[id-1] = {name: phonesArray[id-1].name, phone: e.target.value};
+    phonesArray[id-1]["phone"] = e.target.value;
     this.setState({newWorkers: phonesArray, editWorkers: phonesArray});
-  }
+  };
 
   handleEdit(scheduleId){
     let editWorkersArray = this.state.workers.filter(function(worker){
