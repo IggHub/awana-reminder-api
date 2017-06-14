@@ -67,10 +67,9 @@ class Schedule extends React.Component {
   updateSchedule(){
     let currentSchedule = this.state.schedules.find((el) => el.id === this.state.currentScheduleId);
     console.log("current scheduleId: " + this.state.currentScheduleId);
-    console.log(currentSchedule);
     console.log("current Date: " + currentSchedule.date);
     console.log(this.state.editWorkers);
-    Client.updateSchedule(this.state.currentScheduleId, currentSchedule.date, currentSchedule.message, this.state.editWorkers, () => {
+    Client.updateSchedule(this.state.currentScheduleId, this.state.editDate, this.state.editMessage, this.state.editWorkers, () => {
       this.getWorkersInfo;
     });
   };
@@ -80,7 +79,8 @@ class Schedule extends React.Component {
   };
 
   handleDate(date){
-    this.setState({date: date._d, editDate: date._d})
+    this.setState({date: date._d, editDate: date._d});
+
   };
 
   handleNewWorkers(e, id){
@@ -170,10 +170,12 @@ class Schedule extends React.Component {
         {createSchedule}
 
         <button onClick={() => console.log(this.state.date)}>View Date</button>
+        <button onClick={() => console.log(this.state.editDate)}>View Edit Date</button>
         <button onClick={() => console.log(this.state.workers)}>View Workers</button>
         <button onClick={() => console.log(this.state.newWorkers)}>View New Workers</button>
         <button onClick={() => console.log(this.state.editWorkers)}>View Edit Workers</button>
         <button onClick={() => console.log(this.state.message)}>View Message</button>
+        <button onClick={() => console.log(this.state.editMessage)}>View Edit Message</button>
         <button onClick={() => console.log(this.state.schedules)}>View Schedules</button>
       </div>
     )
