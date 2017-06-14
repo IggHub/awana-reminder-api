@@ -11,6 +11,7 @@ export default class EditSchedules extends React.Component {
       workerHolder.push(
         <EditWorkers
             handleEditWorkers={this.props.handleEditWorkers}
+            handleEditPhones={this.props.handleEditPhones}
             handlePhones={this.props.handlePhones}
             worker={this.props.editWorkers[i-1].name}
             phone={this.props.editWorkers[i-1].phone}
@@ -26,7 +27,7 @@ export default class EditSchedules extends React.Component {
         <EditDate handleDate={this.props.handleDate} editDate={this.props.editDate}/>
         {workerHolder}
         <EditMessage handleMessage={this.props.handleMessage} editMessage={this.props.editMessage} />
-        <button>Update Schedule</button>
+        <button onClick={this.props.updateSchedule}>Update Schedule</button>
         <hr />
       </div>
     )

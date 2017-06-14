@@ -20,15 +20,18 @@ class Schedule extends React.Component {
       creatable: true,
       editWorkers: [],
       editDate: '',
-      editMessage: ''
+      editMessage: '',
+      currentScheduleId: ''
     };
     this.postSchedule = this.postSchedule.bind(this);
+    this.updateSchedule = this.updateSchedule.bind(this);
     this.deleteSchedule = this.deleteSchedule.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
     this.handleDate = this.handleDate.bind(this);
     this.handleNewWorkers = this.handleNewWorkers.bind(this);
     this.handleEditWorkers = this.handleEditWorkers.bind(this);
     this.handlePhones = this.handlePhones.bind(this);
+    this.handleEditPhones = this.handleEditPhones.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
 
   };
@@ -61,6 +64,17 @@ class Schedule extends React.Component {
     });
   };
 
+  updateSchedule(){
+    let currentSchedule = this.state.schedules.find((el) => el.id === this.state.currentScheduleId);
+    console.log("current scheduleId: " + this.state.currentScheduleId);
+    console.log(currentSchedule);
+    console.log("current Date: " + currentSchedule.date);
+    console.log(this.state.editWorkers);
+    Client.updateSchedule(this.state.currentScheduleId, currentSchedule.date, currentSchedule.message, this.state.editWorkers, () => {
+      this.getWorkersInfo;
+    });
+  };
+
   handleMessage(e){
     this.setState({message: e.target.value, editMessage: e.target.value})
   };
@@ -79,13 +93,19 @@ class Schedule extends React.Component {
     let workersArray = this.state.editWorkers.slice();
     workersArray[id-1] = {name: e.target.value, phone: workersArray[id-1].phone};
     this.setState({newWorkers: workersArray, editWorkers: workersArray});
-  }
+  };
 
   handlePhones(e, id){
     let phonesArray = this.state.newWorkers.slice();
     phonesArray[id-1] = {name: phonesArray[id-1].name, phone: e.target.value};
     this.setState({newWorkers: phonesArray});
   };
+
+  handleEditPhones(e, id){
+    let phonesArray = this.state.editWorkers.slice();
+    phonesArray[id-1] = {name: phonesArray[id-1].name, phone: e.target.value};
+    this.setState({newWorkers: phonesArray, editWorkers: phonesArray});
+  }
 
   handleEdit(scheduleId){
     let editWorkersArray = this.state.workers.filter(function(worker){
@@ -96,6 +116,7 @@ class Schedule extends React.Component {
     this.setState({
       editable: !this.state.editable,
       creatable: !this.state.creatable,
+      currentScheduleId: scheduleId,
       editWorkers: editWorkersArray,
       editMessage: editMessage,
       editDate: editDate
@@ -104,6 +125,7 @@ class Schedule extends React.Component {
 
   deleteSchedule(scheduleId){
     Client.deleteSchedule(scheduleId, () => {
+      this.setState({currentScheduleId: ''})
       this.getSchedules();
     })
   }
@@ -118,10 +140,13 @@ class Schedule extends React.Component {
                                                       handleDate={this.handleDate}
                                                       handleEditWorkers={this.handleEditWorkers}
                                                       handlePhones={this.handlePhones}
+                                                      handleEditPhones={this.handleEditPhones}
                                                       handleEdit={this.handleEdit}
                                                       editDate={this.state.editDate}
                                                       editWorkers={this.state.editWorkers}
-                                                      editMessage={this.state.editMessage}/> : <div></div>
+                                                      editMessage={this.state.editMessage}
+                                                      updateSchedule={this.updateSchedule}
+                                                      /> : <div></div>
 
     const createSchedule = this.state.creatable ? <CreateSchedules
                                                       handleMessage={this.handleMessage}

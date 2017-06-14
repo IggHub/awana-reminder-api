@@ -36,6 +36,22 @@ function postSchedule(date, message, workersArray, cb) {
     .then(cb);
 };
 
+function updateSchedule(scheduleId, date, message, workersArray, cb){
+  return fetch(`api/schedules/${scheduleId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      date: date,
+      message: message,
+      user_id: 1,
+      worker_info: workersArray
+    })
+  }).then((response) => response.json())
+    .then(cb);
+}
+
 function deleteSchedule(scheduleId, cb){
   return fetch(`api/schedules/${scheduleId}`, {
     method: 'DELETE'
@@ -46,6 +62,7 @@ const Client = {
   getSchedules,
   getWorkersInfo,
   postSchedule,
+  updateSchedule,
   deleteSchedule
 }
 export default Client;

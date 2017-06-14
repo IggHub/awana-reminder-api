@@ -35,7 +35,12 @@ class SchedulesController < ApplicationController
 
   def update
     @schedule = Schedule.find(params[:id])
+    puts worker_params
     if @schedule.update_attributes(schedule_params)
+      worker_params["worker_info"].each do |w|
+        @worker = Worker.find(id)
+        @worker.update_attributes!
+      end
       render json: @schedule
     else
       render json: @schedule, status: :unprocessable_entity
@@ -48,8 +53,6 @@ class SchedulesController < ApplicationController
       worker.destroy
     end
     @schedule = Schedule.find(params[:id]).destroy
-    #find all workers with that schedule id and destroy it
-
     head :no_content
   end
 

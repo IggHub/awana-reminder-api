@@ -12,7 +12,7 @@ export default class EditWorkers extends React.Component {
 
         <FormGroup>
           <ControlLabel>Phone:</ControlLabel>
-          <FormControl maxLength="14" placeholder="Enter phone" onChange={(e, id) => this.props.handlePhones(e, this.props.id)} value={this.props.phone} />
+          <FormControl maxLength="14" placeholder="Enter phone" onChange={(e, id) => this.props.handleEditPhones(e, this.props.id)} value={this.props.phone} />
         </FormGroup>
       </div>
     )
