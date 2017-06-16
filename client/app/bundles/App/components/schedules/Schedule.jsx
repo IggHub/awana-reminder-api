@@ -23,6 +23,7 @@ class Schedule extends React.Component {
       editMessage: '',
       currentScheduleId: ''
     };
+    this.postMessage = this.postMessage.bind(this);
     this.postSchedule = this.postSchedule.bind(this);
     this.updateSchedule = this.updateSchedule.bind(this);
     this.deleteSchedule = this.deleteSchedule.bind(this);
@@ -45,6 +46,7 @@ class Schedule extends React.Component {
       this.setState({workers})
     })
   };
+
   postSchedule(){
     console.log("starting postSchedule...");
     let tempNewWorkers = this.state.newWorkers.slice();
@@ -79,8 +81,17 @@ class Schedule extends React.Component {
     this.setState({message: e.target.value, editMessage: e.target.value})
   };
 
+  postMessage(){
+    Client.postMessage(this.state.message, this.state.newWorkers, this.state.date);
+  };
+
   handleDate(date){
-    this.setState({date: date._d, editDate: date._d});
+    let today = new Date();
+    let currentHour = today.getHours();
+    let currentMinutePlusOne = today.getMinutes() + 3;
+    let dateClone = date;
+    let aMinuteFromNow = dateClone.set({'hour': currentHour, 'minute': currentMinutePlusOne });
+    this.setState({date: aMinuteFromNow._d, editDate: aMinuteFromNow._d});
 
   };
 
@@ -178,6 +189,7 @@ class Schedule extends React.Component {
         <button onClick={() => console.log(this.state.message)}>View Message</button>
         <button onClick={() => console.log(this.state.editMessage)}>View Edit Message</button>
         <button onClick={() => console.log(this.state.schedules)}>View Schedules</button>
+        <button onClick={this.postMessage}>Post Message</button>
       </div>
     )
   }

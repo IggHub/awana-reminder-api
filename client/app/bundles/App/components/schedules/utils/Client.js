@@ -36,6 +36,25 @@ function postSchedule(date, message, workersArray, cb) {
     .then(cb);
 };
 
+function postMessage(message, workers, messageDateTime){
+  let phoneArray = workers.map((worker) => {
+    return PhoneHelpers.condensePhone(worker.phone)
+  }).filter((el) => {return el !== ""});
+
+  return fetch('text_it', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      message: message,
+      phones: phoneArray,
+      message_datetime: messageDateTime.getTime()
+    })
+  });
+  console.log(messageDateTime.getTime());
+};
+
 function updateSchedule(scheduleId, date, message, workersArray, cb){
   return fetch(`api/schedules/${scheduleId}`, {
     method: 'PUT',
@@ -62,6 +81,7 @@ const Client = {
   getSchedules,
   getWorkersInfo,
   postSchedule,
+  postMessage,
   updateSchedule,
   deleteSchedule
 }
