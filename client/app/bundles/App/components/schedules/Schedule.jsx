@@ -88,7 +88,7 @@ class Schedule extends React.Component {
   handleDate(date){
     let today = new Date();
     let currentHour = today.getHours();
-    let currentMinutePlusOne = today.getMinutes() + 3;
+    let currentMinutePlusOne = today.getMinutes() + 1;
     let dateClone = date;
     let aMinuteFromNow = dateClone.set({'hour': currentHour, 'minute': currentMinutePlusOne });
     this.setState({date: aMinuteFromNow._d, editDate: aMinuteFromNow._d});
