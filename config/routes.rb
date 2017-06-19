@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+
   root "app#index"
   get 'app', to: 'app#index'
   scope :api do

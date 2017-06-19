@@ -1,0 +1,20 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#main-sidebar-right {
+  height: auto;
+  position: fixed;
+  top: 50px;
+  bottom: 0;
+  width: 200px;
+  background-color: #202020;
+  transition: width 0.35s ease;
+    -webkit-transition: width 0.35s ease;
+    -moz-transition: width 0.35s ease;
+    -o-transition: width 0.35s ease;
+}
+
+
+#main-sidebar-right a {
+  color: #ffffff
+}
