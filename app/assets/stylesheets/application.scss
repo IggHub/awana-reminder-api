@@ -4,7 +4,7 @@
 body {
   padding-bottom: 5px;
 }
-#main-sidebar-right {
+#main-sidebar-container {
   height: auto;
   position: fixed;
   top: 0px;
@@ -17,19 +17,38 @@ body {
     -o-transition: width 0.35s ease;
 }
 
-#main-sidebar-right a {
-  color: #ffffff
+#main-sidebar-container a {
+  color: #ffffff;
 }
 
+.navigation-title {
+  text-transform: uppercase;
+}
+
+.main-sidebar {
+  padding:15px;
+  overflow:hidden;
+  width:150px;
+  position: fixed;
+  z-index: 1
+}
 .awanafy-main-img {
   width: 65%;
   height: auto;
   margin: 0 auto;
+  /*position: absolute;
+  z-index: 0;*/
 }
 
 /* centers the columns below main image */
 .card {
   margin: 0 auto;
+}
+
+.sidebar-texts {
+  margin: 0 auto;
+  font-size: 13px;
+  text-transform: uppercase;
 }
 
 /* hides and display hamburger-menu */
