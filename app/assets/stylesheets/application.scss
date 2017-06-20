@@ -1,11 +1,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  padding-bottom: 5px;
+}
 #main-sidebar-right {
   height: auto;
   position: fixed;
-  top: 50px;
-  bottom: 0;
+  top: 0px;
+  bottom: 0px;
   width: 200px;
   background-color: #202020;
   transition: width 0.35s ease;
@@ -14,7 +17,30 @@
     -o-transition: width 0.35s ease;
 }
 
-
 #main-sidebar-right a {
   color: #ffffff
+}
+
+.awanafy-main-img {
+  width: 65%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* centers the columns below main image */
+.card {
+  margin: 0 auto;
+}
+
+/* hides and display hamburger-menu */
+/* small screen (mobile phone)*/
+@media (min-width: 0px) and (max-width: 768) {
+  .hamburger-menu { display: block; }
+  .navigation-title { display: none; }
+}
+
+/* larger screen (tablet) */
+@media (min-width: 769px) {
+  .hamburger-menu { display: none; }
+  .navigation-title { display: block; }
 }

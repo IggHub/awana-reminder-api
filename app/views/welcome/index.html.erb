@@ -1,11 +1,12 @@
 <div class="container">
   <nav class="navbar navbar-light bg-faded">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand navigation-title" href="#">
       <span class="glyphicon glyphicon-apple" aria-hidden="true"></span>
     </a>
-    <a class="navbar-brand" href="#">AWANAFY</a>
-    <a class="navbar-brand" href="#">FEATURES</a>
-    <a class="navbar-brand pull-right" data-toggle="collapse" data-target="#main-sidebar-right" aria-controls="main-sidebar-right" aria-expanded="false" href="#">
+    <a class="navbar-brand navigation-title" href="#">AWANAFY</a>
+    <a class="navbar-brand navigation-title" href="#">FEATURES</a>
+
+    <a class="navbar-brand pull-right hamburger-menu" data-toggle="collapse" data-target="#main-sidebar-right" aria-controls="main-sidebar-right" aria-expanded="false" href="#">
       <span class="glyphicon glyphicon-menu-hamburger"></span>
     </a>
   </nav>
@@ -18,11 +19,12 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h2>Hello!</h2>
+      <%= image_tag('awanafy_sketch.png', class: 'awanafy-main-img img-responsive', alt: "awanafy sketch") %>
     </div>
   </div>
+  <hr />
   <div class="row">
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3 col-sm-6 col-xs-12 col-centered">
       <div class="card" style="width: 200px;">
         <img class="card-img-top img-circle img-responsive" style="margin:0 auto;" src="http://placekitten.com/g/150/150" alt="Card image cap">
         <div class="card-block">
@@ -31,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3 col-sm-6 col-xs-12 col-centered">
       <div class="card" style="width: 200px;">
         <div class="card-block">
           <h4 class="card-title text-center">Card title 2</h4>
@@ -39,7 +41,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3 col-sm-6 col-xs-12 col-centered">
       <div class="card" style="width: 200px;">
         <img class="card-img-top img-circle img-responsive" style="margin:0 auto;" src="http://placekitten.com/g/150/150" alt="Card image cap">
         <div class="card-block">
@@ -48,7 +50,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="col-md-3 col-sm-6 col-xs-12 col-centered">
       <div class="card" style="width: 200px;">
         <div class="card-block">
           <h4 class="card-title text-center">Card title 4</h4>
@@ -56,13 +58,11 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </div>
 
 <!-- footer -->
-<div class="navbar navbar-fixed-bottom">
+<div class="navbar footer">
   <div class="container">
     <p class="navbar-text pull-left">© 2017 - IggyApp</p>
 
@@ -73,8 +73,10 @@
 </div>
 <!-- footer end -->
 
-<div id="main-sidebar-right" class="collapse width pull-right">
+<!-- sidebar -->
+<div id="main-sidebar-right" class="collapse width pull-right navbar-toggleable-sm">
   <div style="padding: 20px; overflow:hidden; width:200px;">
     <a href="#">Here is my content</a>
   </div>
 </div>
+<!-- sidebar end -->
