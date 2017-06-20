@@ -34,12 +34,12 @@ body {
 
 /* hides and display hamburger-menu */
 /* small screen (mobile phone)*/
-@media (min-width: 0px) and (max-width: 400px) {
+@media (min-width: 0px) and (max-width: 768px) {
   .navigation-title { display: none; }
   .hamburger-menu {display: block;}
 }
 
-@media (min-width: 401px) {
+@media (min-width: 769px) {
   .navigation-title { display: block; }
   .hamburger-menu {display: none;}
 }
