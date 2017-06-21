@@ -4,7 +4,12 @@
   </a>
   <a class="navbar-brand navigation-title" href="#">Awanafy</a>
   <a class="navbar-brand navigation-title" href="#">Features</a>
-  <a class="navbar-brand navigation-title pull-right" data-toggle="modal" data-target=".login-modal-sm" href="#">Login</a>
+  <% if user_signed_in? %>
+    <a class="navbar-brand navigation-title pull-right" href="#">Hello, <%= current_user.email %></a>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>   
+  <% else %>
+    <a class="navbar-brand navigation-title pull-right" data-toggle="modal" data-target=".login-modal-sm" href="#">Login</a>
+  <% end %>
   <a class="navbar-brand pull-right hamburger-menu" data-toggle="collapse" data-target="#main-sidebar-container" aria-controls="main-sidebar-container" aria-expanded="false" href="#">
     <span class="glyphicon glyphicon-menu-hamburger"></span>
   </a>

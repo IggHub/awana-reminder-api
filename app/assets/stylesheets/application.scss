@@ -59,6 +59,10 @@ body {
   text-transform: uppercase;
 }
 
+.vertical-line {
+  border-left: 1px solid #D4D4D4;
+}
+
 /* hides and display hamburger-menu */
 /* small screen (mobile phone)*/
 @media (min-width: 0px) and (max-width: 768px) {
