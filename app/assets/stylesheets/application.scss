@@ -9,6 +9,7 @@ body {
   position: fixed;
   top: 0px;
   bottom: 0px;
+  left: 0px;
   width: 200px;
   background-color: #202020;
   transition: width 0.35s ease;
@@ -27,7 +28,6 @@ body {
 }
 
 .main-sidebar {
-  padding:15px;
   overflow:hidden;
   width:150px;
 }
