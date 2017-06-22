@@ -1,8 +1,10 @@
 <div class="container">
+  <%= render :partial => 'welcome/header' %>
+
+  <%= render :partial => 'layouts/spacing' %>
+
   <div class="row">
-    <div class="col-sm-6">
-      <h2>Hello from left!</h2>
-    </div>
+    <div class="col-sm-6"></div>
 
     <div class="col-sm-5 vertical-line">
       <!-- begin login form -->
@@ -35,4 +37,8 @@
 
     </div>
   </div>
+
+  <%= render :partial => 'layouts/spacing' %>
+
+  <%= render :partial => 'welcome/footer' %>
 </div>

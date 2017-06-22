@@ -5,8 +5,8 @@
   <a class="navbar-brand navigation-title" href="#">Awanafy</a>
   <a class="navbar-brand navigation-title" href="#">Features</a>
   <% if user_signed_in? %>
-    <a class="navbar-brand navigation-title pull-right" href="#">Hello, <%= current_user.email %></a>
-    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>   
+    <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "navbar-brand navigation-title pull-right") %>
+    <%= link_to(current_user.email, edit_user_registration_path, class: "navbar-brand pull-right") %>
   <% else %>
     <a class="navbar-brand navigation-title pull-right" data-toggle="modal" data-target=".login-modal-sm" href="#">Login</a>
   <% end %>
