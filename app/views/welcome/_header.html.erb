@@ -3,10 +3,12 @@
     <span class="glyphicon glyphicon-apple" aria-hidden="true"></span>
   </a>
   <span class="navbar-brand navigation-title" href="#"><%= link_to "Awanafy", root_path %></span>
-  <a class="navbar-brand navigation-title" href="#">Features</a>
+  <span class="navbar-brand navigation-title" href="#"><%= link_to "Features", root_path(anchor: "feature-1")%></span>
+
   <% if user_signed_in? %>
     <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "navbar-brand navigation-title pull-right") %>
     <%= link_to(current_user.email, edit_user_registration_path, class: "navbar-brand pull-right") %>
+    <%= link_to "Scheduler", app_path, class: "navbar-brand navigation-title pull-right" %>
   <% else %>
     <span class="navbar-brand navigation-title pull-right"><%= link_to "Login", new_user_session_path %></span>
   <% end %>
