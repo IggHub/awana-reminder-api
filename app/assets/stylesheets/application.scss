@@ -3,6 +3,7 @@
 
 body {
   padding-bottom: 5px;
+  font-family: 'Open Sans', sans-serif;
 }
 #main-sidebar-container {
   height: auto;
@@ -48,6 +49,12 @@ body {
   z-index: 0;
 }
 
+.fixed-bottom-right {
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  opacity: 0.75;
+}
 /* centers the columns below main image */
 .card {
   margin: 0 auto;

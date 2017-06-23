@@ -1,9 +1,8 @@
 <div class="navbar footer">
   <div class="container">
-    <p class="navbar-text pull-left">© 2017 - IggyApp</p>
+    <span class="navbar-text pull-left">©2017 - <%= link_to "IggHub", "https://igghub.github.io/", :target => "_blank"%></span>
 
-    <a class="navbar-text pull-right">FAQ</a>
-    <a class="navbar-text pull-right">Help</a>
-    <a class="navbar-text pull-right">Blog</a>
+    <span class="navbar-text pull-right"><%= link_to "Contact Us", welcome_contact_path %></span>
+    <span class="navbar-text pull-right"><%= link_to "Help", welcome_help_path %></span>
   </div>
 </div>

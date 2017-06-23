@@ -1,5 +1,6 @@
 <div class="container">
   <%= render :partial => 'welcome/header' %>
+  <%= render :partial => 'layouts/spacing' %>
   <div class="row">
     <div class="col-sm-6">
     </div>
@@ -34,8 +35,8 @@
       <% end %>
 
       <%= render "devise/shared/links" %>
-
+      <%= render :partial => 'layouts/spacing' %>
     </div>
   </div>
-  <%= render :partial => 'welcome/header' %>
 </div>
+<%= render :partial => 'welcome/footer' %>

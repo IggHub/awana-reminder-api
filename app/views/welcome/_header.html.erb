@@ -2,52 +2,28 @@
   <a class="navbar-brand navigation-title" href="#">
     <span class="glyphicon glyphicon-apple" aria-hidden="true"></span>
   </a>
-  <a class="navbar-brand navigation-title" href="#">Awanafy</a>
+  <span class="navbar-brand navigation-title" href="#"><%= link_to "Awanafy", root_path %></span>
   <a class="navbar-brand navigation-title" href="#">Features</a>
   <% if user_signed_in? %>
     <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "navbar-brand navigation-title pull-right") %>
     <%= link_to(current_user.email, edit_user_registration_path, class: "navbar-brand pull-right") %>
   <% else %>
-    <a class="navbar-brand navigation-title pull-right" data-toggle="modal" data-target=".login-modal-sm" href="#">Login</a>
+    <span class="navbar-brand navigation-title pull-right"><%= link_to "Login", new_user_session_path %></span>
   <% end %>
   <a class="navbar-brand pull-right hamburger-menu" data-toggle="collapse" data-target="#main-sidebar-container" aria-controls="main-sidebar-container" aria-expanded="false" href="#">
     <span class="glyphicon glyphicon-menu-hamburger"></span>
   </a>
 </nav>
 
-<!-- modal -->
-<div class="modal fade login-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="container">
-        <form>
-          <div class="form-group row">
-            <div class="col-xs-3">
-              <label for="formGroupExampleInput">Username</label>
-              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example Username">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-xs-3">
-              <label for="formGroupExampleInput2">Password</label>
-              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another Password">
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- modal end -->
 
 <!-- sidebar -->
 <div id="main-sidebar-container" class="collapse width pull-right">
   <div class="main-sidebar">
     <div class="row">
       <div class="col-xs-12">
-        <a class="navbar-brand sidebar-texts" href="#">Awanafy</a>
+        <span class="navbar-brand sidebar-texts" href="#"><%= link_to "Awanafy", root_path %></span>
         <a class="navbar-brand sidebar-texts" href="#">Features</a>
-        <a class="navbar-brand sidebar-texts" data-toggle="modal" data-target=".login-modal-sm" href="#">Login</a>
+        <span class="navbar-brand sidebar-texts"><%= link_to "Login", new_user_session_path %></span>
       </div>
     </div>
   </div>

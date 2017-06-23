@@ -1,10 +1,11 @@
 <div class="container">
 
   <%= render 'header' %>
-
+  <%= link_to "Comment wall", root_path(anchor: "test_anchor")%>
   <%= render 'main_content' %>
   <hr />
   <%= render 'secondary_content' %>
-
+  <p id="test_anchor">Hello Anchor test!</p>
+  <button class="btn btn-warning fixed-bottom-right"><span class="glyphicon glyphicon-question-sign"></span> Questions?</button>
 </div>
 <%= render "footer" %>

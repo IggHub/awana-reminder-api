@@ -1,5 +1,6 @@
 <div class="container">
   <%= render :partial => 'welcome/header' %>
+  <%= render :partial => 'layouts/spacing' %>
   <div class="row">
     <div class="col-sm-6">
     </div>
@@ -49,9 +50,9 @@
         <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
         <%= link_to "Back", :back %>
-
+        <%= render :partial => 'layouts/spacing' %>
       </div>
     </div>
   </div>
-  <%= render :partial => 'welcome/footer' %>
 </div>
+<%= render :partial => 'welcome/footer' %>
