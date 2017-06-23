@@ -176,7 +176,8 @@ class Schedule extends React.Component {
           workers={this.state.workers}
           schedules={this.state.schedules}
           deleteSchedule={this.deleteSchedule}
-          handleEdit={this.handleEdit} />
+          handleEdit={this.handleEdit}
+          currentUserId={this.props.currentUserId} />
 
         {editSchedule}
         {createSchedule}

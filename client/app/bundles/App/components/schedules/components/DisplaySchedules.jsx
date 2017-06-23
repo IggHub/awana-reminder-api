@@ -47,7 +47,10 @@ export default class DisplaySchedules extends React.Component{
       <Row>
         <h2>List Schedules:</h2>
         <div style={styles.spacer} />
-        {this.props.schedules.map((schedule, index) =>
+        {this.props.schedules.filter((schedule) => {
+          return schedule.user_id === parseInt(this.props.currentUserId)
+        })
+        .map((schedule, index) =>
           <Col key={index} lg={3} md={4} sm={6}>
 
             <Thumbnail style={{...styles.thumbnail, ...{transform: this.checkIndexForTilt(index)}}} >
