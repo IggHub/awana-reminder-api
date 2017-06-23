@@ -54,7 +54,7 @@ class Schedule extends React.Component {
       return el.name.length > 0
     });
     this.setState({finalNewWorkers: noBlankTempNewWorkers}, () => console.log(this.state.finalNewWorkers));
-    Client.postSchedule(this.state.date, this.state.message, noBlankTempNewWorkers, (schedule) => {
+    Client.postSchedule(this.props.currentUserId, this.state.date, this.state.message, noBlankTempNewWorkers, (schedule) => {
       this.setState({
         schedules: this.state.schedules.concat([schedule]),
         workers: this.state.workers.concat(noBlankTempNewWorkers),
@@ -71,7 +71,7 @@ class Schedule extends React.Component {
     console.log("current scheduleId: " + this.state.currentScheduleId);
     console.log("current Date: " + currentSchedule.date);
     console.log(this.state.editWorkers);
-    Client.updateSchedule(this.state.currentScheduleId, this.state.editDate, this.state.editMessage, this.state.editWorkers, () => {
+    Client.updateSchedule(this.state.currentScheduleId, this.props.currentUserId, this.state.editDate, this.state.editMessage, this.state.editWorkers, () => {
       this.getSchedules();
       this.getWorkersInfo();
     });
@@ -171,6 +171,7 @@ class Schedule extends React.Component {
                                                       newWorkers={this.state.newWorkers}/> : <div></div>
     return (
       <div>
+        <h2>Hello User! {this.props.currentUserId}</h2>
         <DisplaySchedules
           workers={this.state.workers}
           schedules={this.state.schedules}

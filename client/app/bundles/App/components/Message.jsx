@@ -5,7 +5,7 @@ class Message extends React.Component {
     return (
       <div>
         <h2>Message:</h2>
-        <h6>{this.props.name}!</h6>
+        <h6>{this.props.currentUserId}!</h6>
         <h6>{this.props.text}</h6>
       </div>
     )

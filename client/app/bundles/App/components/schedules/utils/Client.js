@@ -20,7 +20,7 @@ function getWorkersInfo(cb){
     .then(cb)
 };
 
-function postSchedule(date, message, workersArray, cb) {
+function postSchedule(currentUserId, date, message, workersArray, cb) {
   return fetch(`api/schedules`, {
     method: 'POST',
     headers: {
@@ -29,7 +29,7 @@ function postSchedule(date, message, workersArray, cb) {
     body: JSON.stringify({
       date: date,
       message: message,
-      user_id: 1,
+      user_id: parseInt(currentUserId),
       worker_info: workersArray
     })
   }).then((response) => response.json())
@@ -55,7 +55,7 @@ function postMessage(message, workers, messageDateTime){
   console.log(messageDateTime.getTime());
 };
 
-function updateSchedule(scheduleId, date, message, workersArray, cb){
+function updateSchedule(scheduleId, currentUserId, date, message, workersArray, cb){
   return fetch(`api/schedules/${scheduleId}`, {
     method: 'PUT',
     headers: {
@@ -64,7 +64,7 @@ function updateSchedule(scheduleId, date, message, workersArray, cb){
     body: JSON.stringify({
       date: date,
       message: message,
-      user_id: 1,
+      user_id: parseInt(currentUserId),
       worker_info: workersArray
     })
   }).then((response) => response.json())

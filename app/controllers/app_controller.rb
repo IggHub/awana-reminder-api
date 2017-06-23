@@ -2,6 +2,6 @@ class AppController < ApplicationController
   layout "app"
 
   def index
-    @hello_world_props = { name: "Stranger" }
+    @scheduler_props = { currentUserId: current_user.id.to_s }
   end
 end

@@ -7,23 +7,19 @@ import Schedule from './schedules/Schedule';
 
 export default class App extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired
+    currentUserId: PropTypes.string.isRequired
   };
 
   constructor(props, _railsContext) {
     super(props);
-    this.state = { name: this.props.name };
+    this.state = { currentUserId: this.props.currentUserId };
   }
-
-  updateName = (name) => {
-    this.setState({ name });
-  };
 
   render() {
     return (
       <div>
         <Grid>
-          <Schedule />
+          <Schedule currentUserId={this.state.currentUserId} />
         </Grid>
       </div>
     );
