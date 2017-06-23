@@ -7,6 +7,7 @@ export default class AddMessage extends React.Component {
       <FormGroup>
         <ControlLabel>Message:</ControlLabel>
         <FormControl value={this.props.message} maxLength="140" placeholder="Enter Message" componentClass="textarea" onChange={this.props.handleMessage} />
+        <hr />
       </FormGroup>
     )
   }

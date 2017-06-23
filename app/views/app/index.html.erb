@@ -1,6 +1,5 @@
-<h1>Hello World</h1>
-<%= react_component("App", props: @hello_world_props, prerender: false) %>
-
-<hr />
-
-<%= react_component("Message", props: {text: "Hello"}) %>
+<div class="container">
+  <%= render :partial => 'welcome/header' %>
+  <%= react_component("App", props: @hello_world_props, prerender: false) %>
+  <%= render :partial => 'welcome/footer' %>
+</div>

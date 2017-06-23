@@ -171,7 +171,6 @@ class Schedule extends React.Component {
                                                       newWorkers={this.state.newWorkers}/> : <div></div>
     return (
       <div>
-        <h2>Hello from Schedule!</h2>
         <DisplaySchedules
           workers={this.state.workers}
           schedules={this.state.schedules}
@@ -181,6 +180,7 @@ class Schedule extends React.Component {
         {editSchedule}
         {createSchedule}
 
+        {/*}
         <button onClick={() => console.log(this.state.date)}>View Date</button>
         <button onClick={() => console.log(this.state.editDate)}>View Edit Date</button>
         <button onClick={() => console.log(this.state.workers)}>View Workers</button>
@@ -189,6 +189,7 @@ class Schedule extends React.Component {
         <button onClick={() => console.log(this.state.message)}>View Message</button>
         <button onClick={() => console.log(this.state.editMessage)}>View Edit Message</button>
         <button onClick={() => console.log(this.state.schedules)}>View Schedules</button>
+        {*/}
         <button onClick={this.postMessage}>Post Message</button>
       </div>
     )

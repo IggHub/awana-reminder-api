@@ -9,6 +9,7 @@ export default class EditDate extends React.Component {
       <FormGroup>
         <ControlLabel>Date:</ControlLabel>
         <DateTime onChange={this.props.handleDate} defaultValue={this.props.editDate}/>
+        <hr />
       </FormGroup>
     )
   }

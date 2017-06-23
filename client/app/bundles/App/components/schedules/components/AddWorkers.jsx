@@ -6,7 +6,7 @@ export default class AddWorkers extends React.Component {
     return (
       <div>
         <FormGroup>
-          <ControlLabel>Worker:</ControlLabel>
+          <ControlLabel>Worker {this.props.id}:</ControlLabel>
           <FormControl maxLength="30" placeholder="Enter worker" onChange={(e, id) => this.props.handleNewWorkers(e, this.props.id)}/>
         </FormGroup>
         <FormGroup>
