@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ### create schedule ###
-user = User.create(name: 'iggy', phone: '(818)-943-9150', password: 'password', username: 'iirianto', email: 'igor.irianto@gmail.com')
+user = User.create(name: 'iggy', phone: '(818)-943-9150', password: 'password', password_confirmation: 'password', username: 'iirianto', email: 'igor.irianto@gmail.com')
 
 3.times do
   schedule = Schedule.create(date: Time.now + (1..10).to_a.sample, user_id: user.id, message: Faker::ChuckNorris.fact)
