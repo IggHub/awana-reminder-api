@@ -21,7 +21,7 @@ export default class App extends React.Component {
       <div>
         <Grid>
           <button onClick={() => console.log(this.state.schedules)}>Schedules</button>
-          <Schedule currentUserId={this.state.currentUserId} />
+          <Schedule currentUserId={this.props.currentUserId} />
         </Grid>
       </div>
     );

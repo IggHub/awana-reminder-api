@@ -4,7 +4,9 @@
   </a>
   <span class="navbar-brand navigation-title" href="#"><%= link_to "Awanafy", root_path %></span>
   <span class="navbar-brand navigation-title" href="#"><%= link_to "Features", root_path(anchor: "feature-1")%></span>
-
+  <a class="navbar-brand pull-right hamburger-menu" data-toggle="collapse" data-target="#main-sidebar-container" aria-controls="main-sidebar-container" aria-expanded="false" href="#">
+    <span class="glyphicon glyphicon-menu-hamburger"></span>
+  </a>
   <% if user_signed_in? %>
     <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "navbar-brand navigation-title pull-right") %>
     <%= link_to(current_user.email, edit_user_registration_path, class: "navbar-brand pull-right") %>
@@ -12,9 +14,7 @@
   <% else %>
     <span class="navbar-brand navigation-title pull-right"><%= link_to "Login", new_user_session_path %></span>
   <% end %>
-  <a class="navbar-brand pull-right hamburger-menu" data-toggle="collapse" data-target="#main-sidebar-container" aria-controls="main-sidebar-container" aria-expanded="false" href="#">
-    <span class="glyphicon glyphicon-menu-hamburger"></span>
-  </a>
+
 </nav>
 
 
