@@ -48,22 +48,29 @@ class Schedule extends React.Component {
   };
 
   postSchedule(){
-    console.log("starting postSchedule...");
     let tempNewWorkers = this.state.newWorkers.slice();
     let noBlankTempNewWorkers = tempNewWorkers.filter((el) => {
-      return el.name.length > 0
+      return el.name.length > 0 && el.phone.length > 0
     });
-    this.setState({finalNewWorkers: noBlankTempNewWorkers}, () => console.log(this.state.finalNewWorkers));
-    Client.postSchedule(this.props.currentUserId, this.state.date, this.state.message, noBlankTempNewWorkers, (schedule) => {
-      this.setState({
-        schedules: this.state.schedules.concat([schedule]),
-        workers: this.state.workers.concat(noBlankTempNewWorkers),
-        date: '',
-        message: '',
-        newWorkers: [{name: '', phone: ''},{name: '', phone: ''},{name: '', phone: ''}]
+    //this.setState({finalNewWorkers: noBlankTempNewWorkers}, () => console.log(this.state.finalNewWorkers));
+    //console.log("no blank temp new workers: " + noBlankTempNewWorkers)
+    // this.state.date and this.state.message and noBlankTempNewWorkers all need to be non-empty
+    if (this.state.date && this.state.message && (noBlankTempNewWorkers.length !== 0)){
+      Client.postSchedule(this.props.currentUserId, this.state.date, this.state.message, noBlankTempNewWorkers, (schedule) => {
+        this.setState({
+          schedules: this.state.schedules.concat([schedule]),
+          workers: this.state.workers.concat(noBlankTempNewWorkers),
+          date: '',
+          message: '',
+          newWorkers: [{name: '', phone: ''},{name: '', phone: ''},{name: '', phone: ''}]
+        });
+        this.getWorkersInfo();
       });
-      this.getWorkersInfo();
-    });
+    } else {
+      console.log("Don't leave it blank!");
+      console.log('noBlankTempNewWorkers:');
+      console.log(noBlankTempNewWorkers)
+    }
   };
 
   updateSchedule(){
