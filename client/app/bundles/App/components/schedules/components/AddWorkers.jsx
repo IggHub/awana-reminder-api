@@ -13,7 +13,6 @@ export default class AddWorkers extends React.Component {
           <ControlLabel>Phone:</ControlLabel>
           <FormControl maxLength="14" value={this.props.phone} placeholder="Enter phone" onChange={(e, id) => this.props.handlePhones(e, this.props.id)} />
         </FormGroup>
-        <button onClick={() => console.log(this.props.worker)}>View worker</button>
         <hr />
       </div>
     )

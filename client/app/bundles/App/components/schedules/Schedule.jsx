@@ -171,7 +171,6 @@ class Schedule extends React.Component {
                                                       newWorkers={this.state.newWorkers}/> : <div></div>
     return (
       <div>
-        <h2>Hello User! {this.props.currentUserId}</h2>
         <DisplaySchedules
           workers={this.state.workers}
           schedules={this.state.schedules}
