@@ -6,8 +6,7 @@ class User < ApplicationRecord
           :recoverable,
           :rememberable,
           :trackable,
-          :validatable,
-          :confirmable
+          :validatable
 
   has_many :schedules
 end
