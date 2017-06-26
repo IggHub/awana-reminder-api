@@ -11,7 +11,8 @@ const styles = {
   },
   button: {
     width: '100%'
-  }, spacer: {
+  },
+  spacer: {
     marginTop: '50px'
   }
 }
@@ -21,7 +22,7 @@ export default class CreateSchedules extends React.Component {
     let workerHolder = [];
     for(var i = 1; i <= 3; i++){
       workerHolder.push(
-        <AddWorkers newWorkers={this.props.newWorkers} handleNewWorkers={this.props.handleNewWorkers} handlePhones={this.props.handlePhones} key={i} id={i}/>
+        <AddWorkers worker={this.props.newWorkers[i-1].name} phone={this.props.newWorkers[i-1].phone} handleNewWorkers={this.props.handleNewWorkers} handlePhones={this.props.handlePhones} key={i} id={i}/>
       )
     }
     return (
