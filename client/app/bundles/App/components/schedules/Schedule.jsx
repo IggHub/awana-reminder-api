@@ -192,6 +192,7 @@ class Schedule extends React.Component {
         <button onClick={() => console.log(this.state.editMessage)}>View Edit Message</button>
         <button onClick={() => console.log(this.state.schedules)}>View Schedules</button>
         {*/}
+        <button onClick={() => console.log(this.state.newWorkers)}>View New Workers</button>
         <button onClick={this.postMessage}>Post Message</button>
       </div>
     )
