@@ -14,12 +14,23 @@ const styles = {
   },
   spacer: {
     marginTop: '50px'
+  },
+  errorMessage: {
+    color: 'white',
+    backgroundColor: '#f44336',
+    position: 'fixed',
+    right: '25px',
+    bottom: '100px',
+    width: '250px',
+    height: '20px',
+    textAlign: 'center',
+    opacity: '0.7'
   }
 }
 
 export default class CreateSchedules extends React.Component {
   render(){
-    const showError = this.props.showError ? <div>Error!</div> : <div></div>
+    const showError = this.props.showError ? <div style={styles.errorMessage}>Error! One of the forms is empty</div> : <div></div>
     let workerHolder = [];
     for(var i = 1; i <= 3; i++){
       workerHolder.push(
