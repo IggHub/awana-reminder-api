@@ -19,6 +19,7 @@ const styles = {
 
 export default class CreateSchedules extends React.Component {
   render(){
+    const showError = this.props.showError ? <div>Error!</div> : <div></div>
     let workerHolder = [];
     for(var i = 1; i <= 3; i++){
       workerHolder.push(
@@ -37,7 +38,7 @@ export default class CreateSchedules extends React.Component {
             <AddMessage handleMessage={this.props.handleMessage} message={this.props.message}/>
 
             <Button style={styles.button} bsStyle="warning" onClick={this.props.postSchedule}>Post Schedule</Button>
-
+            {showError}
           </Col>
           <hr />
         </Row>

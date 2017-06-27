@@ -21,7 +21,8 @@ class Schedule extends React.Component {
       editWorkers: [],
       editDate: '',
       editMessage: '',
-      currentScheduleId: ''
+      currentScheduleId: '',
+      showError: false
     };
     this.postMessage = this.postMessage.bind(this);
     this.postSchedule = this.postSchedule.bind(this);
@@ -62,14 +63,16 @@ class Schedule extends React.Component {
           workers: this.state.workers.concat(noBlankTempNewWorkers),
           date: '',
           message: '',
-          newWorkers: [{name: '', phone: ''},{name: '', phone: ''},{name: '', phone: ''}]
+          newWorkers: [{name: '', phone: ''},{name: '', phone: ''},{name: '', phone: ''}],
+          showError: false
         });
         this.getWorkersInfo();
       });
     } else {
       console.log("Don't leave it blank!");
       console.log('noBlankTempNewWorkers:');
-      console.log(noBlankTempNewWorkers)
+      console.log(noBlankTempNewWorkers);
+      this.setState({showError: true})
     }
   };
 
@@ -154,6 +157,7 @@ class Schedule extends React.Component {
   }
 
   render(){
+    const showError = this.state.showError ? <div>Error!</div> : <div></div>
     const editSchedule = this.state.editable ? <EditSchedules
                                                       handleMessage={this.handleMessage}
                                                       handleDate={this.handleDate}
@@ -175,7 +179,8 @@ class Schedule extends React.Component {
                                                       postSchedule={this.postSchedule}
                                                       date={this.state.date}
                                                       message={this.state.message}
-                                                      newWorkers={this.state.newWorkers}/> : <div></div>
+                                                      newWorkers={this.state.newWorkers}
+                                                      showError={this.state.showError} /> : <div></div>
     return (
       <div>
         <DisplaySchedules
@@ -200,6 +205,7 @@ class Schedule extends React.Component {
         {*/}
         <button onClick={() => console.log(this.state.newWorkers)}>View New Workers</button>
         <button onClick={this.postMessage}>Post Message</button>
+        
       </div>
     )
   }
