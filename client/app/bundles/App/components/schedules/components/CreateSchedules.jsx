@@ -3,6 +3,8 @@ import React from 'react';
 import AddDate from './AddDate';
 import AddWorkers from './AddWorkers';
 import AddMessage from './AddMessage';
+import ErrorMessage from './ErrorMessage';
+
 import {Row, Col, Button, FormGroup} from 'react-bootstrap';
 
 const styles = {
@@ -19,8 +21,8 @@ const styles = {
     color: 'white',
     backgroundColor: '#f44336',
     position: 'fixed',
-    right: '25px',
-    bottom: '100px',
+    right: '125px',
+    bottom: '25px',
     width: '250px',
     height: '20px',
     textAlign: 'center',
@@ -30,7 +32,7 @@ const styles = {
 
 export default class CreateSchedules extends React.Component {
   render(){
-    const showError = this.props.showError ? <div style={styles.errorMessage}>Error! One of the forms is empty</div> : <div></div>
+    const showError = this.props.showError ? <ErrorMessage toggleErrorMessage={this.props.toggleErrorMessage} showError={this.props.showError} /> : <div></div>
     let workerHolder = [];
     for(var i = 1; i <= 3; i++){
       workerHolder.push(
@@ -40,17 +42,16 @@ export default class CreateSchedules extends React.Component {
     return (
       <div>
         <Row>
-          <h2>Create Schedule</h2>
+          
           <div style={styles.spacer} />
-          <Col sm={3} xs={0}></Col>
-          <Col sm={9} xs={12} style={styles.verticalLine}>
+
             <AddDate date={this.props.date} handleDate={this.props.handleDate} />
             {workerHolder}
             <AddMessage handleMessage={this.props.handleMessage} message={this.props.message}/>
 
             <Button style={styles.button} bsStyle="warning" onClick={this.props.postSchedule}>Post Schedule</Button>
             {showError}
-          </Col>
+
           <hr />
         </Row>
         <div style={styles.spacer} />

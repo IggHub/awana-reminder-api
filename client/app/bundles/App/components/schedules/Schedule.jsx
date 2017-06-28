@@ -4,6 +4,10 @@ import DisplaySchedules from '../schedules/components/DisplaySchedules';
 import CreateSchedules from '../schedules/components/CreateSchedules';
 import EditSchedules from '../schedules/components/EditSchedules';
 
+
+const height= '400px';
+const width = '400px';
+
 const styles = {
   schedulerButton: {
     position: 'fixed',
@@ -19,17 +23,18 @@ const styles = {
     position: 'fixed',
     right: '100px',
     bottom: '57px',
-    width: '150px',
-    height: '150px',
+    width: width,
+    height: height,
     borderRadius: '10px',
-    background: 'white'
+    background: 'white',
+    overflow: 'scroll'
   },
   boxHeader: {
     position: 'relative',
     right: '0px',
     top: '0px',
-    width: '150px',
-    height: '30px',
+    width: width,
+    height: '35px',
     borderRadius: '10px 10px 0% 0%',
     background: '#FFBE00',
 
@@ -69,10 +74,14 @@ class Schedule extends React.Component {
     this.handleEditPhones = this.handleEditPhones.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.toggleShowAddSchedule = this.toggleShowAddSchedule.bind(this);
+    this.toggleErrorMessage = this.toggleErrorMessage.bind(this);
   };
   toggleShowAddSchedule(){
     this.setState({showAddSchedule: !this.state.showAddSchedule})
   };
+  toggleErrorMessage(){
+    this.setState({showError: false})
+  }
   getSchedules(){
     Client.getSchedules((schedules) => {
       this.setState({schedules})
@@ -194,7 +203,6 @@ class Schedule extends React.Component {
 
   render(){
     const showAddSchedule = this.state.showAddSchedule ? <div style={styles.boxOverall}><div style={styles.boxHeader}></div></div> : <div></div>
-    const showError = this.state.showError ? <div>Error!</div> : <div></div>
     const editSchedule = this.state.editable ? <EditSchedules
                                                       handleMessage={this.handleMessage}
                                                       handleDate={this.handleDate}
@@ -217,7 +225,8 @@ class Schedule extends React.Component {
                                                       date={this.state.date}
                                                       message={this.state.message}
                                                       newWorkers={this.state.newWorkers}
-                                                      showError={this.state.showError} /> : <div></div>
+                                                      showError={this.state.showError}
+                                                      toggleErrorMessage={this.toggleErrorMessage}/> : <div></div>
     return (
       <div>
         <DisplaySchedules
