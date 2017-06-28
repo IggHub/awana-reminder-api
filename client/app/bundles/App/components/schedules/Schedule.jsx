@@ -4,6 +4,38 @@ import DisplaySchedules from '../schedules/components/DisplaySchedules';
 import CreateSchedules from '../schedules/components/CreateSchedules';
 import EditSchedules from '../schedules/components/EditSchedules';
 
+const styles = {
+  schedulerButton: {
+    position: 'fixed',
+    right: '30px',
+    bottom: '30px',
+    height: '57px',
+    width: '57px',
+    borderRadius: '100%',
+    background: '#FFBE00',
+    cursor: 'pointer',
+  },
+  boxOverall:{
+    position: 'fixed',
+    right: '100px',
+    bottom: '57px',
+    width: '150px',
+    height: '150px',
+    borderRadius: '10px',
+    background: 'white'
+  },
+  boxHeader: {
+    position: 'relative',
+    right: '0px',
+    top: '0px',
+    width: '150px',
+    height: '30px',
+    borderRadius: '10px 10px 0% 0%',
+    background: '#FFBE00',
+
+  }
+}
+
 class Schedule extends React.Component {
   constructor(props, _railsContext) {
     super(props);
@@ -22,7 +54,8 @@ class Schedule extends React.Component {
       editDate: '',
       editMessage: '',
       currentScheduleId: '',
-      showError: false
+      showError: false,
+      showAddSchedule: false,
     };
     this.postMessage = this.postMessage.bind(this);
     this.postSchedule = this.postSchedule.bind(this);
@@ -35,7 +68,10 @@ class Schedule extends React.Component {
     this.handlePhones = this.handlePhones.bind(this);
     this.handleEditPhones = this.handleEditPhones.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
-
+    this.toggleShowAddSchedule = this.toggleShowAddSchedule.bind(this);
+  };
+  toggleShowAddSchedule(){
+    this.setState({showAddSchedule: !this.state.showAddSchedule})
   };
   getSchedules(){
     Client.getSchedules((schedules) => {
@@ -157,6 +193,7 @@ class Schedule extends React.Component {
   }
 
   render(){
+    const showAddSchedule = this.state.showAddSchedule ? <div style={styles.boxOverall}><div style={styles.boxHeader}></div></div> : <div></div>
     const showError = this.state.showError ? <div>Error!</div> : <div></div>
     const editSchedule = this.state.editable ? <EditSchedules
                                                       handleMessage={this.handleMessage}
@@ -192,7 +229,8 @@ class Schedule extends React.Component {
 
         {editSchedule}
         {createSchedule}
-
+        <div onClick={this.toggleShowAddSchedule} style={styles.schedulerButton} />
+        {showAddSchedule}
         {/*}
         <button onClick={() => console.log(this.state.date)}>View Date</button>
         <button onClick={() => console.log(this.state.editDate)}>View Edit Date</button>
@@ -205,7 +243,7 @@ class Schedule extends React.Component {
         {*/}
         <button onClick={() => console.log(this.state.newWorkers)}>View New Workers</button>
         <button onClick={this.postMessage}>Post Message</button>
-        
+
       </div>
     )
   }

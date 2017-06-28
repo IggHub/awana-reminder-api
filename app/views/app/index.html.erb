@@ -1,5 +1,7 @@
-<div class="container">
-  <%= render :partial => 'welcome/header' %>
-  <%= react_component("App", props: @scheduler_props, prerender: false) %>
+<div class="scheduler-page">
+  <div class="container">
+    <%= render :partial => 'welcome/header' %>
+    <%= react_component("App", props: @scheduler_props, prerender: false) %>
+  </div>
+  <%= render :partial => 'welcome/footer' %>
 </div>
-<%= render :partial => 'welcome/footer' %>

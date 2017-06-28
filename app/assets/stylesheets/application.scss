@@ -5,6 +5,7 @@ body {
   padding-bottom: 5px;
   font-family: 'Open Sans', sans-serif;
 }
+
 #main-sidebar-container {
   height: auto;
   position: fixed;
@@ -22,6 +23,10 @@ body {
 
 #main-sidebar-container a {
   color: #ffffff;
+}
+
+.scheduler-page {
+  background: #878787;
 }
 
 .navigation-title {

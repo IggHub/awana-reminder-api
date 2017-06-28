@@ -2,7 +2,7 @@ import React from 'react';
 import {Thumbnail, Row, Col, Glyphicon} from 'react-bootstrap';
 import Moment from 'moment';
 
-var styles = {
+const styles = {
   icon: {
     float: 'right',
     marginTop: '2px',
@@ -14,18 +14,16 @@ var styles = {
   thumbnail: {
     textDecoration: 'none',
     color: '#000',
-    background: '#FFFFCC',
+    background: '#F9FF7D',
     display: 'block',
     height: '17em',
     width: '17em',
     padding: '1em',
-    borderStyle: 'none',
-
-    MozBoxShadow:     '4px 4px 3px #E3C88C',
-    WebkitBoxShadow:  '4px 4px 3px #E3C88C',
-    boxShadow:        '4px 4px 3px #E3C88C',
+    borderStyle: 'none'
+  },
+  background: {
+    background: "#4D4D50"
   }
-
 }
 
 export default class DisplaySchedules extends React.Component{
@@ -64,9 +62,6 @@ export default class DisplaySchedules extends React.Component{
                 )
               }
               <h6>- <em>{schedule.message}</em></h6>
-
-
-
             </Thumbnail>
           </Col>
         )}
