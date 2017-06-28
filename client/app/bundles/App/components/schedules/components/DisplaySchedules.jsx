@@ -1,5 +1,5 @@
 import React from 'react';
-import {Thumbnail, Row, Col, Glyphicon} from 'react-bootstrap';
+import {Thumbnail, Row, Col, Glyphicon, Button} from 'react-bootstrap';
 import Moment from 'moment';
 
 const styles = {
@@ -23,6 +23,9 @@ const styles = {
   },
   background: {
     background: "#4D4D50"
+  },
+  header: {
+    color: 'white'
   }
 }
 
@@ -43,7 +46,8 @@ export default class DisplaySchedules extends React.Component{
 
     return (
       <Row>
-        <h2>List Schedules:</h2>
+        <h2 style={styles.header}>List Schedules <Button onClick={this.props.toggleCreatable} className="pull-right" bsStyle="warning">Add Schedule</Button></h2>
+
         <div style={styles.spacer} />
         {this.props.schedules.filter((schedule) => {
           return schedule.user_id === parseInt(this.props.currentUserId)

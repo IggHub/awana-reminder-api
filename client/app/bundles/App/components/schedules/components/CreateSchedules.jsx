@@ -27,6 +27,18 @@ const styles = {
     height: '20px',
     textAlign: 'center',
     opacity: '0.7'
+  },
+  formBox: {
+    background: 'white',
+    padding: '15px',
+    border: 'none',
+    maxWidth: '500px',
+    margin: '0 auto',
+    position: 'fixed',
+    left: '0',
+    right: '0',
+    top: '50px',
+    overflow: 'scroll'
   }
 }
 
@@ -40,21 +52,18 @@ export default class CreateSchedules extends React.Component {
       )
     }
     return (
-      <div>
+      <div style={styles.formBox}>
         <Row>
-          
-          <div style={styles.spacer} />
-
-            <AddDate date={this.props.date} handleDate={this.props.handleDate} />
-            {workerHolder}
-            <AddMessage handleMessage={this.props.handleMessage} message={this.props.message}/>
-
-            <Button style={styles.button} bsStyle="warning" onClick={this.props.postSchedule}>Post Schedule</Button>
-            {showError}
-
-          <hr />
+          <Col xs={12}>
+            <h3>Create New Schedule</h3>
+              <AddDate date={this.props.date} handleDate={this.props.handleDate} />
+              {workerHolder}
+              <AddMessage handleMessage={this.props.handleMessage} message={this.props.message}/>
+              <Button style={styles.button} bsStyle="warning" onClick={this.props.postSchedule}>Post Schedule</Button>
+              {showError}
+          </Col>
         </Row>
-        <div style={styles.spacer} />
+
       </div>
     )
   }

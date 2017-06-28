@@ -54,7 +54,7 @@ class Schedule extends React.Component {
       phone: '',
       date: '',
       editable: false,
-      creatable: true,
+      creatable: false,
       editWorkers: [],
       editDate: '',
       editMessage: '',
@@ -75,12 +75,17 @@ class Schedule extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.toggleShowAddSchedule = this.toggleShowAddSchedule.bind(this);
     this.toggleErrorMessage = this.toggleErrorMessage.bind(this);
+    this.toggleCreatable = this.toggleCreatable.bind(this);
   };
   toggleShowAddSchedule(){
     this.setState({showAddSchedule: !this.state.showAddSchedule})
   };
   toggleErrorMessage(){
     this.setState({showError: false})
+  };
+  toggleCreatable(){
+    //console.log("Hello creatable!");
+    this.setState({creatable: !this.state.creatable, editable: false})
   }
   getSchedules(){
     Client.getSchedules((schedules) => {
@@ -182,7 +187,7 @@ class Schedule extends React.Component {
     let editDate = this.state.schedules.find((el) => el.id === scheduleId).date;
     this.setState({
       editable: !this.state.editable,
-      creatable: !this.state.creatable,
+      creatable: false,
       currentScheduleId: scheduleId,
       editWorkers: editWorkersArray,
       editMessage: editMessage,
@@ -234,7 +239,8 @@ class Schedule extends React.Component {
           schedules={this.state.schedules}
           deleteSchedule={this.deleteSchedule}
           handleEdit={this.handleEdit}
-          currentUserId={this.props.currentUserId} />
+          currentUserId={this.props.currentUserId}
+          toggleCreatable={this.toggleCreatable} />
 
         {editSchedule}
         {createSchedule}

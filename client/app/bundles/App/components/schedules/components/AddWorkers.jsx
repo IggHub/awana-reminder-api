@@ -1,20 +1,31 @@
 import React from 'react';
-import {FormGroup, FormControl, ControlLabel, Col, Row} from 'react-bootstrap';
+import {FormGroup, FormControl, Form, Col, Row, Glyphicon} from 'react-bootstrap';
 
 export default class AddWorkers extends React.Component {
   render(){
+    const worker = "worker " + this.props.id;
+    const enterPhone = "Enter phone # for " + worker;
+    const enterWorker = "Enter " + worker
     return (
-      <div>
+      <Form horizontal>
         <FormGroup>
-          <ControlLabel>Worker {this.props.id}:</ControlLabel>
-          <FormControl maxLength="30" value={this.props.worker} placeholder="Enter worker" onChange={(e, id) => this.props.handleNewWorkers(e, this.props.id)}/>
+          <Col xs={1}>
+            <Glyphicon glyph="user" />
+          </Col>
+          <Col xs={11}>
+            <FormControl maxLength="30" value={this.props.worker} placeholder={enterWorker} onChange={(e, id) => this.props.handleNewWorkers(e, this.props.id)}/>
+          </Col>
         </FormGroup>
         <FormGroup>
-          <ControlLabel>Phone:</ControlLabel>
-          <FormControl maxLength="14" value={this.props.phone} placeholder="Enter phone" onChange={(e, id) => this.props.handlePhones(e, this.props.id)} />
+          <Col xs={1}>
+            <Glyphicon glyph="phone" />
+          </Col>
+          <Col xs={11}>
+            <FormControl maxLength="14" value={this.props.phone} placeholder={enterPhone} onChange={(e, id) => this.props.handlePhones(e, this.props.id)} />
+          </Col>
         </FormGroup>
         <hr />
-      </div>
+      </Form>
     )
   }
 }
