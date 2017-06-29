@@ -2,7 +2,6 @@
 @import "bootstrap";
 
 body {
-  padding-bottom: 5px;
   min-height: 100%;
   font-family: 'Open Sans', sans-serif;
 }
@@ -33,6 +32,15 @@ body {
 
 .navigation-title {
   text-transform: uppercase;
+}
+
+.color-white {
+  color: #ffffff;
+}
+
+.universal-header {
+  background: #FFBE00;
+  border-radius: none;
 }
 
 .main-sidebar {

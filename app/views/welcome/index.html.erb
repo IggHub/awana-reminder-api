@@ -1,14 +1,11 @@
+<%= render 'header' %>
 <div class="container">
-
-  <%= render 'header' %>
 
   <%= render 'main_content' %>
   <hr />
   <%= render 'feature_one' %>
   <%= render 'feature_two' %>
   <%= render 'feature_three' %>
-  <%= link_to welcome_help_path, class: "btn btn-warning fixed-bottom-right" do %>
-    <span class="glyphicon glyphicon-question-sign"></span> Questions?
-  <% end %>
+
 </div>
 <%= render "footer" %>

@@ -1,6 +1,6 @@
 <div class="scheduler-page">
+  <%= render :partial => 'welcome/header' %>
   <div class="container">
-    <%= render :partial => 'welcome/header' %>
     <%= react_component("App", props: @scheduler_props, prerender: false) %>
   </div>
 </div>
