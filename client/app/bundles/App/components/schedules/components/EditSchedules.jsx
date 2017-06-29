@@ -16,11 +16,13 @@ const styles = {
     padding: '20px',
     border: 'none',
     maxWidth: '500px',
+    maxHeight: '675px',
     margin: '0 auto',
     position: 'fixed',
     left: '0',
     right: '0',
-    top: '50px',
+    top: '30px',
+    bottom: '30px',
     overflow: 'scroll'
   },
   icon: {
