@@ -1,14 +1,19 @@
 import React from 'react';
-import {FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
+import {FormGroup, Form, FormControl, Col, Glyphicon} from 'react-bootstrap';
 
 export default class EditMessage extends React.Component {
   render(){
     return (
-      <FormGroup>
-        <ControlLabel>Message:</ControlLabel>
-        <FormControl onChange={this.props.handleMessage} maxLength="140" componentClass="textarea" value={this.props.editMessage} />
-        <hr />
-      </FormGroup>
+      <Form horizontal>
+        <FormGroup>
+          <Col xs={1}>
+            <Glyphicon glyph="bullhorn" />
+          </Col>
+          <Col xs={11}>
+            <FormControl onChange={this.props.handleMessage} maxLength="140" componentClass="textarea" value={this.props.editMessage} />
+          </Col>
+        </FormGroup>
+      </Form>
     )
   }
 }

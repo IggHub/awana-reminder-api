@@ -5,7 +5,7 @@ import AddWorkers from './AddWorkers';
 import AddMessage from './AddMessage';
 import ErrorMessage from './ErrorMessage';
 
-import {Row, Col, Button, FormGroup} from 'react-bootstrap';
+import {Row, Col, Button, FormGroup, Glyphicon} from 'react-bootstrap';
 
 const styles = {
   verticalLine: {
@@ -30,7 +30,7 @@ const styles = {
   },
   formBox: {
     background: 'white',
-    padding: '15px',
+    padding: '20px',
     border: 'none',
     maxWidth: '500px',
     margin: '0 auto',
@@ -39,6 +39,11 @@ const styles = {
     right: '0',
     top: '50px',
     overflow: 'scroll'
+  },
+  icon: {
+    float: 'right',
+    marginTop: '-2px',
+    marginRight: '6px',
   }
 }
 
@@ -54,8 +59,11 @@ export default class CreateSchedules extends React.Component {
     return (
       <div style={styles.formBox}>
         <Row>
+          <a href="#" onClick={this.props.toggleCreatable}><Glyphicon style={styles.icon} glyph="remove" /></a>
           <Col xs={12}>
+
             <h3>Create New Schedule</h3>
+
               <AddDate date={this.props.date} handleDate={this.props.handleDate} />
               {workerHolder}
               <AddMessage handleMessage={this.props.handleMessage} message={this.props.message}/>

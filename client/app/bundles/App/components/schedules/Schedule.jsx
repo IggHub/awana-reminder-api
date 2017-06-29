@@ -26,7 +26,7 @@ const styles = {
     width: width,
     height: height,
     borderRadius: '10px',
-    background: 'white',
+    background: '#ffffff',
     overflow: 'scroll'
   },
   boxHeader: {
@@ -76,6 +76,7 @@ class Schedule extends React.Component {
     this.toggleShowAddSchedule = this.toggleShowAddSchedule.bind(this);
     this.toggleErrorMessage = this.toggleErrorMessage.bind(this);
     this.toggleCreatable = this.toggleCreatable.bind(this);
+    this.toggleEditable = this.toggleEditable.bind(this);
   };
   toggleShowAddSchedule(){
     this.setState({showAddSchedule: !this.state.showAddSchedule})
@@ -86,7 +87,10 @@ class Schedule extends React.Component {
   toggleCreatable(){
     //console.log("Hello creatable!");
     this.setState({creatable: !this.state.creatable, editable: false})
-  }
+  };
+  toggleEditable(){
+    this.setState({editable: !this.state.editable, creatable: false })
+  };
   getSchedules(){
     Client.getSchedules((schedules) => {
       this.setState({schedules})
@@ -128,9 +132,6 @@ class Schedule extends React.Component {
 
   updateSchedule(){
     let currentSchedule = this.state.schedules.find((el) => el.id === this.state.currentScheduleId);
-    console.log("current scheduleId: " + this.state.currentScheduleId);
-    console.log("current Date: " + currentSchedule.date);
-    console.log(this.state.editWorkers);
     Client.updateSchedule(this.state.currentScheduleId, this.props.currentUserId, this.state.editDate, this.state.editMessage, this.state.editWorkers, () => {
       this.getSchedules();
       this.getWorkersInfo();
@@ -164,7 +165,7 @@ class Schedule extends React.Component {
   handleEditWorkers(e, id){
     let workersArray = this.state.editWorkers.slice();
     workersArray[id-1]["name"] = e.target.value;
-    this.setState({newWorkers: workersArray, editWorkers: workersArray});
+    this.setState({editWorkers: workersArray});
   };
 
   handlePhones(e, id){
@@ -219,6 +220,7 @@ class Schedule extends React.Component {
                                                       editWorkers={this.state.editWorkers}
                                                       editMessage={this.state.editMessage}
                                                       updateSchedule={this.updateSchedule}
+                                                      toggleEditable={this.toggleEditable}
                                                       /> : <div></div>
 
     const createSchedule = this.state.creatable ? <CreateSchedules
@@ -231,7 +233,8 @@ class Schedule extends React.Component {
                                                       message={this.state.message}
                                                       newWorkers={this.state.newWorkers}
                                                       showError={this.state.showError}
-                                                      toggleErrorMessage={this.toggleErrorMessage}/> : <div></div>
+                                                      toggleErrorMessage={this.toggleErrorMessage}
+                                                      toggleCreatable={this.toggleCreatable} /> : <div></div>
     return (
       <div>
         <DisplaySchedules
@@ -257,6 +260,8 @@ class Schedule extends React.Component {
         <button onClick={() => console.log(this.state.schedules)}>View Schedules</button>
         {*/}
         <button onClick={() => console.log(this.state.newWorkers)}>View New Workers</button>
+        <button onClick={() => console.log(this.state.message)}>View Message</button>
+        <button onClick={() => console.log(this.state.schedule)}>View Schedule</button>
         <button onClick={this.postMessage}>Post Message</button>
 
       </div>

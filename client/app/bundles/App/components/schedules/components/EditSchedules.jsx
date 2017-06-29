@@ -2,7 +2,7 @@ import React from 'react';
 import EditWorkers from './EditWorkers';
 import EditDate from './EditDate';
 import EditMessage from './EditMessage';
-import {Row, Col, Button} from 'react-bootstrap';
+import {Row, Col, Button, Glyphicon} from 'react-bootstrap';
 
 const styles = {
   verticalLine: {
@@ -10,6 +10,23 @@ const styles = {
   },
   button: {
     width: '100%'
+  },
+  formBox: {
+    background: 'white',
+    padding: '20px',
+    border: 'none',
+    maxWidth: '500px',
+    margin: '0 auto',
+    position: 'fixed',
+    left: '0',
+    right: '0',
+    top: '50px',
+    overflow: 'scroll'
+  },
+  icon: {
+    float: 'right',
+    marginTop: '-2px',
+    marginRight: '6px',
   }
 }
 
@@ -31,12 +48,11 @@ export default class EditSchedules extends React.Component {
       )
     }
     return (
-      <div>
+      <div style={styles.formBox}>
         <Row>
-          <h2>Edit Schedule</h2>
-          <Col sm={3} xs={0}></Col>
-          <Col sm={9} xs={3} style={styles.verticalLine}>
-
+          <a href="#" onClick={this.props.toggleEditable}><Glyphicon style={styles.icon} glyph="remove" /></a>
+          <Col xs={12}>
+            <h3>Edit Schedule</h3>
             <EditDate handleDate={this.props.handleDate} editDate={this.props.editDate}/>
             {workerHolder}
             <EditMessage handleMessage={this.props.handleMessage} editMessage={this.props.editMessage} />
