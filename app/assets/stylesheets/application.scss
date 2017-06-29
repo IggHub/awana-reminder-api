@@ -36,6 +36,7 @@ body {
 
 .color-white {
   color: #ffffff;
+  text-decoration: none;
 }
 
 .universal-header {
@@ -95,7 +96,37 @@ body {
   border-left: 1px solid #D4D4D4;
 }
 
+.helper-button {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  height: 57px;
+  width: 57px;
+  border-radius: 100%;
+  background: #FFBE00;
+  cursor: pointer;
+}
 
+.box-overall {
+  position: fixed;
+  right: 100px;
+  bottom: 57px;
+  width: 200px;
+  height: 75px;
+  border-radius: 10px;
+  background: #f44336;
+  overflow: scroll;
+}
+
+.box-header {
+  position: relative;
+  right: 0px;
+  top: 0px;
+  width: width;
+  height: 35px;
+  border-radius: 10px 10px 0% 0%;
+  background: #FFBE00;
+}
 /* hides and display hamburger-menu */
 /* small screen (mobile phone)*/
 @media (min-width: 0px) and (max-width: 768px) {

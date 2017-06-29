@@ -37,7 +37,6 @@ const styles = {
     height: '35px',
     borderRadius: '10px 10px 0% 0%',
     background: '#FFBE00',
-
   }
 }
 
