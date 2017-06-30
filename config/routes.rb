@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'welcome/contact'
   get 'welcome/help'
 
-  get 'app', to: 'app#index'
+  get 'reminder', to: 'reminder#index'
 
   post '/text_it' => 'schedules#text_dat_message'
 

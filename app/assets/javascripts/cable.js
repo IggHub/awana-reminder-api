@@ -6,8 +6,8 @@
 //= require_tree ./channels
 
 (function() {
-  this.App || (this.App = {});
+  this.Reminder || (this.Reminder = {});
 
-  App.cable = ActionCable.createConsumer();
+  Reminder.cable = ActionCable.createConsumer();
 
 }).call(this);

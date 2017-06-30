@@ -1,9 +1,9 @@
 import ReactOnRails from 'react-on-rails';
 
-import App from '../components/App';
+import Reminder from '../components/Reminder';
 import Message from '../components/Message';
 
 ReactOnRails.register({
-  App,
+  Reminder,
   Message
 });

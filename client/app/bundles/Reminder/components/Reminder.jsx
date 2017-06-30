@@ -5,7 +5,7 @@ import {Grid, Col, Row, Button} from 'react-bootstrap';
 import Message from './Message';
 import Schedule from './schedules/Schedule';
 
-export default class App extends React.Component {
+export default class Reminder extends React.Component {
   static propTypes = {
     currentUserId: PropTypes.string.isRequired,
     schedules: PropTypes.array.isRequired
