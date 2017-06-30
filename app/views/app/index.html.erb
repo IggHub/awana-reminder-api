@@ -4,4 +4,4 @@
     <%= react_component("App", props: @scheduler_props, prerender: false) %>
   </div>
 </div>
-<%= render :partial => 'welcome/footer' %>
+<%= render partial: "welcome/footer", locals: { position: 'footer-short'} %>

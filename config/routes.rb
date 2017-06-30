@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  
+  get 'welcome/drawer'
   get 'welcome/contact'
   get 'welcome/help'
 
