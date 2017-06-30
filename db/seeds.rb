@@ -19,9 +19,13 @@ end
   Worker.create(name: Faker::Name.name, phone: Faker::PhoneNumber.cell_phone, schedule_id: (1..Schedule.all.length).to_a.sample)
 end
 
-### create rosters
 
-# this was under Worker.create before Roster was added
-# schedule_id: (1..Schedule.all.length).to_a.sample
+5.times do
+  Student.create(name: Faker::Name.name, grade: [7,8,9,10,11,12].sample, user_id: user.id)
+end
 
-#For each workers, create a roster
+Student.all.each do |student|
+  3.times do
+    Score.create(point: (1..10).to_a.sample, completed_at: Time.now, student_id: student.id)
+  end
+end

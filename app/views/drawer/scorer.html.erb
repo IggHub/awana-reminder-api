@@ -3,3 +3,6 @@
   <%= react_component("Scorer", props: @scorer_props, prerender: false) %>
 </div>
 <%= render partial: "welcome/footer", locals: { position: 'footer-short'} %>
+<% @students.each do |student| %>
+  <li><%= student.name %></li>
+<% end %>

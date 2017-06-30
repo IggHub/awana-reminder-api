@@ -1,9 +1,8 @@
 import React from 'react';
-import Client from '../schedules/utils/Client';
+import Client from './utils/Client';
 import DisplaySchedules from '../schedules/components/DisplaySchedules';
 import CreateSchedules from '../schedules/components/CreateSchedules';
 import EditSchedules from '../schedules/components/EditSchedules';
-
 
 const height= '400px';
 const width = '400px';

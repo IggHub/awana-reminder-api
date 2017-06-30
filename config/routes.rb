@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'students/index'
+
+  get 'students/create'
+
+  get 'students/update'
+
+  get 'students/destroy'
+
   root 'welcome#index'
   get 'welcome/contact'
   get 'welcome/help'
