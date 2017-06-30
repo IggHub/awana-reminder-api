@@ -21,7 +21,7 @@ const config = {
       'es5-shim/es5-shim',
       'es5-shim/es5-sham',
       'babel-polyfill',
-      './app/bundles/Reminder/startup/registration',
+      './app/bundles/Drawer/startup/registration',
     ],
   },
 

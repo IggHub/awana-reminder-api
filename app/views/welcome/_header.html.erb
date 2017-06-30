@@ -10,7 +10,7 @@
   <% if user_signed_in? %>
     <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "navbar-brand navigation-title pull-right color-white") %>
     <%= link_to(current_user.email, edit_user_registration_path, class: "navbar-brand pull-right color-white") %>
-    <%= link_to "Drawer", welcome_drawer_path, class: "navbar-brand navigation-title pull-right color-white" %>
+    <%= link_to "Drawer", drawer_path, class: "navbar-brand navigation-title pull-right color-white" %>
   <% else %>
     <span class="navbar-brand navigation-title pull-right"><%= link_to "Login", new_user_session_path, class: "color-white" %></span>
   <% end %>

@@ -1,7 +1,7 @@
 <div class="scheduler-page">
   <%= render :partial => 'welcome/header' %>
   <div class="container">
-    <%= react_component("Reminder", props: @scheduler_props, prerender: false) %>
+    <%= react_component("Reminder", props: @reminder_props, prerender: false) %>
   </div>
 </div>
 <%= render partial: "welcome/footer", locals: { position: 'footer-short'} %>

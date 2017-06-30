@@ -1,0 +1,5 @@
+  <%= render :partial => 'welcome/header' %>
+<div class="container">
+  <%= react_component("Scorer", props: @scorer_props, prerender: false) %>
+</div>
+<%= render partial: "welcome/footer", locals: { position: 'footer-short'} %>

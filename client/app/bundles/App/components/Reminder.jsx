@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {Grid, Col, Row, Button} from 'react-bootstrap';
 
-import Message from './Message';
 import Schedule from './schedules/Schedule';
 
 export default class Reminder extends React.Component {

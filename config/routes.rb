@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  get 'welcome/drawer'
   get 'welcome/contact'
   get 'welcome/help'
 
-  get 'reminder', to: 'reminder#index'
+  get 'drawer', to: "drawer#index"
+  get 'scorer', to: 'drawer#scorer'
+  get 'reminder', to: 'drawer#reminder'
 
   post '/text_it' => 'schedules#text_dat_message'
 

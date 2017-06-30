@@ -1,9 +1,9 @@
 import ReactOnRails from 'react-on-rails';
 
 import Reminder from '../components/Reminder';
-import Message from '../components/Message';
+import Scorer from '../components/Scorer';
 
 ReactOnRails.register({
   Reminder,
-  Message
+  Scorer
 });
