@@ -11,9 +11,7 @@ class SchedulesController < ApplicationController
   end
 
   def index
-    if current_user
-      @schedules = Schedule.where(user_id: current_user.id)
-    end
+    @schedules = Schedule.all
     render json: @schedules
   end
 
