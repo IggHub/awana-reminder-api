@@ -13,8 +13,6 @@ class SchedulesController < ApplicationController
   def index
     if current_user
       @schedules = Schedule.where(user_id: current_user.id)
-    else
-      @schedules = Schedule.all
     end
     render json: @schedules
   end

@@ -9,6 +9,7 @@ class DrawerController < ApplicationController
   end
 
   def scorer
+    @scorer_props = {currentUserId: current_user.id.to_s}
     @students = Student.all
   end
 end

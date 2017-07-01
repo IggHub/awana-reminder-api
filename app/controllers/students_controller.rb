@@ -1,5 +1,9 @@
 class StudentsController < ApplicationController
   def index
+    if current_user
+      @students = Student.all
+    end
+    render json: @students
   end
 
   def create
