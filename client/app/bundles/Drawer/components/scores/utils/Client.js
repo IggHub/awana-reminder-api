@@ -6,11 +6,21 @@ function getStudents(cb){
     }
   }).then((response) => response.json())
     .then(cb)
+};
 
+function getScores(cb){
+  return fetch(`api/scores`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  }).then((response) => response.json())
+    .then(cb)
 };
 
 const Client = {
-  getStudents
+  getStudents,
+  getScores
 }
 
 export default Client;
