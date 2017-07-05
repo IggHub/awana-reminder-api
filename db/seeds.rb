@@ -24,8 +24,12 @@ end
   Student.create(name: Faker::Name.name, grade: [7,8,9,10,11,12].sample, user_id: user.id)
 end
 
+
+
 Student.all.each do |student|
+  week_num = 1
   3.times do
-    Score.create(point: (1..10).to_a.sample, completed_at: Time.now, student_id: student.id)
+    Score.create(point: (1..10).to_a.sample, completed_at: Time.now, week: week_num, student_id: student.id)
+    week_num += 1
   end
 end
