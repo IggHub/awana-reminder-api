@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {Grid, Col, Row, Button} from 'react-bootstrap';
 
-import Score from './scores/score';
+import Score from './scores/Score';
 
 export default class Scorer extends React.Component {
   static propTypes = {
