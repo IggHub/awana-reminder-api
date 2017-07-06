@@ -1,5 +1,5 @@
 import React from 'react';
-import DisplayScores from './DisplayScores';
+import DisplayScores from './components/DisplayScores';
 
 import Client from './utils/Client';
 
@@ -10,7 +10,6 @@ export default class Score extends React.Component {
       students: [],
       scores: []
     };
-    //this.getStudents = this.getStudents.bind(this);
   };
   getStudents(){
     Client.getStudents((students) => {
@@ -22,7 +21,7 @@ export default class Score extends React.Component {
       this.setState({scores})
     })
   };
-  
+
   componentDidMount(){
     this.getStudents();
     this.getScores();

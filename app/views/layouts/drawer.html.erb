@@ -4,7 +4,8 @@
     <title>Awanafy</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+    <%= stylesheet_link_tag    'application', "https://fonts.googleapis.com/css?family=Open+Sans", media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'webpack-bundle' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
@@ -12,5 +13,18 @@
 
   <body>
     <%= yield %>
+    <div class="helper-button"></div>
+    <% flash.each do |type, msg| %>
+      <% if type == "notice" %>
+        <div class="alert alert-success box-overall">
+      <% elsif type == "alert" %>
+        <div class="alert alert-danger box-overall">
+      <% else %>
+        <div class='alert box-overall alert-<%= "#{type}" %>'>
+      <% end %>
+        <a href="#" class="close color-white" data-dismiss="alert">&#215;</a>
+        <span class="color-white"><%= msg %></span>
+    <% end %>
+
   </body>
 </html>
