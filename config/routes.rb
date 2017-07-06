@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'drawer', to: "drawer#index"
   get 'scorer', to: 'drawer#scorer'
   get 'reminder', to: 'drawer#reminder'
+  get 'scheduler', to: 'drawer#scheduler'
 
   post '/text_it' => 'schedules#text_dat_message'
 

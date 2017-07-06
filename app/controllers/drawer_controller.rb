@@ -12,4 +12,7 @@ class DrawerController < ApplicationController
     @scorer_props = {currentUserId: current_user.id.to_s}
     @students = Student.all
   end
+
+  def scheduler
+  end
 end

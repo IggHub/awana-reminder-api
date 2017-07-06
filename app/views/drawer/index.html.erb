@@ -1,9 +1,24 @@
 <div class="drawer-page">
   <%= render :partial => 'welcome/header' %>
-
+  <%= render :partial => 'layouts/spacing' %>
   <div class="container">
-    <%= link_to "Reminder", reminder_path %>
-    <%= link_to "Scorer", scorer_path %>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= link_to reminder_path do %>
+          <%= image_tag('Reminder.png', class: 'drawer-icons img-responsive', alt: 'reminder icon') %>
+        <% end %>
+      </div>
+      <div class="col-sm-4">
+        <%= link_to scorer_path do %>
+          <%= image_tag('Scorer.png', class: 'drawer-icons img-responsive', alt: 'scorer icon') %>
+        <% end %>
+      </div>
+      <div class="col-sm-4">
+      <%= link_to scheduler_path do %>
+        <%= image_tag('Scheduler.png', class: 'drawer-icons img-responsive', alt: "scheduler icon") %>
+      <% end %>
+    </div>
+    </div>
   </div>
 </div>
 <%= render partial: "welcome/footer", locals: { position: 'footer-short'} %>
