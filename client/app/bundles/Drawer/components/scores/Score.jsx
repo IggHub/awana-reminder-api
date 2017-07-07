@@ -13,23 +13,13 @@ export default class Score extends React.Component {
     };
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
   };
-  getScores(){
-    Client.getScores((scores) => {
-      this.setState({scores})
-    })
-  };
-  getStudents(){
-    Client.getStudents((students) => {
-      this.setState({students});
-    })
-  };
   getStudentsAndScores(){
-    Client.getStudentsAndScores(
-      (students) => {this.setState({students})},
-      (scores) => {this.setState({scores})},
-      this.rearrangeStudentsWithScores
-
-    )
+    Client.getStudentsAndScores().then(([students, scores]) => {
+      this.setState({
+        students,
+        scores
+      }, () => this.rearrangeStudentsWithScores())
+    })
   }
   rearrangeStudentsWithScores(){
     console.log('students:')
