@@ -18,9 +18,14 @@ function getScores(cb){
     .then(cb)
 };
 
+function getStudentsAndScores(cbStudent, cbScores, cbStudentsScores){
+  getStudents(cbStudent).then(getScores(cbScores)).then(cbStudentsScores);
+}
+
 const Client = {
   getStudents,
-  getScores
+  getScores,
+  getStudentsAndScores
 }
 
 export default Client;

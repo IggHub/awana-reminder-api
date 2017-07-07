@@ -16,19 +16,31 @@ export default class Score extends React.Component {
   getScores(){
     Client.getScores((scores) => {
       this.setState({scores})
-    }).then(this.getStudents())
+    })
   };
   getStudents(){
     Client.getStudents((students) => {
       this.setState({students});
-      this.rearrangeStudentsWithScores()
     })
   };
+  getStudentsAndScores(){
+    Client.getStudentsAndScores(
+      (students) => {this.setState({students})},
+      (scores) => {this.setState({scores})},
+      this.rearrangeStudentsWithScores
+
+    )
+  }
   rearrangeStudentsWithScores(){
+    console.log('students:')
+    console.log(this.state.students);
+    console.log('scores:');
+    console.log(this.state.scores);
     if (this.state.students.length > 0){
       const studentsScores = {};
       const students = this.state.students;
       const scores = this.state.scores;
+
       students.forEach(function(student){
         var studentScoresArray = scores.filter(function(score){
           return score.student_id === student.id
@@ -36,11 +48,13 @@ export default class Score extends React.Component {
         studentsScores[student.name] = studentScoresArray;
       })
       this.setState({studentsScores});
+
     }
+    console.log('bye rearrange');
   }
 
   componentDidMount(){
-    this.getScores();
+    this.getStudentsAndScores();
 
   };
   render(){
