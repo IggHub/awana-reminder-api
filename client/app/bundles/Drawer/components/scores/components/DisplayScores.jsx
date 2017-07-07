@@ -18,23 +18,11 @@ function addProducts(quantity) {
   }
 }
 
-
 addProducts(5);
 
-
 export default class DisplayScores extends React.Component {
-  constructor(props){
-    super(props);
-    this.createStudentsArray = this.createStudentsArray.bind(this);
-  }
-  createStudentsArray(){
-    const students = this.props.students;
-    const scores = this.props.scores;
-  }
-  componentDidMount(){
-
-  };
   render(){
+    
     return (
       <div>
         <BootstrapTable data={ products }>
@@ -44,11 +32,7 @@ export default class DisplayScores extends React.Component {
             <TableHeaderColumn dataField='week'>Week</TableHeaderColumn>
         </BootstrapTable>
 
-        <BootstrapTable data={ this.props.students }>
-            <TableHeaderColumn dataField='id' isKey={ true }>ID</TableHeaderColumn>
-            <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
-            <TableHeaderColumn dataField='grade'>Grade</TableHeaderColumn>
-        </BootstrapTable>
+
 
         <BootstrapTable data={ this.props.scores }>
             <TableHeaderColumn dataField='id' isKey={ true }>ID</TableHeaderColumn>
@@ -57,7 +41,8 @@ export default class DisplayScores extends React.Component {
             <TableHeaderColumn dataField='week'>Week</TableHeaderColumn>
             <TableHeaderColumn dataField='student_id'>student Id</TableHeaderColumn>
         </BootstrapTable>
-        <button onClick={this.createStudentsArray}>Students</button>
+        <button onClick={() => console.log(this.props.students)}>Students</button>
+        <button onClick={() => console.log(this.props.scores)}>Scores</button>
       </div>
     )
   }
