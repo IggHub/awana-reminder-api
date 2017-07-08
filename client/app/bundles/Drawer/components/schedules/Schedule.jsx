@@ -89,16 +89,15 @@ class Schedule extends React.Component {
   toggleEditable(){
     this.setState({editable: !this.state.editable, creatable: false })
   };
-  getSchedules(){
-    Client.getSchedules((schedules) => {
-      this.setState({schedules})
+
+  getSchedulesAndWorkers(){
+    Client.getSchedulesAndWorkers().then(([schedules, workers]) => {
+      this.setState({
+        schedules,
+        workers
+      })
     })
-  };
-  getWorkersInfo(){
-    Client.getWorkersInfo((workers) => {
-      this.setState({workers})
-    })
-  };
+  }
 
   postSchedule(){
     let tempNewWorkers = this.state.newWorkers.slice();
@@ -118,7 +117,7 @@ class Schedule extends React.Component {
           newWorkers: [{name: '', phone: ''},{name: '', phone: ''},{name: '', phone: ''}],
           showError: false
         });
-        this.getWorkersInfo();
+        this.getSchedulesAndWorkers();
       });
     } else {
       console.log("Don't leave it blank!");
@@ -131,8 +130,7 @@ class Schedule extends React.Component {
   updateSchedule(){
     let currentSchedule = this.state.schedules.find((el) => el.id === this.state.currentScheduleId);
     Client.updateSchedule(this.state.currentScheduleId, this.props.currentUserId, this.state.editDate, this.state.editMessage, this.state.editWorkers, () => {
-      this.getSchedules();
-      this.getWorkersInfo();
+      this.getSchedulesAndWorkers();
     });
   };
 
@@ -197,12 +195,11 @@ class Schedule extends React.Component {
   deleteSchedule(scheduleId){
     Client.deleteSchedule(scheduleId, () => {
       this.setState({currentScheduleId: ''})
-      this.getSchedules();
+      this.getSchedulesAndWorkers();
     })
   }
   componentDidMount(){
-    this.getSchedules();
-    this.getWorkersInfo();
+    this.getSchedulesAndWorkers();
   }
 
   render(){

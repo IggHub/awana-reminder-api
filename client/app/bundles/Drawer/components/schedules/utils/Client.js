@@ -1,24 +1,26 @@
 import PhoneHelpers from './PhoneHelpers';
 
-function getSchedules(cb){
+function getSchedules(){
   return fetch(`api/schedules`, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     }
   }).then((response) => response.json())
-    .then(cb)
 };
 
-function getWorkersInfo(cb){
+function getWorkersInfo(){
   return fetch(`api/workers`, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     }
   }).then((response) => response.json())
-    .then(cb)
 };
+
+function getSchedulesAndWorkers(){
+  return Promise.all([getSchedules(), getWorkersInfo()])
+}
 
 function postSchedule(currentUserId, date, message, workersArray, cb) {
   return fetch(`api/schedules`, {
@@ -78,8 +80,7 @@ function deleteSchedule(scheduleId, cb){
 };
 
 const Client = {
-  getSchedules,
-  getWorkersInfo,
+  getSchedulesAndWorkers,
   postSchedule,
   postMessage,
   updateSchedule,
