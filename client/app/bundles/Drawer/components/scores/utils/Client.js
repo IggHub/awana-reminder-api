@@ -18,7 +18,8 @@ function getScores(){
 
 function getStudentsAndScores(){
   return Promise.all([getStudents(), getScores()])
-}
+};
+
 const Client = {
   getStudentsAndScores
 }

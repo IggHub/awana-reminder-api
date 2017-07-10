@@ -22,10 +22,6 @@ export default class Score extends React.Component {
     })
   }
   rearrangeStudentsWithScores(){
-    console.log('students:')
-    console.log(this.state.students);
-    console.log('scores:');
-    console.log(this.state.scores);
     if (this.state.students.length > 0){
       const studentsScores = {};
       const students = this.state.students;
@@ -38,14 +34,11 @@ export default class Score extends React.Component {
         studentsScores[student.name] = studentScoresArray;
       })
       this.setState({studentsScores});
-
     }
-    console.log('bye rearrange');
   }
 
   componentDidMount(){
     this.getStudentsAndScores();
-
   };
   render(){
     return (
