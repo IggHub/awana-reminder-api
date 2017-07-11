@@ -9,7 +9,7 @@ export default class Score extends React.Component {
     this.state = {
       students: [],
       scores: [],
-      studentsScores: {}
+      studentsScores: []
     };
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
   };
@@ -23,15 +23,17 @@ export default class Score extends React.Component {
   }
   rearrangeStudentsWithScores(){
     if (this.state.students.length > 0){
-      const studentsScores = {};
+      const studentsScores = [];
       const students = this.state.students;
       const scores = this.state.scores;
 
       students.forEach(function(student){
-        var studentScoresArray = scores.filter(function(score){
+        const studentScoresArray = scores.filter(function(score){
           return score.student_id === student.id
         })
-        studentsScores[student.name] = studentScoresArray;
+        const studentsObject = {};
+        studentsObject[student.name] = studentScoresArray;
+        studentsScores.push(studentsObject);
       })
       this.setState({studentsScores});
     }

@@ -3,36 +3,72 @@ import {Table} from 'react-bootstrap';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../scores/stylesheets/react-bootstrap-table-all.min.css';
 
-const cellEditProp = {
-  mode: 'click'
-};
+class ScoresRow extends React.Component {
+  render(){
+    return (
+      <tr>
+        <td>First</td>
+        <td>Second</td>
+      </tr>
+    )
+  }
+}
+
+class ScoresTable extends React.Component {
+  render(){
+    const studentName = <div>{Object.keys(this.props.student)[0]}</div>
+    console.log("BEGIN");
+    console.log(Object.values(this.props.student));
+    console.log(Object.values(this.props.student)[0][0]);
+    console.log(Object.values(this.props.student)[0][1]);
+    console.log(Object.values(this.props.student)[0][2]);
+    console.log(Object.values(this.props.student)[0][0]["point"]);
+    console.log("END");
+    const studentScores = [];
+    for(var i = 0; i <= Object.values(this.props.student)[0].length - 1; i++){
+      studentScores.push(
+        <tr key={i}>
+          <td>{Object.values(this.props.student)[0][i]["week"]}</td>
+          <td>{Object.values(this.props.student)[0][i]["point"]}</td>
+        </tr>
+      )
+    }
+
+    return (
+      <div>
+        {studentName}
+        <table>
+          <thead>
+            <tr>
+              <th>Week</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {studentScores}
+          </tbody>
+        </table>
+        <hr />
+      </div>
+    )
+  }
+}
 
 export default class DisplayScores extends React.Component {
   render(){
     const bsTable = [];
-    if(Object.keys(this.props.studentsScores).length > 0) {
-      for(var i = 0; i < Object.keys(this.props.studentsScores).length; i++){
+    if(this.props.studentsScores.length > 0){
+      this.props.studentsScores.forEach((student, index) => {
         bsTable.push(
-          <div key={i}>
-            <h4>{Object.keys(this.props.studentsScores)[i]}</h4>
-            <BootstrapTable data={this.props.studentsScores[Object.keys(this.props.studentsScores)[i]]} cellEdit={ cellEditProp }>
-              <TableHeaderColumn dataField='id' isKey={ true }>ID</TableHeaderColumn>
-              <TableHeaderColumn dataField='week'>Week</TableHeaderColumn>
-              <TableHeaderColumn dataField='point'>Point</TableHeaderColumn>
-            </BootstrapTable>
-          </div>
+          //5 students; 5 scoresTable
+          <ScoresTable key={index} student={student} index={index}/>
+
         )
-      }
-    };
+      })
+    }
     return (
       <div>
         {bsTable}
-        <BootstrapTable data={ this.props.students } cellEdit={ cellEditProp }>
-          <TableHeaderColumn dataField='id' isKey={ true }>ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>Name</TableHeaderColumn>
-          <TableHeaderColumn dataField='grade'>Grade</TableHeaderColumn>
-          <TableHeaderColumn dataField={'user_id'}>User Id</TableHeaderColumn>
-        </BootstrapTable>
 
         <button onClick={() => console.log(this.props.students)}>Students</button>
         <button onClick={() => console.log(this.props.scores)}>Scores</button>
