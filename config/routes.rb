@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     resources :schedules, only: [:index, :show, :create, :update, :destroy]
     resources :students, only: [:index]
-    resources :scores, only: [:index]
+    resources :scores, only: [:index, :update]
     resources :texts, only: [:index, :create]
     resources :rosters, only: [:index, :create]
   end

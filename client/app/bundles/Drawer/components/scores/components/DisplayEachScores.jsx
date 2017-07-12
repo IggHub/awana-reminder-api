@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Grid, Row, Col, Button} from 'react-bootstrap';
 //import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 //import '../../scores/stylesheets/react-bootstrap-table-all.min.css';
 
@@ -8,7 +8,7 @@ class EditableCell extends React.Component{
   render(){
     return (
       <td>
-        <input onChange={this.props.onStudentScoresTableUpdate} type="text" name={this.props.cellData.type} id={this.props.cellData.id} value={this.props.cellData.value}/>
+        <input onBlur={(id, point)=>{this.props.updateScores(this.props.cellData.id, this.props.cellData.value)}} onChange={this.props.onStudentScoresTableUpdate} type="text" name={this.props.cellData.type} id={this.props.cellData.id} value={this.props.cellData.value}/>
       </td>
     )
   }
@@ -23,7 +23,7 @@ class ScoresTable extends React.Component {
       studentScores.push(
         <tr key={i}>
           <td>{Object.values(this.props.student)[0][i]["week"]}</td>
-          <EditableCell cellData={{
+          <EditableCell updateScores={this.props.updateScores} cellData={{
               type: "point",
               id: Object.values(this.props.student)[0][i]["id"],
               value: Object.values(this.props.student)[0][i]["point"]
@@ -34,7 +34,7 @@ class ScoresTable extends React.Component {
 
     return (
       <div>
-        <Col xs={12} sm={6} lg={3} xl={2}>
+        <Col xs={12} sm={6} lg={3}>
           <table>
             <thead>
               <tr>
@@ -58,7 +58,7 @@ export default class DisplayEachScores extends React.Component {
     if(this.props.studentsScores.length > 0){
       this.props.studentsScores.forEach((student, index) => {
         bsTable.push(
-          <ScoresTable onStudentScoresTableUpdate={this.props.onStudentScoresTableUpdate} key={index} student={student} index={index}/>
+          <ScoresTable updateScores={this.props.updateScores} onStudentScoresTableUpdate={this.props.onStudentScoresTableUpdate} key={index} student={student} index={index}/>
         )
       })
     }
@@ -68,7 +68,11 @@ export default class DisplayEachScores extends React.Component {
           <Row>
             {bsTable}
           </Row>
-          <p>Sum</p>
+          <Row>
+            <Col xs={12}>
+              <Button bsStyle="primary">Submit Scores</Button>
+            </Col>
+          </Row>
         </Grid>
       </div>
     )

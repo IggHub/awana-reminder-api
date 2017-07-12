@@ -14,6 +14,7 @@ export default class Score extends React.Component {
     };
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
     this.handleStudentScoresTable = this.handleStudentScoresTable.bind(this);
+    this.updateScores = this.updateScores.bind(this);
   };
   getStudentsAndScores(){
     Client.getStudentsAndScores().then(([students, scores]) => {
@@ -22,7 +23,8 @@ export default class Score extends React.Component {
         scores
       }, () => this.rearrangeStudentsWithScores())
     })
-  }
+  };
+
   rearrangeStudentsWithScores(){
     if (this.state.students.length > 0){
       const studentsScores = [];
@@ -42,6 +44,11 @@ export default class Score extends React.Component {
     }
   };
 
+  updateScores(){
+    var scores = this.state.scores.slice();
+
+  }
+
   handleStudentScoresTable(e){
     var item = {
       id: e.target.id,
@@ -51,7 +58,6 @@ export default class Score extends React.Component {
     var scores = this.state.scores.slice();
     var newScores = scores.map(function(score) {
       for (var key in score){
-
         if(key == item.name && score.id == item.id) {
           score[key] = item.value;
         }
@@ -59,6 +65,11 @@ export default class Score extends React.Component {
       return score;
     });
     this.setState({scores: newScores});
+  };
+
+  updateScores(id, point){
+    var scores = this.state.scores.slice();
+    Client.updateScores(id, point);
   };
 
   componentDidMount(){
@@ -69,7 +80,11 @@ export default class Score extends React.Component {
     return (
       <div>
         {/*}<DisplayAllScores onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} />{*/}
-        <DisplayEachScores onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} />
+        <DisplayEachScores updateScores={this.updateScores} onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} />
+        <button onClick={() => console.log(this.state.scores)}>Scores</button>
+        <button onClick={() => console.log(this.state.students)}>Students</button>
+        <button onClick={() => console.log(this.state.studentsScores)}>Students n Scores</button>
+        <button onClick={this.updateScores}>Update Scores</button>
       </div>
     )
   }
