@@ -68,11 +68,6 @@ export default class DisplayEachScores extends React.Component {
           <Row>
             {bsTable}
           </Row>
-          <Row>
-            <Col xs={12}>
-              <Button bsStyle="primary">Submit Scores</Button>
-            </Col>
-          </Row>
         </Grid>
       </div>
     )

@@ -4,6 +4,16 @@ import DisplayAllScores from './components/DisplayAllScores';
 
 import Client from './utils/Client';
 
+function compare(a,b){
+  if(a.created_at < b.created_at){
+    return -1;
+  } else if (a.created_at > b.created_at){
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 export default class Score extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +45,7 @@ export default class Score extends React.Component {
         const studentScoresArray = scores.filter(function(score){
           return score.student_id === student.id
         })
+        studentScoresArray.sort(compare);
         const studentsObject = {};
         studentsObject[student.name] = studentScoresArray;
         studentsObject["id"] = student.id
@@ -43,11 +54,6 @@ export default class Score extends React.Component {
       this.setState({studentsScores});
     }
   };
-
-  updateScores(){
-    var scores = this.state.scores.slice();
-
-  }
 
   handleStudentScoresTable(e){
     var item = {
