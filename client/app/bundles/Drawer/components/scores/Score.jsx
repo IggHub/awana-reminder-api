@@ -1,5 +1,6 @@
 import React from 'react';
-import DisplayScores from './components/DisplayScores';
+import DisplayEachScores from './components/DisplayEachScores';
+import DisplayAllScores from './components/DisplayAllScores';
 
 import Client from './utils/Client';
 
@@ -9,8 +10,7 @@ export default class Score extends React.Component {
     this.state = {
       students: [],
       scores: [],
-      studentsScores: [],
-      test: "test"
+      studentsScores: []
     };
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
     this.handleStudentScoresTable = this.handleStudentScoresTable.bind(this);
@@ -48,7 +48,6 @@ export default class Score extends React.Component {
       name: e.target.name,
       value: e.target.value
     };
-    console.log(item);
     var scores = this.state.scores.slice();
     var newScores = scores.map(function(score) {
       for (var key in score){
@@ -60,20 +59,17 @@ export default class Score extends React.Component {
       return score;
     });
     this.setState({scores: newScores});
-    
   };
 
   componentDidMount(){
     this.getStudentsAndScores();
   };
-  handleTest(e){
-    this.setState({test: e.target.value})
-  }
+
   render(){
     return (
       <div>
-        <input type="text" onChange={this.handleTest.bind(this)} value={this.state.test} />
-        <DisplayScores onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} students={this.state.students} scores={this.state.scores} />
+        {/*}<DisplayAllScores onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} />{*/}
+        <DisplayEachScores onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} />
       </div>
     )
   }

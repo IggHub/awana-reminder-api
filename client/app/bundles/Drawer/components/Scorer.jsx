@@ -18,7 +18,6 @@ export default class Scorer extends React.Component {
     return (
       <div>
         <Grid>
-          <h2>Hello Scorer</h2>
           <Score currentUserId={this.props.currentUserId}/>
         </Grid>
       </div>

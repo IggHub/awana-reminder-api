@@ -1,7 +1,7 @@
 import React from 'react';
-import {Table} from 'react-bootstrap';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import '../../scores/stylesheets/react-bootstrap-table-all.min.css';
+import {Grid, Row, Col} from 'react-bootstrap';
+//import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+//import '../../scores/stylesheets/react-bootstrap-table-all.min.css';
 
 
 class EditableCell extends React.Component{
@@ -13,19 +13,16 @@ class EditableCell extends React.Component{
     )
   }
 }
+
 class ScoresTable extends React.Component {
   render(){
     var onStudentScoresTableUpdate = this.props.onStudentScoresTableUpdate;
-    const studentName = <div>{Object.keys(this.props.student)[0]}</div>
+    const studentName = <span>{Object.keys(this.props.student)[0]}</span>
     const studentScores = [];
     for(var i = 0; i <= Object.values(this.props.student)[0].length - 1; i++){
       studentScores.push(
         <tr key={i}>
-          <EditableCell cellData={{
-              type: "week",
-              id: Object.values(this.props.student)[0][i]["id"],
-              value: Object.values(this.props.student)[0][i]["week"]
-            }} onStudentScoresTableUpdate={onStudentScoresTableUpdate} />
+          <td>{Object.values(this.props.student)[0][i]["week"]}</td>
           <EditableCell cellData={{
               type: "point",
               id: Object.values(this.props.student)[0][i]["id"],
@@ -37,41 +34,42 @@ class ScoresTable extends React.Component {
 
     return (
       <div>
-        {studentName}
-        <table>
-          <thead>
-            <tr>
-              <th>Week #</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            {studentScores}
-          </tbody>
-        </table>
-        <hr />
+        <Col xs={12} sm={6} lg={3} xl={2}>
+          <table>
+            <thead>
+              <tr>
+                <th>Week #</th>
+                <th>Points for {studentName}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {studentScores}
+            </tbody>
+          </table>
+        </Col>
       </div>
     )
   }
 }
 
-export default class DisplayScores extends React.Component {
+export default class DisplayEachScores extends React.Component {
   render(){
     const bsTable = [];
     if(this.props.studentsScores.length > 0){
       this.props.studentsScores.forEach((student, index) => {
         bsTable.push(
-          //5 students; 5 scoresTable
           <ScoresTable onStudentScoresTableUpdate={this.props.onStudentScoresTableUpdate} key={index} student={student} index={index}/>
         )
       })
     }
     return (
       <div>
-        <button onClick={() => console.log(this.props.students)}>Students</button>
-        <button onClick={() => console.log(this.props.scores)}>Scores</button>
-        <button onClick={() => console.log(this.props.studentsScores)}>Students Scores</button>
-        {bsTable}
+        <Grid>
+          <Row>
+            {bsTable}
+          </Row>
+          <p>Sum</p>
+        </Grid>
       </div>
     )
   }
