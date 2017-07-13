@@ -8,7 +8,14 @@ class EditableCell extends React.Component{
   render(){
     return (
       <td>
-        <input onBlur={(id, point)=>{this.props.updateScores(this.props.cellData.id, this.props.cellData.value)}} onChange={this.props.onStudentScoresTableUpdate} type="text" name={this.props.cellData.type} id={this.props.cellData.id} value={this.props.cellData.value}/>
+        <input
+          onBlur={(id, point)=>{this.props.updateScores(this.props.cellData.id, this.props.cellData.value)}} onChange={this.props.onStudentScoresTableUpdate}
+          type="text"
+          name={this.props.cellData.type}
+          id={this.props.cellData.id}
+          value={this.props.cellData.value}
+          onFocus={() => console.log(this.props.cellData.id)}
+          />
       </td>
     )
   }
@@ -64,6 +71,7 @@ export default class DisplayEachScores extends React.Component {
     }
     return (
       <div>
+
         <Grid>
           <Row>
             {bsTable}

@@ -25,7 +25,9 @@ export default class Score extends React.Component {
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
     this.handleStudentScoresTable = this.handleStudentScoresTable.bind(this);
     this.updateScores = this.updateScores.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   };
+
   getStudentsAndScores(){
     Client.getStudentsAndScores().then(([students, scores]) => {
       this.setState({
@@ -73,6 +75,25 @@ export default class Score extends React.Component {
     this.setState({scores: newScores});
   };
 
+  handleAdd(){
+    var id = this.state.scores[this.state.scores.length - 1].id + 1;
+    var scores = this.state.scores.slice();
+    var students = this.state.students.slice();;
+    const maxWeek = Math.max(...this.state.scores.map((score) => {return score.week})) + 1;
+    students.forEach((student, index) => {
+      this.state.scores.push(
+        {
+          completed_at: "",
+          point: "",
+          student_id: student.id,
+          week: maxWeek,
+          id: id + index
+        }
+      );
+    })
+
+  }
+
   updateScores(id, point){
     var scores = this.state.scores.slice();
     Client.updateScores(id, point);
@@ -86,8 +107,10 @@ export default class Score extends React.Component {
     return (
       <div>
         {/*}<DisplayAllScores onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} />{*/}
+        <button onClick={this.handleAdd}>Add</button>
         <DisplayEachScores updateScores={this.updateScores} onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} />
         <button onClick={() => console.log(this.state.scores)}>Scores</button>
+        <button onClick={() => console.log(Math.max(...this.state.scores.map((score) => {return score.week})) + 1)}>Max week</button>
         <button onClick={() => console.log(this.state.students)}>Students</button>
         <button onClick={() => console.log(this.state.studentsScores)}>Students n Scores</button>
         <button onClick={this.updateScores}>Update Scores</button>
