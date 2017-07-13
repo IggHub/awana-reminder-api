@@ -72,7 +72,7 @@ export default class Score extends React.Component {
       };
       return score;
     });
-    this.setState({scores: newScores});
+    this.setState({scores: newScores}, () => this.rearrangeStudentsWithScores());
   };
 
   handleAdd(){
@@ -81,7 +81,7 @@ export default class Score extends React.Component {
     var students = this.state.students.slice();;
     const maxWeek = Math.max(...this.state.scores.map((score) => {return score.week})) + 1;
     students.forEach((student, index) => {
-      this.state.scores.push(
+      scores.push(
         {
           completed_at: "",
           point: "",
@@ -91,7 +91,7 @@ export default class Score extends React.Component {
         }
       );
     })
-
+    this.setState({scores}, () => this.rearrangeStudentsWithScores())
   }
 
   updateScores(id, point){
