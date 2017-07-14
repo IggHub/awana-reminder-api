@@ -1,5 +1,6 @@
 import React from 'react';
 import {Grid, Row, Col, Button} from 'react-bootstrap';
+import ScoreCharts from './ScoreCharts';
 //import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 //import '../../scores/stylesheets/react-bootstrap-table-all.min.css';
 
@@ -41,19 +42,24 @@ class ScoresTable extends React.Component {
 
     return (
       <div>
-        <Col xs={12} sm={6} lg={3}>
-          <table>
-            <thead>
-              <tr>
-                <th>Week #</th>
-                <th>Points for {studentName}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {studentScores}
-            </tbody>
-          </table>
-        </Col>
+        <Row>
+          <Col xs={12} sm={6} lg={3}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Week #</th>
+                  <th>Points for {studentName}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {studentScores}
+              </tbody>
+            </table>
+          </Col>
+        </Row>
+        <Row>
+          <ScoreCharts scoreData={Object.values(this.props.student)[0]}/>
+        </Row>
       </div>
     )
   }
@@ -73,9 +79,9 @@ export default class DisplayEachScores extends React.Component {
       <div>
 
         <Grid>
-          <Row>
+
             {bsTable}
-          </Row>
+
         </Grid>
       </div>
     )
