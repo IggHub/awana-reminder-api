@@ -29,8 +29,6 @@ class IndividualLineCharts extends React.Component{
           <YAxis />
           <Tooltip />
         </LineChart>
-        <button onClick={() => {console.log(this.props.scoreData)}}>Scores data</button>
-
       </div>
     )
   }
@@ -62,13 +60,13 @@ class AverageLineCharts extends React.Component {
 
 export default class ScoreCharts extends React.Component{
   render(){
-    const showChart= (this.props.showAverage === false) ? <IndividualLineCharts scoreData={this.props.scoreData} /> :         <AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} />
-    
+    const showChart= (this.props.displayAverageChart === false) ? <IndividualLineCharts scoreData={this.props.scoreData} /> : <AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} />
+
     return (
       <div>
         {showChart}
         <button onClick={this.props.handleAverage}>Switch Charts</button>
-        <button onClick={this.props.showAverage}>Show Average</button>
+        <button onClick={this.props.displayAverageChart}>Display average chart</button>
       </div>
     )
   }

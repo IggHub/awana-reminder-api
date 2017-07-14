@@ -66,10 +66,9 @@ class ScoresTable extends React.Component {
           <ScoreCharts
             scoreData={Object.values(this.props.student)[0]}
             averageScores={this.props.averageScores}
-            showAverage={this.props.showAverage}
+            displayAverageChart={this.props.displayAverageChart}
             handleAverage={this.props.handleAverage}
             />
-          <button onClick={() => {console.log(this.props.averageScores)}}>Average scores</button>
         </Row>
       </div>
     )
@@ -120,7 +119,7 @@ export default class DisplayEachScores extends React.Component {
             key={index} student={student}
             index={index}
             averageScores={averageScores}
-            showAverage={this.props.showAverage}
+            displayAverageChart={this.props.displayAverageChart}
             handleAverage={this.props.handleAverage}
             />
         )

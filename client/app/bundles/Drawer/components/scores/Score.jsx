@@ -21,18 +21,17 @@ export default class Score extends React.Component {
       students: [],
       scores: [],
       studentsScores: [],
-      showAverage: false,
+      displayAverageChart: false
     };
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
     this.handleStudentScoresTable = this.handleStudentScoresTable.bind(this);
     this.updateScores = this.updateScores.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
-    this.handleAverage = this.handleAverage.bind(this);
+    this.toggleDisplayAverage = this.toggleDisplayAverage.bind(this);
   };
 
-  handleAverage(){
-    const showAverage = this.state.showAverage;
-    this.setState({showAverage: !showAverage}, () => console.log(this.state.showAverage))
+  toggleDisplayAverage(e){
+    this.setState({displayAverageChart: !this.state.displayAverageChart}, () => console.log(this.state.displayAverageChart))
   }
 
   getStudentsAndScores(){
@@ -119,7 +118,7 @@ export default class Score extends React.Component {
           updateScores={this.updateScores}
           onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores}
           scores={this.state.scores}
-          showAverage={this.state.showAverage}
+          displayAverageChart={this.state.displayAverageChart}
           handleAverage={this.handleAverage}
           />
         <button onClick={() => console.log(this.state.scores)}>Scores</button>
@@ -127,8 +126,9 @@ export default class Score extends React.Component {
         <button onClick={() => console.log(this.state.students)}>Students</button>
         <button onClick={() => console.log(this.state.studentsScores)}>Students n Scores</button>
         <button onClick={this.updateScores}>Update Scores</button>
-          <button onClick={this.handleAverage}>Switch Charts</button>
-
+        <button onClick={this.handleAverage}>Switch Charts</button>
+        <button onClick={() => console.log(this.state.displayAverageChart)}>Display average chart</button>
+        <button onClick={this.toggleDisplayAverage}>Toggle display average</button>
       </div>
     )
   }
