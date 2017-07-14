@@ -20,13 +20,20 @@ export default class Score extends React.Component {
     this.state = {
       students: [],
       scores: [],
-      studentsScores: []
+      studentsScores: [],
+      showAverage: false,
     };
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
     this.handleStudentScoresTable = this.handleStudentScoresTable.bind(this);
     this.updateScores = this.updateScores.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleAverage = this.handleAverage.bind(this);
   };
+
+  handleAverage(){
+    const showAverage = this.state.showAverage;
+    this.setState({showAverage: !showAverage}, () => console.log(this.state.showAverage))
+  }
 
   getStudentsAndScores(){
     Client.getStudentsAndScores().then(([students, scores]) => {
@@ -108,12 +115,20 @@ export default class Score extends React.Component {
       <div>
         {/*}<DisplayAllScores onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} />{*/}
         <button onClick={this.handleAdd}>Add</button>
-        <DisplayEachScores updateScores={this.updateScores} onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} />
+        <DisplayEachScores
+          updateScores={this.updateScores}
+          onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores}
+          scores={this.state.scores}
+          showAverage={this.state.showAverage}
+          handleAverage={this.handleAverage}
+          />
         <button onClick={() => console.log(this.state.scores)}>Scores</button>
         <button onClick={() => console.log(Math.max(...this.state.scores.map((score) => {return score.week})) + 1)}>Max week</button>
         <button onClick={() => console.log(this.state.students)}>Students</button>
         <button onClick={() => console.log(this.state.studentsScores)}>Students n Scores</button>
         <button onClick={this.updateScores}>Update Scores</button>
+          <button onClick={this.handleAverage}>Switch Charts</button>
+
       </div>
     )
   }

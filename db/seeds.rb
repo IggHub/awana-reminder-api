@@ -28,7 +28,7 @@ end
 
 Student.all.each do |student|
   week_num = 1
-  3.times do
+  8.times do
     Score.create(point: (1..10).to_a.sample, completed_at: Time.now, week: week_num, student_id: student.id)
     week_num += 1
   end
