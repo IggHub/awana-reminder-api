@@ -4,6 +4,25 @@ import ScoreCharts from './ScoreCharts';
 //import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 //import '../../scores/stylesheets/react-bootstrap-table-all.min.css';
 
+const styles={
+  card: {
+    border: "1px solid black",
+    padding: "15px",
+    margin: "15px",
+    height: "300px",
+    maxHeight: "300px",
+    width: "100%",
+    overflow: "auto"
+  },
+  chartButton: {
+    position: "relative",
+    background: "red",
+    width: "100%",
+    height: "50px",
+
+  }
+};
+
 function uniqueFilter(value, index, self){
   return self.indexOf(value) === index;
 };
@@ -56,32 +75,35 @@ class ScoresTable extends React.Component {
     }
 
     return (
-      <div>
-        <Row>
-          <Col xs={12} sm={6} lg={3}>
-            <table>
-              <thead>
-                <tr>
-                  <th>Week #</th>
-                  <th>Points for {studentName}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {studentScores}
-              </tbody>
-            </table>
-          </Col>
-        </Row>
-        <Row>
-          <ScoreCharts
-            scoreData={Object.values(this.props.student)[0]}
-            averageScores={this.props.averageScores}
-            displayAverageChart={this.props.displayAverageChart}
-            handleAverage={this.props.handleAverage}
-            cumulativeScores={cumulativeScores}
-            />
-        </Row>
-      </div>
+
+      <Col xs={12} sm={6} lg={3}>
+        <div style={styles.card}>
+          <table>
+            <thead>
+              <tr>
+                <th>Week #</th>
+                <th>Points for {studentName}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {studentScores}
+            </tbody>
+          </table>
+        </div>
+        <div style={styles.chartButton}></div>
+        {/*}        <Row>
+                  <ScoreCharts
+                    scoreData={Object.values(this.props.student)[0]}
+                    averageScores={this.props.averageScores}
+                    displayAverageChart={this.props.displayAverageChart}
+                    handleAverage={this.props.handleAverage}
+                    cumulativeScores={cumulativeScores}
+                    />
+                </Row>
+        {*/}
+      </Col>
+
+
     )
   }
 }
@@ -146,7 +168,9 @@ export default class DisplayEachScores extends React.Component {
     return (
       <div>
         <Grid>
-          {bsTable}
+          <Row>
+            {bsTable}
+          </Row>
         </Grid>
       </div>
     )
