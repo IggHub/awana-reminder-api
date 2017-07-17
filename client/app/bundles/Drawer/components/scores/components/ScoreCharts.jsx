@@ -15,7 +15,7 @@ const data = [
 
 class IndividualLineCharts extends React.Component{
   render(){
-    const scoreData = this.props.scoreData;
+    const scoreData = this.props.scoreData.slice();
     scoreData.forEach((score) => {
       score.point = Number(score.point);
     })
@@ -46,8 +46,32 @@ class AverageLineCharts extends React.Component {
     return (
       <div>
         <LineChart width={600} height={300} data={scoreData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <Line type="monotone" dataKey={"point"} stroke="#82ca9d" />
+          <Line type="monotone" dataKey="point" stroke="#82ca9d" />
           <Line type="monotone" dataKey="averagePoint" stroke="#8884d8" activeDot={{r: 8}}/>
+          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <XAxis dataKey="week" />
+          <YAxis />
+          <Tooltip />
+        </LineChart>
+      </div>
+    )
+  }
+}
+
+class CumulativeLineCharts extends React.Component {
+  render(){
+    const scoreData = this.props.scoreData.slice();
+    const cumulativeScoreData = this.props.cumulativeScores.slice();
+
+    scoreData.forEach((score, index) => {
+      score.point = Number(score.point);
+      score.cumulativePoint = Number(cumulativeScoreData[index].cumulativePoint)
+    })
+    return (
+      <div>
+        <LineChart width={600} height={300} data={scoreData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+          <Line type="monotone" dataKey="winPoint" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="cumulativePoint" stroke="#8884d8" activeDot={{r: 8}}/>
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis dataKey="week" />
           <YAxis />
@@ -64,9 +88,12 @@ export default class ScoreCharts extends React.Component{
 
     return (
       <div>
-        {showChart}
+        <CumulativeLineCharts scoreData={this.props.scoreData} cumulativeScores={this.props.cumulativeScores} />
+        <AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} />
+        <button onClick={() => {console.log(this.props.averageScores)}}>Display average scores</button>
         <button onClick={this.props.handleAverage}>Switch Charts</button>
         <button onClick={this.props.displayAverageChart}>Display average chart</button>
+        <button onClick={() => {console.log(this.props.cumulativeScores)}}>Cumulative Score</button>
       </div>
     )
   }

@@ -118,6 +118,7 @@ export default class Score extends React.Component {
           updateScores={this.updateScores}
           onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores}
           scores={this.state.scores}
+          students={this.state.students}
           displayAverageChart={this.state.displayAverageChart}
           handleAverage={this.handleAverage}
           />

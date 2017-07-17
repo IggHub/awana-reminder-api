@@ -30,6 +30,16 @@ class EditableCell extends React.Component{
 class ScoresTable extends React.Component {
   render(){
     var onStudentScoresTableUpdate = this.props.onStudentScoresTableUpdate;
+
+    const cumulativeScores = Object.values(this.props.student)[0];
+    var cumulativePointHolder = 0;
+    cumulativeScores.forEach((eachWeek, index) => {
+      cumulativePointHolder = cumulativePointHolder + Number(eachWeek["point"]);
+      eachWeek["cumulativePoint"] = cumulativePointHolder;
+      eachWeek["winPoint"] = 50;
+    })
+
+    const weeks = this.props.weeks.slice();
     const studentName = <span>{Object.keys(this.props.student)[0]}</span>
     const studentScores = [];
     for(var i = 0; i <= Object.values(this.props.student)[0].length - 1; i++){
@@ -68,6 +78,7 @@ class ScoresTable extends React.Component {
             averageScores={this.props.averageScores}
             displayAverageChart={this.props.displayAverageChart}
             handleAverage={this.props.handleAverage}
+            cumulativeScores={cumulativeScores}
             />
         </Row>
       </div>
@@ -85,8 +96,11 @@ export default class DisplayEachScores extends React.Component {
     const bsTable = [];
 
     if(this.props.studentsScores.length > 0){
-      const scores = this.props.scores;
+      const scores = this.props.scores.slice();
+
+
       weeks = scores.map((score) => {return score.week}).filter(uniqueFilter);
+      //weeks = [1,2,3,4,5,6,7,8]
 
       weeks.forEach((week, index) => {
         scoreHolder.push(scores.filter((score) => {
@@ -95,6 +109,7 @@ export default class DisplayEachScores extends React.Component {
         )
       });
 
+      /*pushing averageScores*/
       scoreHolder.forEach((weekly, index) => {
         const scoreArrayHolder = [];
         const scoreObjectHolder = {};
@@ -103,7 +118,6 @@ export default class DisplayEachScores extends React.Component {
             Number(eachStudent.point)
           )
         });
-
         averageScores.push(
           {
             averagePoint: average(scoreArrayHolder),
@@ -111,16 +125,20 @@ export default class DisplayEachScores extends React.Component {
           }
         );
       })
+      /* end averageScores*/
+
       this.props.studentsScores.forEach((student, index) => {
         bsTable.push(
           <ScoresTable
             updateScores={this.props.updateScores}
             onStudentScoresTableUpdate={this.props.onStudentScoresTableUpdate}
-            key={index} student={student}
+            key={index}
+            student={student}
             index={index}
             averageScores={averageScores}
             displayAverageChart={this.props.displayAverageChart}
             handleAverage={this.props.handleAverage}
+            weeks={weeks}
             />
         )
       })
