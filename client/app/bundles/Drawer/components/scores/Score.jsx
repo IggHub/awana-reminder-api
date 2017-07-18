@@ -21,17 +21,22 @@ export default class Score extends React.Component {
       students: [],
       scores: [],
       studentsScores: [],
-      displayAverageChart: false
+      shouldDisplayChart: false,
+      selectedChartId: '',
     };
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
     this.handleStudentScoresTable = this.handleStudentScoresTable.bind(this);
     this.updateScores = this.updateScores.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
-    this.toggleDisplayAverage = this.toggleDisplayAverage.bind(this);
+    this.toggleDisplayChart = this.toggleDisplayChart.bind(this);
   };
 
-  toggleDisplayAverage(e){
-    this.setState({displayAverageChart: !this.state.displayAverageChart}, () => console.log(this.state.displayAverageChart))
+  toggleDisplayChart(id){
+    this.setState({
+      shouldDisplayChart: !this.state.shouldDisplayChart,
+      selectedChartId: id
+    }, () => console.log(this.state.shouldDisplayChart))
+
   }
 
   getStudentsAndScores(){
@@ -119,9 +124,10 @@ export default class Score extends React.Component {
           onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores}
           scores={this.state.scores}
           students={this.state.students}
-          displayAverageChart={this.state.displayAverageChart}
-          handleAverage={this.handleAverage}
-          />
+          toggleDisplayChart={this.toggleDisplayChart}
+          shouldDisplayChart={this.state.shouldDisplayChart}
+          selectedChartId={this.state.selectedChartId}
+        />
         <button onClick={() => console.log(this.state.scores)}>Scores</button>
         <button onClick={() => console.log(Math.max(...this.state.scores.map((score) => {return score.week})) + 1)}>Max week</button>
         <button onClick={() => console.log(this.state.students)}>Students</button>
@@ -129,7 +135,7 @@ export default class Score extends React.Component {
         <button onClick={this.updateScores}>Update Scores</button>
         <button onClick={this.handleAverage}>Switch Charts</button>
         <button onClick={() => console.log(this.state.displayAverageChart)}>Display average chart</button>
-        <button onClick={this.toggleDisplayAverage}>Toggle display average</button>
+        <button onClick={this.toggleDisplayChart}>Toggle display chart</button>
       </div>
     )
   }

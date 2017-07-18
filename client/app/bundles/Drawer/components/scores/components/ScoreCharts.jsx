@@ -84,16 +84,12 @@ class CumulativeLineCharts extends React.Component {
 
 export default class ScoreCharts extends React.Component{
   render(){
-    const showChart= (this.props.displayAverageChart === false) ? <IndividualLineCharts scoreData={this.props.scoreData} /> : <AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} />
-
+    const shouldIShowThis = (this.props.index === this.props.selectedChartId) ? <div><CumulativeLineCharts scoreData={this.props.scoreData} cumulativeScores={this.props.cumulativeScores} /> <AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} /></div> : <div></div>
+    const showChart= <IndividualLineCharts scoreData={this.props.scoreData} />
     return (
       <div>
-        <CumulativeLineCharts scoreData={this.props.scoreData} cumulativeScores={this.props.cumulativeScores} />
-        <AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} />
-        <button onClick={() => {console.log(this.props.averageScores)}}>Display average scores</button>
-        <button onClick={this.props.handleAverage}>Switch Charts</button>
-        <button onClick={this.props.displayAverageChart}>Display average chart</button>
-        <button onClick={() => {console.log(this.props.cumulativeScores)}}>Cumulative Score</button>
+        {shouldIShowThis}
+
       </div>
     )
   }

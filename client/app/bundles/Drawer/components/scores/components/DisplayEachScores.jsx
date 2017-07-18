@@ -8,7 +8,7 @@ const styles={
   card: {
     border: "1px solid black",
     padding: "15px",
-    margin: "15px",
+    margin: "15px 15px 0px 15px",
     height: "300px",
     maxHeight: "300px",
     width: "100%",
@@ -16,10 +16,13 @@ const styles={
   },
   chartButton: {
     position: "relative",
-    background: "red",
     width: "100%",
     height: "50px",
-
+    margin: "0px 15px 15px 15px",
+    border: "1px solid black",
+    cursor: "pointer",
+    textAlign: "center",
+    verticalAlign: "middle"
   }
 };
 
@@ -73,9 +76,13 @@ class ScoresTable extends React.Component {
         </tr>
       )
     }
-
+    const revealCharts = (this.props.shouldDisplayChart === true) ? <ScoreCharts
+                                                                      scoreData={Object.values(this.props.student)[0]}
+                                                                      averageScores={this.props.averageScores}
+                                                                      cumulativeScores={cumulativeScores}
+                                                                      index={this.props.index}
+                                                                      selectedChartId={this.props.selectedChartId} /> : <div></div>
     return (
-
       <Col xs={12} sm={6} lg={3}>
         <div style={styles.card}>
           <table>
@@ -90,20 +97,17 @@ class ScoresTable extends React.Component {
             </tbody>
           </table>
         </div>
-        <div style={styles.chartButton}></div>
-        {/*}        <Row>
-                  <ScoreCharts
-                    scoreData={Object.values(this.props.student)[0]}
-                    averageScores={this.props.averageScores}
-                    displayAverageChart={this.props.displayAverageChart}
-                    handleAverage={this.props.handleAverage}
-                    cumulativeScores={cumulativeScores}
-                    />
-                </Row>
-        {*/}
+        <div style={styles.chartButton} onClick={(id) => this.props.toggleDisplayChart(this.props.index)}>
+          Display Chart
+        </div>
+        <Row>
+
+          {revealCharts}
+
+        </Row>
+        <button onClick={() => {console.log(this.props.index)}}>Show index</button>
+        <button onClick={() => {console.log(this.props.student)}}>Show Student</button>
       </Col>
-
-
     )
   }
 }
@@ -119,7 +123,6 @@ export default class DisplayEachScores extends React.Component {
 
     if(this.props.studentsScores.length > 0){
       const scores = this.props.scores.slice();
-
 
       weeks = scores.map((score) => {return score.week}).filter(uniqueFilter);
       //weeks = [1,2,3,4,5,6,7,8]
@@ -158,13 +161,15 @@ export default class DisplayEachScores extends React.Component {
             student={student}
             index={index}
             averageScores={averageScores}
-            displayAverageChart={this.props.displayAverageChart}
-            handleAverage={this.props.handleAverage}
             weeks={weeks}
+            shouldDisplayChart={this.props.shouldDisplayChart}
+            toggleDisplayChart={this.props.toggleDisplayChart}
+            selectedChartId={this.props.selectedChartId}
             />
         )
       })
     }
+
     return (
       <div>
         <Grid>
