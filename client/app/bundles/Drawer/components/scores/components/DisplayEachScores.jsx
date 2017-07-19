@@ -101,11 +101,11 @@ class ScoresTable extends React.Component {
         <div style={styles.chartButton} onClick={(id) => this.props.toggleDisplayChart(this.props.index)}>
           Display Chart
         </div>
-        <Row>
+        <div>
 
           {revealCharts}
 
-        </Row>
+        </div>
       </Col>
     )
   }
