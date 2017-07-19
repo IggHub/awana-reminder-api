@@ -81,7 +81,8 @@ class ScoresTable extends React.Component {
                                                                       averageScores={this.props.averageScores}
                                                                       cumulativeScores={cumulativeScores}
                                                                       index={this.props.index}
-                                                                      selectedChartId={this.props.selectedChartId} /> : <div></div>
+                                                                      selectedChartId={this.props.selectedChartId}
+                                                                      toggleDisplayChart={this.props.toggleDisplayChart} /> : <div></div>
     return (
       <Col xs={12} sm={6} lg={3}>
         <div style={styles.card}>
@@ -105,8 +106,6 @@ class ScoresTable extends React.Component {
           {revealCharts}
 
         </Row>
-        <button onClick={() => {console.log(this.props.index)}}>Show index</button>
-        <button onClick={() => {console.log(this.props.student)}}>Show Student</button>
       </Col>
     )
   }

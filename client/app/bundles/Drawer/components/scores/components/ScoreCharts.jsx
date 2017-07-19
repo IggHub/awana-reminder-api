@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { LineChart,
+    AreaChart,
+    Area,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip } from 'recharts';
 
 
 const data = [
@@ -22,7 +29,7 @@ class IndividualLineCharts extends React.Component{
 
     return (
       <div>
-        <LineChart width={600} height={300} data={scoreData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+        <LineChart width={600} height={200} data={scoreData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
           <Line type="monotone" dataKey={"point"} stroke="#82ca9d" />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis dataKey="week" />
@@ -45,14 +52,27 @@ class AverageLineCharts extends React.Component {
 
     return (
       <div>
-        <LineChart width={600} height={300} data={scoreData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <Line type="monotone" dataKey="point" stroke="#82ca9d" />
-          <Line type="monotone" dataKey="averagePoint" stroke="#8884d8" activeDot={{r: 8}}/>
+        <AreaChart width={750} height={200} data={scoreData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+
+          <defs>
+            <linearGradient id="colorPoint" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+            </linearGradient>
+            <linearGradient id="colorAveragePoint" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+            </linearGradient>
+          </defs>
+
+          <Area type="monotone" dataKey="point" stroke="#8884d8" fillOpacity={1} fill="url(#colorPoint)" />
+          <Area type="monotone" dataKey="averagePoint" stroke="#82ca9d" fillOpacity={1} fill="url(#colorAveragePoint)" />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+
           <XAxis dataKey="week" />
           <YAxis />
           <Tooltip />
-        </LineChart>
+        </AreaChart>
       </div>
     )
   }
@@ -69,7 +89,8 @@ class CumulativeLineCharts extends React.Component {
     })
     return (
       <div>
-        <LineChart width={600} height={300} data={scoreData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+        <LineChart width={750} height={200} data={scoreData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+
           <Line type="monotone" dataKey="winPoint" stroke="#82ca9d" />
           <Line type="monotone" dataKey="cumulativePoint" stroke="#8884d8" activeDot={{r: 8}}/>
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
@@ -82,13 +103,27 @@ class CumulativeLineCharts extends React.Component {
   }
 }
 
+const styles = {
+  chartWrapper: {
+    position: 'fixed',
+    left: '50%',
+    top: '50%',
+    width: '850px',
+    padding: '25px',
+		background: '#FFFFFF',
+    zIndex: '5',
+    transform: 'translateY(-50%) translateX(-50%)',
+    border: '1px solid black'
+  }
+}
 export default class ScoreCharts extends React.Component{
   render(){
-    const shouldIShowThis = (this.props.index === this.props.selectedChartId) ? <div><CumulativeLineCharts scoreData={this.props.scoreData} cumulativeScores={this.props.cumulativeScores} /> <AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} /></div> : <div></div>
+    const revealOnlySelectedData = (this.props.index === this.props.selectedChartId) ? <div><AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} /> <CumulativeLineCharts scoreData={this.props.scoreData} cumulativeScores={this.props.cumulativeScores} /></div> : <div></div>
     const showChart= <IndividualLineCharts scoreData={this.props.scoreData} />
     return (
-      <div>
-        {shouldIShowThis}
+      <div style={styles.chartWrapper} onClick={(id) => this.props.toggleDisplayChart(this.props.index)}>
+
+        {revealOnlySelectedData}
 
       </div>
     )

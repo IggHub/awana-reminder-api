@@ -128,6 +128,7 @@ export default class Score extends React.Component {
           shouldDisplayChart={this.state.shouldDisplayChart}
           selectedChartId={this.state.selectedChartId}
         />
+      {/*}
         <button onClick={() => console.log(this.state.scores)}>Scores</button>
         <button onClick={() => console.log(Math.max(...this.state.scores.map((score) => {return score.week})) + 1)}>Max week</button>
         <button onClick={() => console.log(this.state.students)}>Students</button>
@@ -136,6 +137,7 @@ export default class Score extends React.Component {
         <button onClick={this.handleAverage}>Switch Charts</button>
         <button onClick={() => console.log(this.state.displayAverageChart)}>Display average chart</button>
         <button onClick={this.toggleDisplayChart}>Toggle display chart</button>
+        {*/}
       </div>
     )
   }
