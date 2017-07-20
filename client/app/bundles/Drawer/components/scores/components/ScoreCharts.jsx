@@ -90,7 +90,7 @@ class ChartsContainer extends React.Component {
           <AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} />
           <h2>Cumulative Point Chart</h2>
           <CumulativeLineCharts scoreData={this.props.scoreData} cumulativeScores={this.props.cumulativeScores} />
-          <Button pull-right bsStyle="danger" onClick={(id) => this.props.toggleDisplayChart(this.props.index)}>Close</Button>
+          <Button bsStyle="danger" onClick={(id) => this.props.toggleDisplayChart(this.props.index)}>Close</Button>
         </div>
       </div>
     )

@@ -1,7 +1,5 @@
 import React from 'react';
 import DisplayEachScores from './components/DisplayEachScores';
-import DisplayAllScores from './components/DisplayAllScores';
-
 import Client from './utils/Client';
 
 function compare(a,b){
@@ -23,11 +21,13 @@ export default class Score extends React.Component {
       studentsScores: [],
       shouldDisplayChart: false,
       selectedChartId: '',
+      filterText: ''
     };
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
     this.handleStudentScoresTable = this.handleStudentScoresTable.bind(this);
     this.updateScores = this.updateScores.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleUserInput = this.handleUserInput.bind(this);
     this.toggleDisplayChart = this.toggleDisplayChart.bind(this);
   };
 
@@ -36,8 +36,10 @@ export default class Score extends React.Component {
       shouldDisplayChart: !this.state.shouldDisplayChart,
       selectedChartId: id
     }, () => console.log(this.state.shouldDisplayChart))
-
-  }
+  };
+  handleUserInput(e){
+    this.setState({filterText: e.target.value}, () => {console.log(this.state.filterText)})
+  };
 
   getStudentsAndScores(){
     Client.getStudentsAndScores().then(([students, scores]) => {
@@ -117,7 +119,6 @@ export default class Score extends React.Component {
   render(){
     return (
       <div>
-        {/*}<DisplayAllScores onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores} />{*/}
         <button onClick={this.handleAdd}>Add</button>
         <DisplayEachScores
           updateScores={this.updateScores}
@@ -127,6 +128,8 @@ export default class Score extends React.Component {
           toggleDisplayChart={this.toggleDisplayChart}
           shouldDisplayChart={this.state.shouldDisplayChart}
           selectedChartId={this.state.selectedChartId}
+          handleUserInput={this.handleUserInput}
+          filterText={this.state.filterText}
         />
       {/*}
         <button onClick={() => console.log(this.state.scores)}>Scores</button>

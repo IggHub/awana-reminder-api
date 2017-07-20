@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid, Row, Col, Button} from 'react-bootstrap';
 import ScoreCharts from './ScoreCharts';
+import SearchBar from './SearchBar';
 //import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 //import '../../scores/stylesheets/react-bootstrap-table-all.min.css';
 
@@ -152,26 +153,37 @@ export default class DisplayEachScores extends React.Component {
       /* end averageScores*/
 
       this.props.studentsScores.forEach((student, index) => {
-        bsTable.push(
-          <ScoresTable
-            updateScores={this.props.updateScores}
-            onStudentScoresTableUpdate={this.props.onStudentScoresTableUpdate}
-            key={index}
-            student={student}
-            index={index}
-            averageScores={averageScores}
-            weeks={weeks}
-            shouldDisplayChart={this.props.shouldDisplayChart}
-            toggleDisplayChart={this.props.toggleDisplayChart}
-            selectedChartId={this.props.selectedChartId}
-            />
-        )
+        var studentName = Object.keys(student)[0];
+        console.log(studentName);
+        if(studentName.indexOf(this.props.filterText) === -1) {
+          bsTable.push(<div key={index}></div>)
+        } else {
+          bsTable.push(
+            <ScoresTable
+              updateScores={this.props.updateScores}
+              onStudentScoresTableUpdate={this.props.onStudentScoresTableUpdate}
+              key={index}
+              student={student}
+              index={index}
+              averageScores={averageScores}
+              weeks={weeks}
+              shouldDisplayChart={this.props.shouldDisplayChart}
+              toggleDisplayChart={this.props.toggleDisplayChart}
+              selectedChartId={this.props.selectedChartId}
+              />
+          )
+      }
       })
+
     }
+
 
     return (
       <div>
         <Grid>
+          <Row>
+            <SearchBar filterText={this.props.filterText} handleUserInput={this.props.handleUserInput} />
+          </Row>
           <Row>
             {bsTable}
           </Row>
