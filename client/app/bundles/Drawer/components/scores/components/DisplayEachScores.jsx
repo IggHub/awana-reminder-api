@@ -153,9 +153,9 @@ export default class DisplayEachScores extends React.Component {
       /* end averageScores*/
 
       this.props.studentsScores.forEach((student, index) => {
-        var studentName = Object.keys(student)[0];
-        console.log(studentName);
-        if(studentName.indexOf(this.props.filterText) === -1) {
+        var studentName = Object.keys(student)[0].toLowerCase();
+        var filterText = this.props.filterText.toLowerCase();
+        if(studentName.indexOf(filterText) === -1) {
           bsTable.push(<div key={index}></div>)
         } else {
           bsTable.push(

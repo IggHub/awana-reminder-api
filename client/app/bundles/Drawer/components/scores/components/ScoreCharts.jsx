@@ -84,13 +84,19 @@ class CumulativeLineCharts extends React.Component {
 class ChartsContainer extends React.Component {
   render(){
     return (
-      <div style={styles.chartWrapper} onClick={(id) => this.props.toggleDisplayChart(this.props.index)}>
+      <div style={styles.chartWrapper}>
         <div style={styles.chartContainer}>
-          <h2>Average Point Chart</h2>
-          <AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} />
-          <h2>Cumulative Point Chart</h2>
-          <CumulativeLineCharts scoreData={this.props.scoreData} cumulativeScores={this.props.cumulativeScores} />
-          <Button bsStyle="danger" onClick={(id) => this.props.toggleDisplayChart(this.props.index)}>Close</Button>
+          <Tabs defaultActiveKey={1} id="charts-tab">
+            <Tab eventKey={1} title="Average Pt">
+              <h2>Average Point Chart</h2>
+              <AverageLineCharts scoreData={this.props.scoreData} averageScores={this.props.averageScores} />
+            </Tab>
+            <Tab eventKey={2} title="Total Pt">
+              <h2>Cumulative Point Chart</h2>
+              <CumulativeLineCharts scoreData={this.props.scoreData} cumulativeScores={this.props.cumulativeScores} />
+            </Tab>
+            <Button bsStyle="danger" onClick={(id) => this.props.toggleDisplayChart(this.props.index)}>Close</Button>
+          </Tabs>
         </div>
       </div>
     )
