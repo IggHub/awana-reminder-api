@@ -5,6 +5,17 @@ class ScoresController < ApplicationController
   end
 
   def create
+    @scores = Score.new(score_params)
+
+    puts 'Hello create!!'
+    puts '\(^ o ^)/'
+=begin
+    if @score.save
+      render json: @score
+    else
+      render json: @score, status: :unprocessable_entity
+    end
+=end
   end
 
   def update
@@ -19,9 +30,14 @@ class ScoresController < ApplicationController
   def destroy
   end
 
+  def delete_by_week
+    Score.destroy_all(:week => params[:week])
+    head :no_content
+  end
+
   private
 
   def score_params
-    params.require(:score).permit(:completed_at, :point)
+    params.require(:score).permit(:completed_at, :point, :week, :student_id)
   end
 end

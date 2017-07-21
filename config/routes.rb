@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'scheduler', to: 'drawer#scheduler'
 
   post '/text_it' => 'schedules#text_dat_message'
+  post '/delete_latest_week' => 'scores#delete_by_week'
 
   devise_for :users
 
@@ -17,8 +18,9 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show]
     resources :schedules, only: [:index, :show, :create, :update, :destroy]
     resources :students, only: [:index]
-    resources :scores, only: [:index, :update]
+    resources :scores, only: [:index, :create, :update]
     resources :texts, only: [:index, :create]
     resources :rosters, only: [:index, :create]
+
   end
 end

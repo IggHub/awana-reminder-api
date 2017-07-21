@@ -26,8 +26,10 @@ export default class Score extends React.Component {
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
     this.handleStudentScoresTable = this.handleStudentScoresTable.bind(this);
     this.updateScores = this.updateScores.bind(this);
+    this.postScores = this.postScores.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.toggleDisplayChart = this.toggleDisplayChart.bind(this);
   };
 
@@ -37,8 +39,9 @@ export default class Score extends React.Component {
       selectedChartId: id
     }, () => console.log(this.state.shouldDisplayChart))
   };
+
   handleUserInput(e){
-    this.setState({filterText: e.target.value}, () => {console.log(this.state.filterText)})
+    this.setState({filterText: e.target.value})
   };
 
   getStudentsAndScores(){
@@ -92,25 +95,39 @@ export default class Score extends React.Component {
     var id = this.state.scores[this.state.scores.length - 1].id + 1;
     var scores = this.state.scores.slice();
     var students = this.state.students.slice();;
+    var newWeekScoresHolder = [];
     const maxWeek = Math.max(...this.state.scores.map((score) => {return score.week})) + 1;
     students.forEach((student, index) => {
-      scores.push(
+      newWeekScoresHolder.push(
         {
           completed_at: "",
-          point: "",
+          point: 0,
           student_id: student.id,
           week: maxWeek,
-          id: id + index
+          id: id + index,
         }
       );
     })
-    this.setState({scores}, () => this.rearrangeStudentsWithScores())
+    scores = scores.concat(newWeekScoresHolder);
+    this.setState({scores}, () => {
+      this.rearrangeStudentsWithScores();
+      console.log(newWeekScoresHolder); //newWeekScoresHolder array contains all the new data! postScores using newWeekScoresHolder!
+      /*add postScores here to post new scores with points 0 */
+    })
+  }
+
+  handleDelete(){
+    var maxWeek = Math.max(...this.state.scores.map((score) => {return score.week}));
+    Client.deleteScores(maxWeek).then(this.getStudentsAndScores());
   }
 
   updateScores(id, point){
-    var scores = this.state.scores.slice();
     Client.updateScores(id, point);
   };
+
+  postScores(id, point, week, studentId){
+    Client.postScores(id, point, week, studentId);
+  }
 
   componentDidMount(){
     this.getStudentsAndScores();
@@ -122,6 +139,7 @@ export default class Score extends React.Component {
         <button onClick={this.handleAdd}>Add</button>
         <DisplayEachScores
           updateScores={this.updateScores}
+          postScores={this.postScores}
           onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores}
           scores={this.state.scores}
           students={this.state.students}
@@ -131,9 +149,10 @@ export default class Score extends React.Component {
           handleUserInput={this.handleUserInput}
           filterText={this.state.filterText}
         />
-      {/*}
         <button onClick={() => console.log(this.state.scores)}>Scores</button>
-        <button onClick={() => console.log(Math.max(...this.state.scores.map((score) => {return score.week})) + 1)}>Max week</button>
+        <button onClick={this.handleDelete}>Delete latest week</button>
+      {/*}
+        <button onClick={() => console.log(Math.max(...this.state.scores.map((score) => {return score.week})))}>Max week</button>
         <button onClick={() => console.log(this.state.students)}>Students</button>
         <button onClick={() => console.log(this.state.studentsScores)}>Students n Scores</button>
         <button onClick={this.updateScores}>Update Scores</button>

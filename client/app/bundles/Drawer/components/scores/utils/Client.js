@@ -32,25 +32,50 @@ function updateScores(scoreId, point){
   }).then((response) => response.json())
 };
 
-/*
-function postScores(){
-  return fetch('api/scores', {
+function postScores(scoreId, point, week, studentId){
+  return fetch(`api/scores`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      completed_at:
-      point:
-      week:
+      point: point,
+      week: week,
+      student_id: studentId
     })
-  })
+  }).then((response) => response.json())
+};
+
+function deleteScores(week){
+  return fetch(`delete_latest_week`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      week: week
+    })
+  });
 }
-*/
+
+function customDeleteScores(week){
+  return fetch(`api/scores/delete_by_week/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      week: week
+    })
+  }).then((response) => response.json())
+}
 
 const Client = {
   getStudentsAndScores,
-  updateScores
+  updateScores,
+  postScores,
+  deleteScores,
+  customDeleteScores
 }
 
 export default Client;
