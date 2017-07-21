@@ -66,7 +66,6 @@ class CumulativeLineCharts extends React.Component {
       <div>
         <ResponsiveContainer aspect={5}>
           <LineChart data={scoreData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-            <Line type="monotone" dataKey="winPoint" stroke="#82ca9d" />
             <Line type="monotone" dataKey="cumulativePoint" stroke="#8884d8" activeDot={{r: 8}}/>
             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
             <XAxis dataKey="week" />
