@@ -33,36 +33,8 @@ function uniqueFilter(value, index, self){
 
 let average = (array) => array.reduce((a, b) => a + b) / array.length;
 
-class UpdateCell extends React.Component {
-  render(){
-    return (
-      <div>
-
-      </div>
-    )
-  }
-};
-
-class AddCell extends React.Component {
-  render(){
-    return (
-      <div>
-        <input
-          onBlur={(id, point, week, studentId) => {this.props.postScores(this.props.cellData.id, this.props.cellData.value, this.props.cellData.week, this.props.cellData.studentId)}}
-          onChange={this.props.onStudentScoresTableUpdate}
-          type="text"
-          name={this.props.cellData.type}
-          id={this.props.cellData.id}
-          value={this.props.cellData.value}
-          />
-      </div>
-    )
-  }
-}
 class EditableCell extends React.Component{
   render(){
-    //if this.props.cellData.isNewlyAdded === true, then render CellAdd
-    //const renderCell = (this.props.cellData.isNewlyAdded === true) ? <AddCell cellData={this.props.cellData} onStudentScoresTableUpdate={this.props.onStudentScoresTableUpdate} postScores={this.props.postScores} /> : <UpdateCell cellData={this.props.cellData} updateScores={this.props.updateScores} onStudentScoresTableUpdate={this.props.onStudentScoresTableUpdate} />
     return (
       <td>
         <input
@@ -100,7 +72,6 @@ class ScoresTable extends React.Component {
           <td>{Object.values(this.props.student)[0][i]["week"]}</td>
           <EditableCell
               updateScores={this.props.updateScores}
-              postScores={this.props.postScores}
               cellData={{
                 type: "point",
                 id: Object.values(this.props.student)[0][i]["id"],
@@ -196,7 +167,6 @@ export default class DisplayEachScores extends React.Component {
           bsTable.push(
             <ScoresTable
               updateScores={this.props.updateScores}
-              postScores={this.props.postScores}
               onStudentScoresTableUpdate={this.props.onStudentScoresTableUpdate}
               key={index}
               student={student}
@@ -212,7 +182,6 @@ export default class DisplayEachScores extends React.Component {
       })
 
     }
-
 
     return (
       <div>

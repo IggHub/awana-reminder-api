@@ -26,7 +26,6 @@ export default class Score extends React.Component {
     this.rearrangeStudentsWithScores = this.rearrangeStudentsWithScores.bind(this);
     this.handleStudentScoresTable = this.handleStudentScoresTable.bind(this);
     this.updateScores = this.updateScores.bind(this);
-    this.postScores = this.postScores.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -95,7 +94,9 @@ export default class Score extends React.Component {
     var id = this.state.scores[this.state.scores.length - 1].id + 1;
     var scores = this.state.scores.slice();
     var students = this.state.students.slice();;
+    var timeNow = new Date();
     var newWeekScoresHolder = [];
+    console.log(timeNow);
     const maxWeek = Math.max(...this.state.scores.map((score) => {return score.week})) + 1;
     students.forEach((student, index) => {
       newWeekScoresHolder.push(
@@ -105,29 +106,28 @@ export default class Score extends React.Component {
           student_id: student.id,
           week: maxWeek,
           id: id + index,
+          created_at: timeNow
         }
       );
     })
     scores = scores.concat(newWeekScoresHolder);
+    scores.sort(compare);
     this.setState({scores}, () => {
       this.rearrangeStudentsWithScores();
-      console.log(newWeekScoresHolder); //newWeekScoresHolder array contains all the new data! postScores using newWeekScoresHolder!
       Client.postScores(newWeekScoresHolder);
     })
   }
 
   handleDelete(){
     var maxWeek = Math.max(...this.state.scores.map((score) => {return score.week}));
-    Client.deleteScores(maxWeek).then(this.getStudentsAndScores());
+    Client.deleteScores(maxWeek, () => {
+      this.getStudentsAndScores()
+    });
   }
 
   updateScores(id, point){
     Client.updateScores(id, point);
   };
-
-  postScores(id, point, week, studentId){
-    Client.postScores(id, point, week, studentId);
-  }
 
   componentDidMount(){
     this.getStudentsAndScores();
@@ -139,7 +139,6 @@ export default class Score extends React.Component {
         <button onClick={this.handleAdd}>Add</button>
         <DisplayEachScores
           updateScores={this.updateScores}
-          postScores={this.postScores}
           onStudentScoresTableUpdate={this.handleStudentScoresTable} studentsScores={this.state.studentsScores}
           scores={this.state.scores}
           students={this.state.students}

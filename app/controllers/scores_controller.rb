@@ -34,7 +34,6 @@ class ScoresController < ApplicationController
 
   def delete_by_week
     Score.destroy_all(:week => params[:week])
-    head :no_content
   end
 
   private

@@ -44,7 +44,7 @@ function postScores(scoresArray){
   })
 };
 
-function deleteScores(week){
+function deleteScores(week, cb){
   return fetch(`delete_latest_week`, {
     method: 'POST',
     headers: {
@@ -53,7 +53,8 @@ function deleteScores(week){
     body: JSON.stringify({
       week: week
     })
-  });
+  })
+  .then(cb);
 }
 
 function customDeleteScores(week){
