@@ -5,10 +5,12 @@ class ScoresController < ApplicationController
   end
 
   def create
-    @scores = Score.new(score_params)
-
     puts 'Hello create!!'
     puts '\(^ o ^)/'
+    params[:scores_array].each do |score|
+      Score.create(point: score["point"], student_id: score["student_id"], week: score["week"], completed_at: Time.now)
+    end
+
 =begin
     if @score.save
       render json: @score

@@ -112,7 +112,7 @@ export default class Score extends React.Component {
     this.setState({scores}, () => {
       this.rearrangeStudentsWithScores();
       console.log(newWeekScoresHolder); //newWeekScoresHolder array contains all the new data! postScores using newWeekScoresHolder!
-      /*add postScores here to post new scores with points 0 */
+      Client.postScores(newWeekScoresHolder);
     })
   }
 

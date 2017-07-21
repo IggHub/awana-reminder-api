@@ -32,18 +32,16 @@ function updateScores(scoreId, point){
   }).then((response) => response.json())
 };
 
-function postScores(scoreId, point, week, studentId){
+function postScores(scoresArray){
   return fetch(`api/scores`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      point: point,
-      week: week,
-      student_id: studentId
+      scores_array: scoresArray
     })
-  }).then((response) => response.json())
+  })
 };
 
 function deleteScores(week){
