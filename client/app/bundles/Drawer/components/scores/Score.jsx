@@ -1,7 +1,8 @@
 import React from 'react';
 import DisplayEachScores from './components/DisplayEachScores';
 import Client from './utils/Client';
-
+import Moment from 'moment';
+//later, if causes problem, sort created_at
 function compare(a,b){
   if(a.created_at < b.created_at){
     return -1;
@@ -10,7 +11,26 @@ function compare(a,b){
   } else {
     return 0;
   }
-}
+};
+
+function prettyDate(time){
+	var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
+		diff = (((new Date()).getTime() - date.getTime()) / 1000),
+		day_diff = Math.floor(diff / 86400);
+
+	if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+		return;
+
+	return day_diff == 0 && (
+			diff < 60 && "just now" ||
+			diff < 120 && "1 minute ago" ||
+			diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
+			diff < 7200 && "1 hour ago" ||
+			diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+		day_diff == 1 && "Yesterday" ||
+		day_diff < 7 && day_diff + " days ago" ||
+		day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
+};
 
 export default class Score extends React.Component {
   constructor(props) {
@@ -62,6 +82,7 @@ export default class Score extends React.Component {
         const studentScoresArray = scores.filter(function(score){
           return score.student_id === student.id
         })
+//        console.log(prettyDate(studentScoresArray[0]["created_at"]));
         studentScoresArray.sort(compare);
         const studentsObject = {};
         studentsObject[student.name] = studentScoresArray;
@@ -94,9 +115,8 @@ export default class Score extends React.Component {
     var id = this.state.scores[this.state.scores.length - 1].id + 1;
     var scores = this.state.scores.slice();
     var students = this.state.students.slice();;
-    var timeNow = new Date();
+    var timeNow = new Date().toISOString();
     var newWeekScoresHolder = [];
-    console.log(timeNow);
     const maxWeek = Math.max(...this.state.scores.map((score) => {return score.week})) + 1;
     students.forEach((student, index) => {
       newWeekScoresHolder.push(
@@ -111,7 +131,6 @@ export default class Score extends React.Component {
       );
     })
     scores = scores.concat(newWeekScoresHolder);
-    scores.sort(compare);
     this.setState({scores}, () => {
       this.rearrangeStudentsWithScores();
       Client.postScores(newWeekScoresHolder);

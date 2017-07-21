@@ -44,7 +44,7 @@ class EditableCell extends React.Component{
           name={this.props.cellData.type}
           id={this.props.cellData.id}
           value={this.props.cellData.value}
-          onFocus={() => console.log(this.props.cellData.studentId)}
+          onFocus={() => console.log(this.props.cellData.createdAt)}
           />
       </td>
     )
@@ -77,7 +77,8 @@ class ScoresTable extends React.Component {
                 id: Object.values(this.props.student)[0][i]["id"],
                 value: Object.values(this.props.student)[0][i]["point"],
                 week: Object.values(this.props.student)[0][i]["week"],
-                studentId: Object.values(this.props.student)[0][i]["student_id"]
+                studentId: Object.values(this.props.student)[0][i]["student_id"],
+                createdAt: Object.values(this.props.student)[0][i]["created_at"]
               }}
               onStudentScoresTableUpdate={onStudentScoresTableUpdate} />
         </tr>
