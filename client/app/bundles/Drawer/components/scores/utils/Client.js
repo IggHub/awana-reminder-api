@@ -32,6 +32,21 @@ function updateScores(scoreId, point){
   }).then((response) => response.json())
 };
 
+function postStudent(name, grade, userId, cb){
+  return fetch(`api/students`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: name,
+      grade: grade,
+      user_id: userId
+    })
+  })
+  .then(cb);
+}
+
 function postScores(scoresArray){
   return fetch(`api/scores`, {
     method: 'POST',
@@ -74,7 +89,7 @@ const Client = {
   updateScores,
   postScores,
   deleteScores,
-  customDeleteScores
+  postStudent
 }
 
 export default Client;

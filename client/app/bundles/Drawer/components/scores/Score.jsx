@@ -1,8 +1,9 @@
 import React from 'react';
 import DisplayEachScores from './components/DisplayEachScores';
+import AddStudent from './components/AddStudent';
 import Client from './utils/Client';
-import Moment from 'moment';
-//later, if causes problem, sort created_at
+
+
 function compare(a,b){
   if(a.created_at < b.created_at){
     return -1;
@@ -31,6 +32,7 @@ export default class Score extends React.Component {
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.toggleDisplayChart = this.toggleDisplayChart.bind(this);
+    this.postStudent = this.postStudent.bind(this);
   };
 
   toggleDisplayChart(id){
@@ -129,6 +131,12 @@ export default class Score extends React.Component {
     Client.updateScores(id, point);
   };
 
+  postStudent(name, grade, userId){
+    Client.postStudent(name, grade, userId, () => {
+      this.rearrangeStudentsWithScores();
+    });
+  }
+
   componentDidMount(){
     this.getStudentsAndScores();
   };
@@ -148,7 +156,10 @@ export default class Score extends React.Component {
           handleUserInput={this.handleUserInput}
           filterText={this.state.filterText}
         />
+        <AddStudent />
         <button onClick={this.handleDelete}>Delete latest week</button>
+        <button onClick={() => console.log(this.state.students)}>Students</button>
+        <button onClick={() => console.log(this.state.studentsScores)}>Students n Scores</button>
       {/*}
         <button onClick={() => console.log(Math.max(...this.state.scores.map((score) => {return score.week})))}>Max week</button>
         <button onClick={() => console.log(this.state.students)}>Students</button>

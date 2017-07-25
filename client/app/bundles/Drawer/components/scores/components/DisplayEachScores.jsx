@@ -60,7 +60,6 @@ class ScoresTable extends React.Component {
     cumulativeScores.forEach((eachWeek, index) => {
       cumulativePointHolder = cumulativePointHolder + Number(eachWeek["point"]);
       eachWeek["cumulativePoint"] = cumulativePointHolder;
-      eachWeek["winPoint"] = 50;
     })
 
     const weeks = this.props.weeks.slice();

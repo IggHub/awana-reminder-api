@@ -56,13 +56,28 @@ body {
 }
 
 .color-white {
-  color: #ffffff;
+  color: #58482C;
   text-decoration: none;
 }
 
 .universal-header {
-  background: #FFBE00;
+  background: red;
   border-radius: none;
+  height: 10%;
+  width: 100%;
+  position: fixed;
+}
+
+.primary-content {
+    position: absolute;
+    margin-top: 10%;      /* ADJUSTMENT */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 90%;          /* ADJUSTMENT */
+    background: yellow;
+    margin: 0;            /* NEW */
 }
 
 .main-sidebar {
@@ -88,10 +103,6 @@ body {
   margin: 0 auto;
 }
 
-.primary-content {
-  position: relative;
-  z-index: 0;
-}
 
 .feature-one {
   position: relative;
