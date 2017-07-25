@@ -1,8 +1,9 @@
 <nav class="navbar universal-header navbar-static-top">
-  <a class="navbar-brand navigation-title color-white">
-    <span class="glyphicon glyphicon-apple" aria-hidden="true"></span>
-  </a>
-  <%= link_to "Sundae", root_path, class: "color-white navbar-brand navigation-title" %>
+  <%= link_to root_path, class: 'navbar-brand' do %>
+    <%= image_tag('sundae_logo.png', class: "img-fluid sundae-logo", alt: "sundae logo") %>
+  <% end %>
+
+  <%= link_to "Sundae", root_path, class: "navbar-brand sundae-nav-title" %>
   <a class="navbar-brand pull-right hamburger-menu" data-toggle="collapse" data-target="#main-sidebar-container" aria-controls="main-sidebar-container" aria-expanded="false">
     <span class="glyphicon glyphicon-menu-hamburger"></span>
   </a>

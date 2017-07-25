@@ -1,7 +1,19 @@
-<div class="row primary-content">
-  <div class="col-md-12">
-    <h1>Don't let the youngins wreak havoc</h1>
-    <h4>Awanafy is the awesomest Sunday School class management solution!</h4>
+<div class="primary-content">
+  <div class="section-intro">
+    <h1 class="section-header">Sunday School Analytics For K-12</h1>
+    <p class="section-subheader">Sundae-app makes it easy to keep track of points and deliver them to parents</p>
+    <div class="section-subscribe">
+      <input type="text" placeholder="Enter email here..." />
+      <button class="button-subscribe">Subscribe</button>
+    </div>
+  </div>
+  <div class="section-image">
+    <%= image_tag('sundae_kids.png', class: "img-fluid", alt: "sundae_kids") %>
+  </div>
+  <div class="arrow-down">
+    <%= link_to root_path(anchor: "feature-1") do %>
+      <span class="glyphicon glyphicon-chevron-down"></span>
+    <% end %>
   </div>
 </div>
 <!--
