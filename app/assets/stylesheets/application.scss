@@ -49,13 +49,6 @@ body {
   bottom: 0px;
 }
 
-.footer-main {
-  position: relative;
-  width: 100%;
-  height: 50px;
-  bottom: 0px;
-
-}
 .navigation-title {
   text-transform: uppercase;
 }
@@ -77,6 +70,7 @@ body {
   height: 10%;
   width: 100%;
   position: fixed;
+  background: #ffffff;
 }
 
 .sundae-logo {
@@ -89,14 +83,14 @@ body {
 }
 
 .primary-content {
-    position: absolute;
-    margin-top: 10%;      /* ADJUSTMENT */
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 90%;          /* ADJUSTMENT */
-    margin: 0;            /* NEW */
+  position: absolute;
+  margin-top: 10%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 90%;
+  margin: 0;
 }
 
 .section-intro {
@@ -171,6 +165,43 @@ input[type="text"]:focus {
 }
 
 
+.feature-one {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 100%;
+}
+
+.feature-two {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 200%;
+  background: blue;
+}
+
+.feature-three {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 300%;
+  background: orange;
+}
+.feature-one-content, .feature-two-content, .feature-three-content {
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  top: 10%;
+  background: yellow;
+}
+
+.footer-main {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  top: 400%;
+  background: red;
+}
 
 .main-sidebar {
   overflow:hidden;
@@ -193,22 +224,6 @@ input[type="text"]:focus {
   width: 75%;
   height: auto;
   margin: 0 auto;
-}
-
-
-.feature-one {
-  position: relative;
-  z-index: 0;
-}
-
-.feature-two {
-  position: relative;
-  z-index: 0;
-}
-
-.feature-three {
-  position: relative;
-  z-index: 0;
 }
 
 .fixed-bottom-right {
