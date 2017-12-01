@@ -7,7 +7,6 @@ class SchedulesController < ApplicationController
       #HardWorker.perform_at(Time.now + (5 * index).seconds, params[:message], num)
       HardWorker.perform_at(message_datetime + (5 * index).seconds, params[:message], num)
     end
-
   end
 
   def index
